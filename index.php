@@ -14,7 +14,6 @@
     $data = file_get_contents($filename);
     $json = json_decode($data);
     echo "<table border=1px>";
-    $count=0;
     foreach ($json as $row) {
       echo "<tr>";
       
@@ -25,15 +24,16 @@
       echo "</tr> <tr>";
       foreach($row as $key => $value) {
         if (is_object($value)) {
-          /* print_r($value);
-          $json2 = json_decode($value); */
-          echo "<td>" . $value['url'] . "</td>"; 
+          foreach ($value as $key2 => $value2) {
+            if (!is_object($value2)) {
+              echo "<td>" . $value2 . "</td>"; 
+            }
+          }
         } else {
           echo "<td>" . $value . "</td>";
         }
       }
       
-      $count+=1;
       echo "</tr>";
     }
     echo "</table>";
