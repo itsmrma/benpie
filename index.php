@@ -14,12 +14,17 @@
     $data = file_get_contents($filename);
     $json = json_decode($data);
     echo "<table border=1px>";
+    $count=0;
     foreach ($json as $row) {
       echo "<tr>";
       
-      foreach($row as $key => $value) {
-        echo "<td>" . $key . "</td>";
+      if ($count==0) {
+        foreach($row as $key => $value) {
+          echo "<td>" . $key . "</td>";
+        }
+        $count++;
       }
+      
 
       echo "</tr> <tr>";
       foreach($row as $key => $value) {
@@ -30,7 +35,11 @@
             }
           }
         } else {
-          echo "<td>" . $value . "</td>";
+          if ($value=="") {
+          echo "<td> NULL </td>";
+          } else {
+            echo "<td>" . $value . "</td>";
+          }
         }
       }
       
