@@ -24,9 +24,10 @@
 
       echo "</tr> <tr>";
       foreach($row as $key => $value) {
-        if (gettype($value)=="array") {
-          $json2 = json_decode($value);
-          echo "<td>" . $json2['url'] . "</td>"; 
+        if (is_object($value)) {
+          /* print_r($value);
+          $json2 = json_decode($value); */
+          echo "<td>" . $value['url'] . "</td>"; 
         } else {
           echo "<td>" . $value . "</td>";
         }
