@@ -1,6 +1,10 @@
 <?php
-  echo "Ciao mondo";
-  echo "Hello World";
+  $host = "localhost";
+  $user = "root";
+  $pass = "";
+  $db = "sagre";
+
+  $conn = new mysqli($host, $user, $pass, $db);
 
   $url = "https://www.dati.lombardia.it/resource/hs8z-dcey.json";
   $filename = basename($url);
