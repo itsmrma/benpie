@@ -14,5 +14,9 @@
     $data = file_get_contents($filename);
     $json = json_decode($data);
     print_r($json);
+
+    
   }
+
+
 ?>
