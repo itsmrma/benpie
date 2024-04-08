@@ -13,10 +13,28 @@
   if (file_exists($filename)) {
     $data = file_get_contents($filename);
     $json = json_decode($data);
-    print_r($json);
-
+    
+    echo "<table border=1px>";
+    $count=0;
+    foreach($json as $row){
+      echo "<tr>";
+      
+      foreach($row as $key=> $value){
+        if(!$count){
+          echo "<td>".$key."</td>";
+        }else{
+          echo "<td>".$value."</td>";
+        }
+        
+      }
+      $count+=1;
+      echo "</tr>";
+    }
+    echo "</table>";
     
   }
+
+
 
 
 ?>
