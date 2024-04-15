@@ -6,4 +6,5 @@ Sito con cui è possibile effettuare ricerche delle sagre sul territorio lombard
 EVENTO (<b>id</b>, denom, id_tipo*, n_ediz, descrizione, data_inizio, ora_inizio, data_fine, ora_fine, anno, istat, id_comune*, id_toponimo*, civico, nome_org, url, geo_x, geo_y) <br>
 TIPO (<b>id</b>, nome) <br>
 COMUNE (<b>id</b>, nome, cap, id_prov*) <br>
+PROVINCIA (<b>id</b>, nome) <br>
 TOPONIMO (<b>id</b>, nome) <br>
