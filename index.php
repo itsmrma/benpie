@@ -16,7 +16,7 @@
     echo "<table border=1px>";
     $count=0;
     
-    $nomi = array(25);
+    $nomi = array(24);
     foreach ($json as $row) {
       echo "<tr>";
       $i=0;  
@@ -24,10 +24,10 @@
         foreach($row as $key => $value) {
           if ($key!="location") {
             echo "<td>" . $key . "</td>";
+            $nomi[$i] = $key;
+            $i++;
           }
           
-          $nomi[$i] = $key;
-          $i++;
           
         }
         $count++;
@@ -37,19 +37,21 @@
       
       echo "</tr> <tr>";
       foreach($row as $key => $value) {
-        if ($key!=$nomi[$i] && $key!=$nomi[23]) {
+        if ($key != "location" ) {
+          while($key!=$nomi[$i] && $i<24){
+            $i++;
+            echo "<td> NULL </td>";
+          }
           if (is_object($value)) {
             foreach ($value as $key2 => $value2) {
               if (!is_object($value2)) {
                 echo "<td>" . $value2 . "</td>"; 
               }
             }
-          } else {
+          } else{
             echo "<td>" . $value . "</td>";
           }
           $i++;
-        } else {
-          echo "<td> NULL </td>";
         }
         
       }
