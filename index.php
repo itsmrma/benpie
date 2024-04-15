@@ -16,7 +16,7 @@
     echo "<table border=1px>";
     $count=0;
     
-    $nomi = array(24);
+    $nomi = array(25);
     foreach ($json as $row) {
       echo "<tr>";
       $i=0;  
@@ -27,7 +27,6 @@
             $nomi[$i] = $key;
             $i++;
           }
-          
           
         }
         $count++;
