@@ -22,11 +22,9 @@ if (file_exists($filename)) {
 
     foreach ($json as $row) {
         foreach($row as $key => $value) {
-        if ($key!="location") {
-            $nomi[$i++] = $key;
-        }
-
-
+            if ($key!="location") {
+                $nomi[$i++] = $key;
+            }
         }
     }
 
