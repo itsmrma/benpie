@@ -14,6 +14,7 @@ if (file_exists($filename)) {
     $data = file_get_contents($filename);
     $json = json_decode($data);
 
+    $i=0;
     $count=0;
     $nomi = array();
 
@@ -29,6 +30,7 @@ if (file_exists($filename)) {
         }
     }
 
+    print(count($json) . " " . count($nomi));
 
     for ($i=0; $i<count($json); $i++) {
         // gestione comuni
@@ -69,7 +71,6 @@ if (file_exists($filename)) {
                 $query .= "'NULL', ";
             }
         }
-        print("ciao");
 
         $query .= "')";
 
