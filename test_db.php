@@ -15,43 +15,68 @@ if (file_exists($filename)) {
     $json = json_decode($data);
 
     $count=0;
-
     $nomi = array();
 
     foreach ($json as $row) {
         if ($count==0) {
             foreach($row as $key => $value) {
-              if ($key!="location") {
+              if ($key!="location" && $key!=":@computed_region_ttgh_9sm5" && $key!=":@computed_region_af5v_nc64") {
                 $nomi[$i++] = $key;
               }
               
             }
             $count++;
         }
+    }
 
-        
-        $i=0;
-        $insert = array();
 
-        foreach ($row as $key => $value) {
-            
-            if ($key!="location") {
-                if (is_object($value)) {
-                    foreach ($value as $key2 => $value2) {
-                        if (!is_object($value2)) {
-                            $insert[$nomi[$i++]] = $value2;
-                        }
-                    }
-                } else {
-                        $insert[$nomi[$i++]] = $value;
-                }
-            }
-            print_r($insert);
-            echo "<br>";
+    for ($i=0; $i<count($json); $i++) {
+        // gestione comuni
+        if (isset($json[$i]['cap'])) {
+
+        } else {
+
         }
-          
+
+        // gestione province
+        if (isset($json[$i]['prov'])) {
+
+        } else {
+
+        }
+
+        // gestione tipi
+        if (isset($json[$i]['tipo'])) {
+
+        } else {
+
+        }
+
+        // gestione toponimi
+        if (isset($json[$i]['toponimo'])) {
+
+        } else {
+
+        }
+
+        $query = "INSERT INTO `evento` (`id`, `denom`, `id_tipo`, `n_ediz`, `descrizione`, `data_inizio`, `ora_inizio`, `data_fine`, `ora_fine`, `anno`, `istat`, `id_comune`, `id_toponimo`, `civico`, `nome_org`, `url`, `geo_x`, `geo_y`) VALUES (NULL, ";
+
+        for ($j=1; $j<count($nomi); $j++) {
+
+            if (isset($json[$i][$nomi[$j]])) {
+                $query .= "'" . str_replace("'", " ", $json[$i][$nomi[$j]]) . "', ";
+            } else {
+                $query .= "'NULL', ";
+            }
+        }
+        print("ciao");
+
+        $query .= "')";
+
+        print($query . "ciao");
     }
 
 }
+    
 
 ?>
