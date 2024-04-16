@@ -8,11 +8,10 @@ $conn = new mysqli($host, $user, $pass, $db);
 
 $url = "https://www.dati.lombardia.it/resource/hs8z-dcey.json";
 $filename = basename($url);
-file_put_contents($filename, file_get_contents($url));
 
 if (file_exists($filename)) {
-    $data = file_get_contents($filename);
-    $json = json_decode($data);
+    $data = file_get_contents($url);
+    $json = json_decode($data, true);
 
     $i=0;
     $count=0;
@@ -29,8 +28,6 @@ if (file_exists($filename)) {
             $count++;
         }
     }
-
-    print(count($json) . " " . count($nomi));
 
     for ($i=0; $i<count($json); $i++) {
         // gestione comuni
@@ -61,20 +58,22 @@ if (file_exists($filename)) {
 
         }
 
-        $query = "INSERT INTO `evento` (`id`, `denom`, `id_tipo`, `n_ediz`, `descrizione`, `data_inizio`, `ora_inizio`, `data_fine`, `ora_fine`, `anno`, `istat`, `id_comune`, `id_toponimo`, `civico`, `nome_org`, `url`, `geo_x`, `geo_y`) VALUES (NULL, ";
+        $query = "INSERT INTO `evento` (`id`, `denom`, `id_tipo`, `n_ediz`, `descrizione`, `data_inizio`, `ora_inizio`, `data_fine`, `ora_fine`, `anno`, `istat`, `id_comune`, `id_toponimo`, `civico`, `nome_org`, `url`, `geo_x`, `geo_y`) VALUES (NULL";
 
         for ($j=1; $j<count($nomi); $j++) {
 
             if (isset($json[$i][$nomi[$j]])) {
-                $query .= "'" . str_replace("'", " ", $json[$i][$nomi[$j]]) . "', ";
+                $query .= ", '" . str_replace("'", " ", $json[$i][$nomi[$j]]) . "'";
             } else {
-                $query .= "'NULL', ";
+                $query .= ", 'NULL'";
             }
         }
 
-        $query .= "')";
+        $query .= ")";
 
-        print($query . "ciao");
+        print($query . "<br><br><br>");
+
+        $conn->query($query);
     }
 
 }
