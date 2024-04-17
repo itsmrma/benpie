@@ -30,19 +30,27 @@ if (file_exists($filename)) {
     }
 
     for ($i=0; $i<count($json); $i++) {
-        // gestione comuni
-        if (isset($json[$i]['cap'])) {
-
-        } else {
-
-        }
-
         // gestione province
         if (isset($json[$i]['prov'])) {
 
         } else {
 
         }
+
+
+        // gestione comuni
+        if (isset($json[$i]['cap'])) {
+            $query_com = "SELECT id FROM comune WHERE cap = '" . $json[$i]['cap'] . "'";
+            $result = $conn->query($query_com);
+            if ($result->num_rows==0) {
+                $query_com = "INSERT INTO `comune` (`id`, `nome`, `cap`, `id_prov`) VALUES (NULL, NULL, NULL, '') ";
+            } else {
+
+            }
+        } else {
+
+        }
+        
 
         // gestione tipi
         if (isset($json[$i]['tipo'])) {
