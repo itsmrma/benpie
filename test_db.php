@@ -170,6 +170,7 @@ if (file_exists($filename)) {
         }
 
 
+        // USARE URL PER CONTROLLARE SE È GIÀ PRESENTE
         $query = "INSERT INTO `evento` (`id`, `denom`, `id_tipo`, `n_ediz`, `descrizione`, `data_inizio`, `ora_inizio`, `data_fine`, `ora_fine`, `anno`, `istat`, `id_comune`, `id_toponimo`, `civico`, `nome_org`, `url`, `geo_x`, `geo_y`) VALUES (NULL";
 
         for ($j=1; $j<count($nomi); $j++) {
