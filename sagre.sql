@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 15, 2024 at 02:11 PM
+-- Generation Time: Apr 17, 2024 at 08:12 AM
 -- Server version: 11.2.3-MariaDB
 -- PHP Version: 8.3.4
 
@@ -29,10 +29,17 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `comune` (
   `id` int(11) NOT NULL,
-  `nome` varchar(50) NOT NULL,
+  `nome` varchar(50) DEFAULT NULL,
   `cap` int(5) DEFAULT NULL,
   `id_prov` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+
+--
+-- Dumping data for table `comune`
+--
+
+INSERT INTO `comune` (`id`, `nome`, `cap`, `id_prov`) VALUES
+(1, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -69,8 +76,15 @@ CREATE TABLE `evento` (
 
 CREATE TABLE `provincia` (
   `id` int(11) NOT NULL,
-  `nome` varchar(50) NOT NULL
+  `nome` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+
+--
+-- Dumping data for table `provincia`
+--
+
+INSERT INTO `provincia` (`id`, `nome`) VALUES
+(1, NULL);
 
 -- --------------------------------------------------------
 
@@ -80,8 +94,15 @@ CREATE TABLE `provincia` (
 
 CREATE TABLE `tipo` (
   `id` int(11) NOT NULL,
-  `nome` varchar(20) NOT NULL
+  `nome` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+
+--
+-- Dumping data for table `tipo`
+--
+
+INSERT INTO `tipo` (`id`, `nome`) VALUES
+(1, NULL);
 
 -- --------------------------------------------------------
 
@@ -95,6 +116,13 @@ CREATE TABLE `toponimo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 --
+-- Dumping data for table `toponimo`
+--
+
+INSERT INTO `toponimo` (`id`, `nome`) VALUES
+(1, NULL);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -102,13 +130,17 @@ CREATE TABLE `toponimo` (
 -- Indexes for table `comune`
 --
 ALTER TABLE `comune`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_prov` (`id_prov`);
 
 --
 -- Indexes for table `evento`
 --
 ALTER TABLE `evento`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_comune` (`id_comune`),
+  ADD KEY `id_tipo` (`id_tipo`),
+  ADD KEY `id_toponimo` (`id_toponimo`);
 ALTER TABLE `evento` ADD FULLTEXT KEY `denom` (`denom`);
 
 --
@@ -137,7 +169,7 @@ ALTER TABLE `toponimo`
 -- AUTO_INCREMENT for table `comune`
 --
 ALTER TABLE `comune`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `evento`
@@ -149,19 +181,37 @@ ALTER TABLE `evento`
 -- AUTO_INCREMENT for table `provincia`
 --
 ALTER TABLE `provincia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tipo`
 --
 ALTER TABLE `tipo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `toponimo`
 --
 ALTER TABLE `toponimo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `comune`
+--
+ALTER TABLE `comune`
+  ADD CONSTRAINT `comune_ibfk_1` FOREIGN KEY (`id_prov`) REFERENCES `provincia` (`id`);
+
+--
+-- Constraints for table `evento`
+--
+ALTER TABLE `evento`
+  ADD CONSTRAINT `evento_ibfk_1` FOREIGN KEY (`id_comune`) REFERENCES `comune` (`id`),
+  ADD CONSTRAINT `evento_ibfk_2` FOREIGN KEY (`id_tipo`) REFERENCES `tipo` (`id`),
+  ADD CONSTRAINT `evento_ibfk_3` FOREIGN KEY (`id_toponimo`) REFERENCES `toponimo` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
