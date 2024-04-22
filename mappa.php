@@ -121,9 +121,9 @@
           }),vectorLayerLocation
         ],
         view: new ol.View({
-          center: [45.553139, 9.599792],
-         
-          zoom: 3
+          center: [1077769.5466310475,5736453.760081485],
+          extent: [944407.0434141352, 5570429.229433595, 1274103.8338330938,  5885413.565552787],
+          zoom: 7,
         })
       });
       
@@ -145,6 +145,7 @@
       }
       
       map.on('click', function (evt) {
+        console.log(evt.coordinate);
         const feature = map.forEachFeatureAtPixel(evt.pixel, function (feature) {
           return feature;
         });
