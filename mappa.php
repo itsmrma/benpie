@@ -150,7 +150,6 @@
         });
 
         document.cookie = "idEvento = "+feature.get('id');
-        <?php $_SESSION["idEvento"]= $_COOKIE["idEvento"]; ?>
 
         disposePopover();
         if (!feature) {
@@ -160,7 +159,7 @@
         popover = new bootstrap.Popover(element, {
           placement: 'top',
           html: true,
-          content: "<a href='infoEvento.php'>"+feature.get('name')+"</a>"
+          content: "<a target='_blank' href='infoEvento.php'>"+feature.get('name')+"</a>"
         });
         popover.show();
       });
