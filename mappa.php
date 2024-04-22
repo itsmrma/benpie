@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
   <head>
+
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v9.1.0/ol.css">
     <style>
@@ -15,14 +17,96 @@
     <script src="https://cdn.jsdelivr.net/npm/ol@v9.1.0/dist/ol.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     
+    <meta name="viewport" content="width=device-width, initial-scale=0.75">
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/95ae55bd9a.js" crossorigin="anonymous"></script>
+    <!-- Material Icon -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+    <script type="module">
+      import '@material/web/all.js';
+      import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
+  
+      document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dark.css" id="themeCSS">
+    <script src="js/index.js"></script>
+    <script src="js/changeTheme.js"></script>
   </head>
 
 
   <body>
+    <div class="sidebar">
+      <img src="lomb.png" width="85px" height="85px" style="align-self: center;">
+        <div class="sidebar-inner">
+          <a href="index.html" class="sidebar-link">
+            <span class="material-symbols-outlined">
+              home
+            </span>
+            <span class="sidebar-link-text">
+              Homepage
+            </span>
+          </a>
 
+          <a class="sidebar-link" id="cercaeventi" href="mappa.php">
+              <span class="material-symbols-outlined">
+                  search
+              </span>
+              <span class="sidebar-link-text">Ricerca Fiere</span>
+          </a>
+
+          <a class="sidebar-link" id="cercaeventi" href="mappa.php">
+            <span class="material-symbols-outlined">
+                map
+            </span>
+            <span class="sidebar-link-text">Mappa</span>
+          </a>
+
+          <a href="" class="sidebar-link">
+            <span class="material-symbols-outlined">
+              login
+            </span>
+            <span class="sidebar-link-text">
+              Effettua il login
+            </span>
+          </a>
+
+          <a href="test_db.php" class="sidebar-link">
+            <span class="material-symbols-outlined">
+              sync
+            </span>
+            <span class="sidebar-link-text">
+              Aggiorna i dati
+            </span>
+          </a>
+
+        </div>
+
+        <div class="sidebar-theme-container sidebar-desktop">
+            <a onclick="changeTheme()" class="sidebar-theme"><span class="material-symbols-outlined sidebar-theme-btn">
+                light_mode
+            </span></a>
+        </div>
+
+        <div class="sidebar-link sidebar-contatti sidebar-desktop">
+            <a href="https://github.com/itsmrma/benpie" target="_blank">Github <i class="fa-brands fa-github"></i></a>
+        </div>
+    </div>
+
+    <div class="main-container">
+        
+        <div id="map" class="map"><div id="popup"></div></div>
+    </div>
     
-    <div id="map" class="map"><div id="popup"></div></div>
 
     <?php 
         session_start();
@@ -59,6 +143,8 @@
         
         
     ?> 
+
+
 
 
     <script type="module">
