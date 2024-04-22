@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v9.1.0/ol.css">
     <style>
       .map {
-        height: 800px;
+        height: 600px;
         width: 60%;
         
         margin-left: auto;
@@ -28,7 +28,6 @@
         session_start();
         $conn = new mysqli("localhost","root","","sagre");
 			
-        // Check connection
         if ($conn -> connect_error) {
           die("Errore di connessione ".$conn->connect_errno." ".$conn->connect_error);
         }
@@ -36,11 +35,7 @@
         $sql = "select geo_x, geo_y, denom, id from evento";
         
 
-				if(($coordResult = $conn ->query($sql))){
-					echo "query corretta";
-				}else{
-					echo "query non corretta";
-				}
+				$coordResult = $conn ->query($sql);
 				$coordinate = [];
         $denominazioni = [];
         $id = [];
@@ -67,9 +62,10 @@
 
 
     <script type="module">
+
       var coordinate =  <?php echo json_encode($coordinate); ?>; // inizializza le coordinate da php a js
       var nomiEventi = <?php echo json_encode($denominazioni); ?>; // inizializza nomi eventi da php a js
-      var id = <?php echo json_encode($id); ?>;
+      var id = <?php echo json_encode($id); ?>; // inizializza id eventi da php a js
 
       console.log(coordinate[0][0],coordinate[0][1]);
       const iconFeature = [];
@@ -145,7 +141,7 @@
       }
       
       map.on('click', function (evt) {
-        console.log(evt.coordinate);
+        
         const feature = map.forEachFeatureAtPixel(evt.pixel, function (feature) {
           return feature;
         });
