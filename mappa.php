@@ -1,34 +1,99 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v9.1.0/ol.css">
     <style>
       .map {
         height: 400px;
         width: 100%;
       }
     </style>
-    <script src="https://openlayers.org/en/v4.6.5/build/ol.js" type="text/javascript"></script>
-    <title>OpenLayers example</title>
+    <script src="https://cdn.jsdelivr.net/npm/ol@v9.1.0/dist/ol.js">
+    </script>
+    
+    
   </head>
+
 
   <body>
 
-    <h2>My Map</h2>
+    
     <div id="map" class="map"></div>
 
-    <script type="text/javascript">
-
-        var vectorLayer = new ol.layer.Vector({ // VectorLayer({
-            source: new ol.source.Vector(),
-        });
+    <?php 
         
+        $conn = new mysqli("localhost","root","","sagre");
+			
+        // Check connection
+        if ($conn -> connect_error) {
+          die("Errore di connessione ".$conn->connect_errno." ".$conn->connect_error);
+        }
+        
+        $sql = "select geo_x, geo_y from evento";
+        
+
+				if(($result = $conn ->query($sql))){
+					echo "query corretta";
+				}else{
+					echo "query non corretta";
+				}
+				$coordinate = [];
+        $j=0;
+
+				foreach($result as $row){
+          $i=0;
+					foreach($row as $key => $value){
+            $temp[$i] = $value;
+            $i++;
+					}
+					$coordinate[$j] = $temp;
+          $j++;
+				}
+        
+        
+    ?> 
+
+
+    <script >
+    
+      var coordinate =  <?php echo json_encode($coordinate); ?>; // inizializza le coordinate da php a js
+
+      const iconFeature = new ol.Feature({
+        geometry: new ol.geom.Point([0, 0]),
+        name: 'Null Island',
+        population: 4000,
+        rainfall: 500,
+      });
+
+      const iconStyle = new ol.Style({
+        image: new ol.Style.Icon({
+          anchor: [0.5, 46],
+          anchorXUnits: 'fraction',
+          anchorYUnits: 'pixels',
+          src: 'data/icon.png',
+        }),
+      });
+
+      iconFeature.setStyle(iconStyle);
+
+      const vectorSourceLocation = new VectorSource({
+        features: [iconFeature],
+      });
+
+      const vectorLayerLocation = new VectorLayer({
+        source: vectorSourceLocation,
+      });
+
+      var vectorLayer = new ol.layer.Vector({ // VectorLayer({
+          source: new ol.source.Vector(),
+      });
+      
       var map = new ol.Map({
         target: 'map',
         layers: [
           new ol.layer.Tile({
             source: new ol.source.OSM()
-          }), vectorLayer
+          }), vectorLayer, vectorLayerLocation
         ],
         view: new ol.View({
           center: ol.proj.fromLonLat([37.41, 8.82]),
@@ -36,28 +101,8 @@
         })
       });
 
-      map.on('click', function (evt) {
-        console.log(ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'));
-        addMarker(evt.coordinate);
-      });
-      var vectorSource = vectorLayer.getSource();
-    function addMarker(coordinates) {
-        console.log(coordinates);
-        var marker = new ol.Feature(new ol.geom.Point(coordinates));
-        var zIndex = 1;
-        marker.setStyle(new ol.style.Style({
-        image: new ol.style.Icon(({
-            anchor: [0.5, 36], 
-            anchorXUnits: "fraction",
-            anchorYUnits: "pixels",
-            opacity: 1,
-            src: "mapIcons/pinother.png", 
-            zIndex: zIndex
-        })),
-        zIndex: zIndex
-        }));
-        vectorSource.addFeature(marker);
-    }
+    
     </script>
+
   </body>
 </html>
