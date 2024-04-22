@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v9.1.0/ol.css">
     <style>
       .map {
@@ -11,9 +12,8 @@
         margin-right: auto;
       }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/ol@v9.1.0/dist/ol.js">
-     
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/ol@v9.1.0/dist/ol.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     
     
   </head>
@@ -22,7 +22,7 @@
   <body>
 
     
-    <div id="map" class="map"></div>
+    <div id="map" class="map"><div id="popup"></div></div>
 
     <?php 
         
@@ -33,22 +33,27 @@
           die("Errore di connessione ".$conn->connect_errno." ".$conn->connect_error);
         }
         
-        $sql = "select geo_x, geo_y from evento";
+        $sql = "select geo_x, geo_y, denom from evento";
         
 
-				if(($result = $conn ->query($sql))){
+				if(($coordResult = $conn ->query($sql))){
 					echo "query corretta";
 				}else{
 					echo "query non corretta";
 				}
 				$coordinate = [];
+        $denominazioni = [];
         $j=0;
 
-				foreach($result as $row){
+				foreach($coordResult as $row){
           $i=0;
 					foreach($row as $key => $value){
-            $temp[$i] = $value;
-            $i++;
+            if($key=="denom"){
+              $denominazioni[$j] = $value;
+            }else{
+              $temp[$i] = $value;
+              $i++;
+            }
 					}
 					$coordinate[$j] = $temp;
           $j++;
@@ -61,6 +66,8 @@
     <script type="module">
       
       var coordinate =  <?php echo json_encode($coordinate); ?>; // inizializza le coordinate da php a js
+      var nomiEventi = <?php echo json_encode($denominazioni); ?>; // inizializza nomi eventi da php a js
+
       console.log(coordinate[0][0],coordinate[0][1]);
       const iconFeature = [];
 
@@ -80,7 +87,7 @@
           console.log(coordinate[i][0],coordinate[i][1]);
           iconFeature[j] = new ol.Feature({
             geometry: new ol.geom.Point(ol.proj.transform([coordinate[i][0], coordinate[i][1]], "EPSG:4326", "EPSG:3857")),
-            name: 'Null Island',
+            name: nomiEventi[j],
           });
           iconFeature[j].setStyle(iconStyle);
           j++;
@@ -97,7 +104,7 @@
         source: vectorSourceLocation,
       });
 
-      var vectorLayer = new ol.layer.Vector({ // VectorLayer({
+      var vectorLayer = new ol.layer.Vector({ 
           source: new ol.source.Vector(),
       });
       
@@ -111,10 +118,47 @@
           }),vectorLayerLocation
         ],
         view: new ol.View({
-          center: ol.proj.fromLonLat([37.41, 8.82]),
-          zoom: 4
+          center: [45.553139, 9.599792],
+         
+          zoom: 3
         })
       });
+      
+      const element = document.getElementById('popup');
+
+      const popup = new ol.Overlay({
+        element: element,
+        positioning: 'bottom-center',
+        stopEvent: false,
+      });
+      map.addOverlay(popup);
+
+      let popover;
+      function disposePopover() {
+        if (popover) {
+          popover.dispose();
+          popover = undefined;
+        }
+      }
+      
+      map.on('click', function (evt) {
+        const feature = map.forEachFeatureAtPixel(evt.pixel, function (feature) {
+          return feature;
+        });
+        disposePopover();
+        if (!feature) {
+          return;
+        }
+        popup.setPosition(evt.coordinate);
+        popover = new bootstrap.Popover(element, {
+          placement: 'top',
+          html: true,
+          content: feature.get('name')
+        });
+        popover.show();
+      });
+
+      map.on('movestart', disposePopover);
 
     
     </script>
