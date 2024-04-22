@@ -9,6 +9,7 @@
       }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/ol@v9.1.0/dist/ol.js">
+     
     </script>
     
     
@@ -54,33 +55,42 @@
     ?> 
 
 
-    <script >
-    
+    <script type="module">
+      
       var coordinate =  <?php echo json_encode($coordinate); ?>; // inizializza le coordinate da php a js
+      console.log(coordinate[0][0],coordinate[0][1]);
+      const iconFeature = [];
 
-      const iconFeature = new ol.Feature({
-        geometry: new ol.geom.Point([0, 0]),
-        name: 'Null Island',
-        population: 4000,
-        rainfall: 500,
-      });
-
-      const iconStyle = new ol.Style({
-        image: new ol.Style.Icon({
-          anchor: [0.5, 46],
+      const iconStyle = new ol.style.Style({
+        image: new ol.style.Icon({
+          anchor: [0.5, 50],
           anchorXUnits: 'fraction',
           anchorYUnits: 'pixels',
-          src: 'data/icon.png',
+          src: 'icona.png',
+          scale: 0.04
         }),
       });
 
-      iconFeature.setStyle(iconStyle);
+      for(var i=0, j=0; i<coordinate.length; i++){
+        console.log(coordinate[i][0],coordinate[i][1]);
+        if(coordinate[i][0]!=null && coordinate[i][1]!=null){
+          console.log(coordinate[i][0],coordinate[i][1]);
+          iconFeature[j] = new ol.Feature({
+            geometry: new ol.geom.Point(ol.proj.transform([coordinate[i][0], coordinate[i][1]], "EPSG:4326", "EPSG:3857")),
+            name: 'Null Island',
+          });
+          iconFeature[j].setStyle(iconStyle);
+          j++;
+        }
+      }
 
-      const vectorSourceLocation = new VectorSource({
-        features: [iconFeature],
+      const IconCollection = new ol.Collection(iconFeature);
+
+      const vectorSourceLocation = new ol.source.Vector({
+        features: IconCollection,
       });
 
-      const vectorLayerLocation = new VectorLayer({
+      const vectorLayerLocation = new ol.layer.Vector({
         source: vectorSourceLocation,
       });
 
