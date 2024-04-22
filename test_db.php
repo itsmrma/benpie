@@ -169,39 +169,45 @@ if (file_exists($filename)) {
             $id_toponimo=1;
         }
 
+        $query = "SELECT url FROM evento WHERE url='" . $json[$i]['url_programma']['url'] . "'";
+        $sel_res = $conn->query($query);
+        if ($sel_res->num_rows==0) {
+            $query = "INSERT INTO `evento` (`id`, `denom`, `id_tipo`, `n_ediz`, `descrizione`, `data_inizio`, `ora_inizio`, `data_fine`, `ora_fine`, `anno`, `istat`, `id_comune`, `id_toponimo`, `civico`, `nome_org`, `url`, `geo_x`, `geo_y`) VALUES (NULL";
 
-        // USARE URL PER CONTROLLARE SE È GIÀ PRESENTE
-        $query = "INSERT INTO `evento` (`id`, `denom`, `id_tipo`, `n_ediz`, `descrizione`, `data_inizio`, `ora_inizio`, `data_fine`, `ora_fine`, `anno`, `istat`, `id_comune`, `id_toponimo`, `civico`, `nome_org`, `url`, `geo_x`, `geo_y`) VALUES (NULL";
+            for ($j=1; $j<count($nomi); $j++) {
 
-        for ($j=1; $j<count($nomi); $j++) {
-
-            if ($nomi[$j]=="civico") {
-                $query .= ", '" . $id_com . "'";
-            }
-
-            if ($nomi[$j]=="civico") {
-                $query .= ", '" . $id_toponimo . "'";
-            }
-
-            if ($nomi[$j]=="n_ediz") {
-                $query .= ", '" . $id_tipo . "'";
-            }
-
-            if (isset($json[$i][$nomi[$j]])) {
-                if ($nomi[$j]=="url_programma") {
-                    $query .= ", '" . $json[$i][$nomi[$j]]['url'] . "'";
-                } else {
-                    $query .= ", '" . $json[$i][$nomi[$j]] . "'";
+                if ($nomi[$j]=="civico") {
+                    $query .= ", '" . $id_com . "'";
                 }
-                
-            } else {
-                $query .= ", NULL";
+
+                if ($nomi[$j]=="civico") {
+                    $query .= ", '" . $id_toponimo . "'";
+                }
+
+                if ($nomi[$j]=="n_ediz") {
+                    $query .= ", '" . $id_tipo . "'";
+                }
+
+                if (isset($json[$i][$nomi[$j]])) {
+                    if ($nomi[$j]=="url_programma") {
+                        $query .= ", '" . $json[$i][$nomi[$j]]['url'] . "'";
+                    } else {
+                        $query .= ", '" . $json[$i][$nomi[$j]] . "'";
+                    }
+                    
+                } else {
+                    $query .= ", NULL";
+                }
             }
+
+            $query .= ")";
+
+            $conn->query($query);
+        } else {
+            print("Fiera " . $json[$i]['denom'] . " già presente <br>");
         }
-
-        $query .= ")";
-
-        $conn->query($query);
+        
+        
     }
 
 }
