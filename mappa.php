@@ -4,8 +4,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v9.1.0/ol.css">
     <style>
       .map {
-        height: 400px;
-        width: 100%;
+        height: 800px;
+        width: 60%;
+        
+        margin-left: auto;
+        margin-right: auto;
       }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/ol@v9.1.0/dist/ol.js">
@@ -67,7 +70,7 @@
           anchorXUnits: 'fraction',
           anchorYUnits: 'pixels',
           src: 'icona.png',
-          scale: 0.04
+          scale: 0.06
         }),
       });
 
@@ -102,8 +105,10 @@
         target: 'map',
         layers: [
           new ol.layer.Tile({
-            source: new ol.source.OSM()
-          }), vectorLayer, vectorLayerLocation
+            source: new ol.source.XYZ({
+              url: 'http://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}'
+            })
+          }),vectorLayerLocation
         ],
         view: new ol.View({
           center: ol.proj.fromLonLat([37.41, 8.82]),
