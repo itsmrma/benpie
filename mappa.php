@@ -15,7 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/ol@v9.1.0/dist/ol.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     
-    
+
   </head>
 
 
@@ -25,7 +25,7 @@
     <div id="map" class="map"><div id="popup"></div></div>
 
     <?php 
-        
+        session_start();
         $conn = new mysqli("localhost","root","","sagre");
 			
         // Check connection
@@ -33,7 +33,7 @@
           die("Errore di connessione ".$conn->connect_errno." ".$conn->connect_error);
         }
         
-        $sql = "select geo_x, geo_y, denom from evento";
+        $sql = "select geo_x, geo_y, denom, id from evento";
         
 
 				if(($coordResult = $conn ->query($sql))){
@@ -43,6 +43,7 @@
 				}
 				$coordinate = [];
         $denominazioni = [];
+        $id = [];
         $j=0;
 
 				foreach($coordResult as $row){
@@ -50,6 +51,8 @@
 					foreach($row as $key => $value){
             if($key=="denom"){
               $denominazioni[$j] = $value;
+            }else if($key=="id"){
+              $id[$j] = $value;
             }else{
               $temp[$i] = $value;
               $i++;
@@ -64,9 +67,9 @@
 
 
     <script type="module">
-      
       var coordinate =  <?php echo json_encode($coordinate); ?>; // inizializza le coordinate da php a js
       var nomiEventi = <?php echo json_encode($denominazioni); ?>; // inizializza nomi eventi da php a js
+      var id = <?php echo json_encode($id); ?>;
 
       console.log(coordinate[0][0],coordinate[0][1]);
       const iconFeature = [];
@@ -84,10 +87,10 @@
       for(var i=0, j=0; i<coordinate.length; i++){
         console.log(coordinate[i][0],coordinate[i][1]);
         if(coordinate[i][0]!=null && coordinate[i][1]!=null){
-          console.log(coordinate[i][0],coordinate[i][1]);
           iconFeature[j] = new ol.Feature({
             geometry: new ol.geom.Point(ol.proj.transform([coordinate[i][0], coordinate[i][1]], "EPSG:4326", "EPSG:3857")),
             name: nomiEventi[j],
+            id: id[j],
           });
           iconFeature[j].setStyle(iconStyle);
           j++;
@@ -145,6 +148,9 @@
         const feature = map.forEachFeatureAtPixel(evt.pixel, function (feature) {
           return feature;
         });
+
+        document.cookie = "idEvento = "+feature.get('id');
+
         disposePopover();
         if (!feature) {
           return;
@@ -153,7 +159,7 @@
         popover = new bootstrap.Popover(element, {
           placement: 'top',
           html: true,
-          content: feature.get('name')
+          content: "<a target='_blank' href='infoEvento.php'>"+feature.get('name')+"</a>"
         });
         popover.show();
       });
