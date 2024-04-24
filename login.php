@@ -1,44 +1,36 @@
 <!doctype html>
 <html lang="en">
   <head>
-
-    <style>
-      .map {
-        height: 600px;
-        width: 60%;
-        
-        margin-left: auto;
-        margin-right: auto;
-      }
-    </style>
-
-
     <?php include 'head.html';?>
   </head>
 
 
   <body>
+
     <?php include 'code.html';?>
 
     
     <div class="main-container">
-        
         <div id="map" class="map"><div id="popup"></div></div>
     </div>
 
     <?php 
-        
+        echo "<form method='post'>
+        <br><input type='text' name='email'>
+        <input type='submit'>
+        </form>";
+
         $conn = new mysqli("localhost","root","","sagre");
 			
         if ($conn -> connect_error) {
           die("Errore di connessione ".$conn->connect_errno." ".$conn->connect_error);
         }
         
-        $sql = "select geo_x, geo_y, denom, id from evento";
+        $sql = "select email from utenti where email=".$_POST["email"];
         
+        $result = $conn ->query($sql);
 
-        $coordResult = $conn ->query($sql);
-
+        
         
     ?> 
     
