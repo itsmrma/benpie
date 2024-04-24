@@ -77,12 +77,11 @@
       var nomiEventi = <?php echo json_encode($denominazioni); ?>; // inizializza nomi eventi da php a js
       var id = <?php echo json_encode($id); ?>; // inizializza id eventi da php a js
 
-      console.log(coordinate[0][0],coordinate[0][1]);
       const iconFeature = [];
 
       const iconStyle = new ol.style.Style({
         image: new ol.style.Icon({
-          anchor: [0.5, 50],
+          anchor: [0.5, 640],
           anchorXUnits: 'fraction',
           anchorYUnits: 'pixels',
           src: 'icona.png',
@@ -173,7 +172,6 @@
 
       map.on('movestart', disposePopover);
 
-    
     </script>
 
     
