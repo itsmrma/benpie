@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Apr 17, 2024 at 08:12 AM
--- Server version: 11.2.3-MariaDB
--- PHP Version: 8.3.4
+-- Host: 127.0.0.1
+-- Creato il: Apr 24, 2024 alle 11:41
+-- Versione del server: 10.4.20-MariaDB
+-- Versione PHP: 8.0.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,117 +24,115 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comune`
+-- Struttura della tabella `comune`
 --
 
 CREATE TABLE `comune` (
   `id` int(11) NOT NULL,
-  `nome` varchar(50) DEFAULT NULL,
+  `nome` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `cap` int(5) DEFAULT NULL,
   `id_prov` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
---
--- Dumping data for table `comune`
---
-
-INSERT INTO `comune` (`id`, `nome`, `cap`, `id_prov`) VALUES
-(1, NULL, NULL, 1);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `evento`
+-- Struttura della tabella `evento`
 --
 
 CREATE TABLE `evento` (
   `id` int(11) NOT NULL,
-  `denom` varchar(100) DEFAULT NULL,
+  `denom` varchar(100) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `id_tipo` int(11) NOT NULL,
-  `n_ediz` varchar(10) DEFAULT NULL,
-  `descrizione` varchar(500) DEFAULT NULL,
+  `n_ediz` varchar(10) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `descrizione` varchar(500) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `data_inizio` datetime DEFAULT NULL,
-  `ora_inizio` varchar(5) DEFAULT NULL,
+  `ora_inizio` varchar(5) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `data_fine` datetime DEFAULT NULL,
-  `ora_fine` varchar(5) DEFAULT NULL,
+  `ora_fine` varchar(5) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `anno` year(4) DEFAULT NULL,
   `istat` int(6) DEFAULT NULL,
   `id_comune` int(11) NOT NULL,
   `id_toponimo` int(11) NOT NULL,
   `civico` int(6) DEFAULT NULL,
-  `nome_org` varchar(100) DEFAULT NULL,
-  `url` varchar(100) DEFAULT NULL,
-  `geo_x` varchar(30) DEFAULT NULL,
-  `geo_y` varchar(30) DEFAULT NULL
+  `nome_org` varchar(100) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `url` varchar(100) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `geo_x` varchar(30) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `geo_y` varchar(30) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `provincia`
+-- Struttura della tabella `preferiti`
+--
+
+CREATE TABLE `preferiti` (
+  `idEvento` int(11) NOT NULL,
+  `idUtente` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `provincia`
 --
 
 CREATE TABLE `provincia` (
   `id` int(11) NOT NULL,
-  `nome` varchar(50) DEFAULT NULL
+  `nome` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
---
--- Dumping data for table `provincia`
---
-
-INSERT INTO `provincia` (`id`, `nome`) VALUES
-(1, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tipo`
+-- Struttura della tabella `tipo`
 --
 
 CREATE TABLE `tipo` (
   `id` int(11) NOT NULL,
-  `nome` varchar(20) DEFAULT NULL
+  `nome` varchar(20) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
---
--- Dumping data for table `tipo`
---
-
-INSERT INTO `tipo` (`id`, `nome`) VALUES
-(1, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `toponimo`
+-- Struttura della tabella `toponimo`
 --
 
 CREATE TABLE `toponimo` (
   `id` int(11) NOT NULL,
-  `nome` varchar(30) DEFAULT NULL
+  `nome` varchar(30) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
---
--- Dumping data for table `toponimo`
---
-
-INSERT INTO `toponimo` (`id`, `nome`) VALUES
-(1, NULL);
+-- --------------------------------------------------------
 
 --
--- Indexes for dumped tables
+-- Struttura della tabella `utenti`
+--
+
+CREATE TABLE `utenti` (
+  `nomeUtente` varchar(30) NOT NULL,
+  `email` varchar(60) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  `nome` varchar(20) NOT NULL,
+  `cognome` varchar(20) NOT NULL,
+  `idUtente` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Indici per le tabelle scaricate
 --
 
 --
--- Indexes for table `comune`
+-- Indici per le tabelle `comune`
 --
 ALTER TABLE `comune`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_prov` (`id_prov`);
 
 --
--- Indexes for table `evento`
+-- Indici per le tabelle `evento`
 --
 ALTER TABLE `evento`
   ADD PRIMARY KEY (`id`),
@@ -144,74 +142,100 @@ ALTER TABLE `evento`
 ALTER TABLE `evento` ADD FULLTEXT KEY `denom` (`denom`);
 
 --
--- Indexes for table `provincia`
+-- Indici per le tabelle `preferiti`
+--
+ALTER TABLE `preferiti`
+  ADD PRIMARY KEY (`idEvento`,`idUtente`),
+  ADD KEY `idUtente` (`idUtente`);
+
+--
+-- Indici per le tabelle `provincia`
 --
 ALTER TABLE `provincia`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tipo`
+-- Indici per le tabelle `tipo`
 --
 ALTER TABLE `tipo`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `toponimo`
+-- Indici per le tabelle `toponimo`
 --
 ALTER TABLE `toponimo`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Indici per le tabelle `utenti`
+--
+ALTER TABLE `utenti`
+  ADD PRIMARY KEY (`idUtente`);
+
+--
+-- AUTO_INCREMENT per le tabelle scaricate
 --
 
 --
--- AUTO_INCREMENT for table `comune`
+-- AUTO_INCREMENT per la tabella `comune`
 --
 ALTER TABLE `comune`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `evento`
+-- AUTO_INCREMENT per la tabella `evento`
 --
 ALTER TABLE `evento`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `provincia`
+-- AUTO_INCREMENT per la tabella `provincia`
 --
 ALTER TABLE `provincia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tipo`
+-- AUTO_INCREMENT per la tabella `tipo`
 --
 ALTER TABLE `tipo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `toponimo`
+-- AUTO_INCREMENT per la tabella `toponimo`
 --
 ALTER TABLE `toponimo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Constraints for dumped tables
+-- AUTO_INCREMENT per la tabella `utenti`
+--
+ALTER TABLE `utenti`
+  MODIFY `idUtente` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Limiti per le tabelle scaricate
 --
 
 --
--- Constraints for table `comune`
+-- Limiti per la tabella `comune`
 --
 ALTER TABLE `comune`
   ADD CONSTRAINT `comune_ibfk_1` FOREIGN KEY (`id_prov`) REFERENCES `provincia` (`id`);
 
 --
--- Constraints for table `evento`
+-- Limiti per la tabella `evento`
 --
 ALTER TABLE `evento`
   ADD CONSTRAINT `evento_ibfk_1` FOREIGN KEY (`id_comune`) REFERENCES `comune` (`id`),
   ADD CONSTRAINT `evento_ibfk_2` FOREIGN KEY (`id_tipo`) REFERENCES `tipo` (`id`),
   ADD CONSTRAINT `evento_ibfk_3` FOREIGN KEY (`id_toponimo`) REFERENCES `toponimo` (`id`);
+
+--
+-- Limiti per la tabella `preferiti`
+--
+ALTER TABLE `preferiti`
+  ADD CONSTRAINT `preferiti_ibfk_1` FOREIGN KEY (`idEvento`) REFERENCES `evento` (`id`),
+  ADD CONSTRAINT `preferiti_ibfk_2` FOREIGN KEY (`idUtente`) REFERENCES `utenti` (`idUtente`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
