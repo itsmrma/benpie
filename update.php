@@ -33,16 +33,17 @@
         
         <?php include 'code.html';?>
         
-
-        <div class="main-container">
-          <?php include 'test_db.php';?>
-        </div>
-
         <script>
           // set active
           var active = document.getElementById('sidebar_update');
           active.classList.add('active');
         </script>
+
+        <div class="main-container">
+          <?php include 'test_db.php';?>
+        </div>
+
+        
 
        </body>
 
