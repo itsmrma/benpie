@@ -33,7 +33,20 @@
                     echo "<h1> ". $array['denom'] . "</h1><br>";
                     echo "<h3>" . $array['descrizione'] . "</h3><br>";
 
+                    $date=date_create($array['data_inizio']);
+                    $date1 = date_format($date, "Y/m/d");
+                    $date = date_create($date1 . $array['ora_inizio']);
+                    $start = date_format($date,"Y/m/d H:i");
+
+                    $date=date_create($array['data_fine']);
+                    $date1 = date_format($date, "Y/m/d");
+                    $date = date_create($date1 . $array['ora_fine']);
+                    $end = date_format($date,"Y/m/d H:i");
+
+                    echo "<span class='material-symbols-outlined'>schedule</span>" . $start . "<span class='material-symbols-outlined'>arrow_right_alt</span>" . $end . "<br><br><br>";
+
                     echo "<div id='feedback-recruiting'><div class='grid-center-2col'><a class='card-1' href='". $array['url'] . "'><i class='fas fa-comment'></i><h4 style='margin: 0;'>PDF</h4></a></div></div>";
+                                        
     
                     print_r($array);
                 ?>
