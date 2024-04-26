@@ -43,7 +43,7 @@
                     $date = date_create($date1 . $array['ora_fine']);
                     $end = date_format($date,"Y/m/d H:i");
 
-                    echo "<span class='material-symbols-outlined'>schedule</span>" . $start . "<span class='material-symbols-outlined'>arrow_right_alt</span>" . $end . "<br><br><br>";
+                    echo "<span class='material-symbols-outlined'>schedule</span>" . $start . "<span class='material-symbols-outlined'>sports_score</span>" . $end . "<br><br><br>";
 
                     echo "<div id='feedback-recruiting'><div class='grid-center-2col'><a class='card-1' href='". $array['url'] . "'><i class='fas fa-comment'></i><h4 style='margin: 0;'>PDF</h4></a></div></div>";
                                         
