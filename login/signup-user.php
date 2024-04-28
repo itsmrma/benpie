@@ -12,8 +12,8 @@
         <div class="row">
             <div class="col-md-4 offset-md-4 form">
                 <form action="signup-user.php" method="POST" autocomplete="">
-                    <h2 class="text-center">Signup Form</h2>
-                    <p class="text-center">It's quick and easy.</p>
+                    <h2 class="text-center">Signup</h2>
+                    
                     <?php
                     if(count($errors) == 1){
                         ?>
@@ -40,7 +40,7 @@
                     }
                     ?>
                     <div class="form-group">
-                        <input class="form-control" type="text" name="name" placeholder="Full Name" required value="<?php echo $name ?>">
+                        <input class="form-control" type="text" name="nomeUtente" placeholder="username" required value="<?php echo $name ?>">
                     </div>
                     <div class="form-group">
                         <input class="form-control" type="email" name="email" placeholder="Email Address" required value="<?php echo $email ?>">
@@ -54,7 +54,7 @@
                     <div class="form-group">
                         <input class="form-control button" type="submit" name="signup" value="Signup">
                     </div>
-                    <div class="link login-link text-center">Already a member? <a href="login-user.php">Login here</a></div>
+                    <div class="link login-link text-center">Sei già registrato? <a href="login-user.php">Accedi</a></div>
                 </form>
             </div>
         </div>
