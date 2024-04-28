@@ -74,8 +74,7 @@
                     
                     $geo_x = $array["geo_x"];
                     $geo_y = $array["geo_y"];
-                    $idEvento = $array["id"];
-
+                    $nomeEvento = $array["denom"];
                 ?>
             </div>
 
@@ -95,12 +94,12 @@
 
             var geo_x =  <?php echo json_encode($geo_x); ?>; // inizializza le coordinate da php a js
             var geo_y = <?php echo json_encode($geo_y); ?>; // inizializza nomi eventi da php a js
-            var idEvento = <?php echo json_encode($idEvento); ?>;
-            console.log(geo_x, geo_y, idEvento);
+            var nomeEvento = <?php echo json_encode($nomeEvento); ?>;
+            console.log(geo_x, geo_y);
 
             const iconFeature = new ol.Feature({
                 geometry: new ol.geom.Point(ol.proj.transform([geo_x, geo_y], "EPSG:4326", "EPSG:3857")),
-                id: idEvento,
+                nome: nomeEvento,
             });
 
             const iconStyle = new ol.style.Style({
@@ -164,8 +163,6 @@
                     return feature;
                 });
 
-                document.cookie = "idEvento = "+feature.get('id');
-
                 disposePopover();
                 if (!feature) {
                     return;
@@ -174,7 +171,7 @@
                 popover = new bootstrap.Popover(element, {
                     placement: 'top',
                     html: true,
-                    content: "<a target='_blank' href='infoEvento.php'>"+feature.get('name')+"</a>"
+                    content: ""+feature.get('nome')
                 });
                 popover.show();
             });
