@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Apr 24, 2024 alle 11:41
--- Versione del server: 10.4.20-MariaDB
--- Versione PHP: 8.0.9
+-- Creato il: Apr 28, 2024 alle 14:41
+-- Versione del server: 10.4.28-MariaDB
+-- Versione PHP: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `comune` (
   `id` int(11) NOT NULL,
-  `nome` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `nome` varchar(50) DEFAULT NULL,
   `cap` int(5) DEFAULT NULL,
   `id_prov` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -42,23 +42,23 @@ CREATE TABLE `comune` (
 
 CREATE TABLE `evento` (
   `id` int(11) NOT NULL,
-  `denom` varchar(100) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `denom` varchar(100) DEFAULT NULL,
   `id_tipo` int(11) NOT NULL,
-  `n_ediz` varchar(10) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `descrizione` varchar(500) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `n_ediz` varchar(10) DEFAULT NULL,
+  `descrizione` varchar(500) DEFAULT NULL,
   `data_inizio` datetime DEFAULT NULL,
-  `ora_inizio` varchar(5) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `ora_inizio` varchar(5) DEFAULT NULL,
   `data_fine` datetime DEFAULT NULL,
-  `ora_fine` varchar(5) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `ora_fine` varchar(5) DEFAULT NULL,
   `anno` year(4) DEFAULT NULL,
   `istat` int(6) DEFAULT NULL,
   `id_comune` int(11) NOT NULL,
   `id_toponimo` int(11) NOT NULL,
   `civico` int(6) DEFAULT NULL,
-  `nome_org` varchar(100) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `url` varchar(100) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `geo_x` varchar(30) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `geo_y` varchar(30) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL
+  `nome_org` varchar(100) DEFAULT NULL,
+  `url` varchar(100) DEFAULT NULL,
+  `geo_x` varchar(30) DEFAULT NULL,
+  `geo_y` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 -- --------------------------------------------------------
@@ -70,7 +70,7 @@ CREATE TABLE `evento` (
 CREATE TABLE `preferiti` (
   `idEvento` int(11) NOT NULL,
   `idUtente` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -80,7 +80,7 @@ CREATE TABLE `preferiti` (
 
 CREATE TABLE `provincia` (
   `id` int(11) NOT NULL,
-  `nome` varchar(50) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL
+  `nome` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 -- --------------------------------------------------------
@@ -91,7 +91,7 @@ CREATE TABLE `provincia` (
 
 CREATE TABLE `tipo` (
   `id` int(11) NOT NULL,
-  `nome` varchar(20) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL
+  `nome` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 -- --------------------------------------------------------
@@ -102,7 +102,7 @@ CREATE TABLE `tipo` (
 
 CREATE TABLE `toponimo` (
   `id` int(11) NOT NULL,
-  `nome` varchar(30) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL
+  `nome` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 -- --------------------------------------------------------
@@ -115,10 +115,8 @@ CREATE TABLE `utenti` (
   `nomeUtente` varchar(30) NOT NULL,
   `email` varchar(60) NOT NULL,
   `password` varchar(200) NOT NULL,
-  `nome` varchar(20) NOT NULL,
-  `cognome` varchar(20) NOT NULL,
   `idUtente` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indici per le tabelle scaricate
