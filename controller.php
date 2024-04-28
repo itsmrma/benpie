@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    require "connection.php";
+    $con = mysqli_connect('localhost', 'root', '', 'sagre');
     $email = "";
     $name = "";
     $errors = array();
@@ -25,7 +25,7 @@
                             values('$name', '$email', '$encpass')";
             $data_check = mysqli_query($con, $insert_data);
             if(!$data_check){
-                $errors['db-error'] = "Failed while inserting data into database!";
+                $errors['db-error'] = "Inserimento delle credenziali fallito";
             }
         }
 
@@ -44,12 +44,12 @@
             if(password_verify($password, $fetch_pass)){
                 $_SESSION['email'] = $email;
                 $_SESSION['password'] = $password;
-                header('location: ../index.php');
+                header('location: index.php');
             }else{
-                $errors['email'] = "Incorrect email or password!";
+                $errors['email'] = "credenziali errate";
             }
         }else{
-            $errors['email'] = "It's look like you're not yet a member! Click on the bottom link to signup.";
+            $errors['email'] = "Non sei registrato";
         }
     }
 
@@ -57,6 +57,6 @@
     
    //if login now button click
     if(isset($_POST['login-now'])){
-        header('Location: login-user.php');
+        header('Location: login.php');
     }
 ?>
