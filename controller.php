@@ -12,7 +12,7 @@
         $password =  mysqli_real_escape_string($con,$_POST['password']);
         $cpassword = mysqli_real_escape_string($con, $_POST['cpassword']);
         if($password !== $cpassword){
-            $errors['password'] = "Le password non corrispondo!";
+            $errors['password'] = "Le password non corrispondono!";
         }
         $email_check = "SELECT * FROM utenti WHERE email = '$email'";
         $res = mysqli_query($con, $email_check);
@@ -22,11 +22,12 @@
         if(count($errors) === 0){
             $encpass = password_hash($password, PASSWORD_BCRYPT);
             $insert_data = "INSERT INTO utenti (nomeUtente, email, password)
-                            values('$name', '$email', '$encpass')";
+            values('$name', '$email', '$encpass')";
             $data_check = mysqli_query($con, $insert_data);
             if(!$data_check){
-                $errors['db-error'] = "Inserimento delle credenziali fallito";
+                $errors['db-error'] = "Inserimento delle credenziali su db fallito";
             }
+            header('Location: login.php');
         }
 
     }

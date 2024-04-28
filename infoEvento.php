@@ -28,8 +28,6 @@
 
         <div class="main-container">
 
-            <div id="map" class="map"><div id="popup"></div></div>
-
             <div class="infoEvento">
                 <?php
                     $opts = [
@@ -53,6 +51,7 @@
 
                     
                     echo "<h1> ". $array['denom'] . "</h1><br>";
+                    echo "<div id='map' class='map'><div id='popup'></div></div>";
                     echo "<h3>" . $array['descrizione'] . "</h3><br>";
 
                     $date=date_create($array['data_inizio']);
