@@ -95,8 +95,8 @@
             var geo_x =  <?php echo json_encode($geo_x); ?>; // inizializza le coordinate da php a js
             var geo_y = <?php echo json_encode($geo_y); ?>; // inizializza nomi eventi da php a js
             var nomeEvento = <?php echo json_encode($nomeEvento); ?>;
-            console.log(geo_x, geo_y);
 
+            console.log(geo_x, geo_y);
             const iconFeature = new ol.Feature({
                 geometry: new ol.geom.Point(ol.proj.transform([geo_x, geo_y], "EPSG:4326", "EPSG:3857")),
                 nome: nomeEvento,

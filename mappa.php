@@ -53,7 +53,7 @@
               $denominazioni[$j] = $value;
             }else if($key=="id"){
               $id[$j] = $value;
-            }else{
+            }else if($key=="geo_x" || $key== "geo_y"){
               $temp[$i] = $value;
               $i++;
             }
@@ -94,8 +94,8 @@
         if(coordinate[i][0]!=null && coordinate[i][1]!=null){
           iconFeature[j] = new ol.Feature({
             geometry: new ol.geom.Point(ol.proj.transform([coordinate[i][0], coordinate[i][1]], "EPSG:4326", "EPSG:3857")),
-            name: nomiEventi[j],
-            id: id[j],
+            name: nomiEventi[i],
+            id: id[i],
           });
           iconFeature[j].setStyle(iconStyle);
           j++;
@@ -173,8 +173,6 @@
       map.on('movestart', disposePopover);
 
     </script>
-
-    
 
   </body>
 </html>
