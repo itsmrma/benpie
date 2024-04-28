@@ -11,28 +11,26 @@
 
     
     <div class="main-container">
-        <div id="map" class="map"><div id="popup"></div></div>
+        <form method='post'>
+          <br>Mail: <input type='text' name='email'>
+          <?php 
+            if(isset($_POST['mail'])){
+              $conn = new mysqli("localhost","root","","sagre");
+            
+              if ($conn -> connect_error) {
+                die("Errore di connessione ".$conn->connect_errno." ".$conn->connect_error);
+              }
+              
+              $sql = "select email from utenti where email=".$_POST["email"];
+              
+              $result = $conn ->query($sql);
+            }
+          ?> 
+          <input type='submit'>
+        </form>
     </div>
 
-    <?php 
-        echo "<form method='post'>
-        <br><input type='text' name='email'>
-        <input type='submit'>
-        </form>";
 
-        $conn = new mysqli("localhost","root","","sagre");
-			
-        if ($conn -> connect_error) {
-          die("Errore di connessione ".$conn->connect_errno." ".$conn->connect_error);
-        }
-        
-        $sql = "select email from utenti where email=".$_POST["email"];
-        
-        $result = $conn ->query($sql);
-
-        
-        
-    ?> 
     
     <script>
       // set active
