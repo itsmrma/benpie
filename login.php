@@ -1,26 +1,27 @@
 <?php require_once "controller.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/page.css">
+    <?php include 'head.html'; ?>
+    <script src="js/ShowPSW.js"></script>
 
-    <?php include 'head.html';?>
 </head>
 
 <body>
 
-    <?php include 'code.html';?>
+    <?php include 'code.html'; ?>
 
     <div class="main-container">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 offset-md-4 form login-form">
-                        <form action="login.php" method="POST" autocomplete="">
-                            <h2 class="text-center">Login</h2>
-                            <?php
+        <div class="main">
+            <div class="section flex-center-y">
+                <div class="rounded-inner">
+                    <form class="basic-form" method="POST" action="login.php">
+                        <h1 class="firstTitle flex-center-x">Accedi</h1>
+                        <?php
                             if(count($errors) > 0){
                                 ?>
                                 <div class="alert alert-danger text-center">
@@ -33,29 +34,39 @@
                                 <?php
                             }
                             ?>
-                            <div class="form-group">
-                                <input class="form-control" type="email" name="email" placeholder="Email Address" required value="<?php echo $email ?>">
+                        <div class="input-container">
+                            <div class="material-textfield">
+                                <input placeholder="" type="email" required name="email">
+                                <label>Email</label>
                             </div>
-                            <div class="form-group">
-                                <input class="form-control" type="password" name="password" placeholder="Password" required>
+                        </div>
+                        <div class="input-container">
+                            <div class="material-textfield">
+                                <input placeholder="" type="password" required name="password" id="password">
+                                <label>Password</label>
+                                <span id="PSWShowHideIcon" onclick="ShowPSW()"><i class="fa-solid fa-eye-slash"></i></span>
                             </div>
-                            
-                            <div class="form-group">
-                                <input class="form-control button" type="submit" name="login" value="Login">
-                            </div>
-                            <div class="link login-link text-center">Non sei registrato? <a href="signup.php">Registrati ora</a></div>
-                        </form>
-                    </div>
+                            <p class="firstSubtitle">Non hai un account? <a href="signup.php" class="link">Registrati</a>
+                            </p>
+                        </div>
+                        <button class="btn filled submit-btn">Accedi</a>
+                    </form>
                 </div>
             </div>
+        </div>
+
     </div>
-    
+
+
+
     <script>
-      // set active
-      var active = document.getElementById('sidebar_login');
-      active.classList.add('active');
+        // set active
+        var active = document.getElementById('sidebar_login');
+        active.classList.add('active');
     </script>
 
 
+
 </body>
+
 </html>

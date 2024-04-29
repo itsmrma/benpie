@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+//error_reporting(0);
 $host = "localhost";
 $user = "root";
 $pass = "";
@@ -11,7 +11,7 @@ $url = "https://www.dati.lombardia.it/resource/hs8z-dcey.json";
 $filename = basename($url);
 
 if (file_exists($filename)) {
-    $data = file_get_contents($url);
+    $data = file_get_contents('https://www.dati.lombardia.it/resource/hs8z-dcey.json?$limit=2544');
     $json = json_decode($data, true);
 
     $i=0;
