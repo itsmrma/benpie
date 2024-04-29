@@ -16,8 +16,17 @@
         <script src="https://cdn.jsdelivr.net/npm/ol@v9.1.0/dist/ol.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
           
-
-        <?php include 'head.html';?>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("button").click(function(){
+                    $.ajax({url: "addFavorite.php", success: function(result){
+                    $("#div1").html(result);
+                    }});
+                });
+            });
+        </script>
+        <?php include 'head.html';session_start();?>
     </head>
 
     <body>
@@ -30,6 +39,7 @@
 
             <div class="infoEvento">
                 <?php
+                    
                     $opts = [
                         'http' => [
                           'method' => "GET",
@@ -67,8 +77,13 @@
                     echo "<span class='material-symbols-outlined'>schedule</span>" . $start . "<span class='material-symbols-outlined'>sports_score</span>" . $end . "<br><br><br>";
 
                     echo "<div id='feedback-recruiting'><div class='grid-center-2col'><a class='card-1' href='". $array['url'] . "'><i class='fas fa-comment'></i><h4 style='margin: 0;'>PDF</h4></a></div></div>";
-                                        
-    
+                    
+                    
+                    if(isset($_SESSION["email"])){
+                       $_SESSION["idEvento"] =  $array['id'];
+                       echo "<button>PREFERITI</button>";
+                    }
+                    
                     print_r($array);
                     
                     $geo_x = $array["geo_x"];
@@ -80,6 +95,7 @@
             
             
         </div>
+
 
         <script>
             // set active
