@@ -48,7 +48,7 @@
                         ]
                       ];
 
-                    $conn = new mysqli("localhost","root","","sagre");
+                    $conn = new mysqli("localhost","root","admin","sagre");
                     
                     if ($conn -> connect_error) {
                         die("Errore di connessione ". $conn->connect_errno ." ".$conn->connect_error);
