@@ -2,7 +2,7 @@
 //error_reporting(0);
 $host = "localhost";
 $user = "root";
-$pass = "";
+$pass = "admin";
 $db = "sagre";
 
 $conn = new mysqli($host, $user, $pass, $db);
