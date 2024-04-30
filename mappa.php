@@ -30,7 +30,6 @@
     </div>
 
     <?php 
-        
         $conn = new mysqli("localhost","root","admin","sagre");
 			
         if ($conn -> connect_error) {
