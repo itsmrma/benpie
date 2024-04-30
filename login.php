@@ -15,7 +15,7 @@
 
     <?php include 'code.html'; ?>
 
-    <div class="main-container">
+    <div class="main-container" style>
         <div class="main">
             <div class="section flex-center-y">
                 <div class="rounded-inner">
@@ -46,7 +46,8 @@
                                 <label>Password</label>
                                 <span id="PSWShowHideIcon" onclick="ShowPSW()"><i class="fa-solid fa-eye-slash"></i></span>
                             </div>
-                            <p class="firstSubtitle">Non hai un account? <a href="signup.php" class="link">Registrati</a>
+                            <br>
+                            <p class="firstSubtitle">Non hai un account?<a href="signup.php" class="link"> Registrati</a>
                             </p>
                         </div>
                         <button class="btn filled submit-btn">Accedi</a>

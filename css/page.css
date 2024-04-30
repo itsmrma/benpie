@@ -4,6 +4,9 @@
     max-width: 980px;
     width: 100%;
 	transition: all 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .sub-section{
@@ -19,7 +22,18 @@
     padding-top: 3%;
     width: 100%;
     margin-bottom: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.firstSubtitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .rounded-container .firstTitle{
 	border: none;
 	margin: 0;
@@ -74,6 +88,7 @@
     color: var(--muted);
     cursor: pointer;
 }
+
 input:focus + label + #PSWShowHideIcon i{
     color: var(--on-surface-primary);
 }
