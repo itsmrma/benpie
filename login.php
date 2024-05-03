@@ -50,7 +50,7 @@
                             <p class="firstSubtitle">Non hai un account?<a href="signup.php" class="link"> Registrati</a>
                             </p>
                         </div>
-                        <button class="btn filled submit-btn">Accedi</a>
+                        <button class="btn filled submit-btn" type="submit" name="login" value="login">Accedi</a>
                     </form>
                 </div>
             </div>
