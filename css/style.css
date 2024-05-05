@@ -386,6 +386,56 @@ button.btn.outlined:hover {
 	text-transform: initial;
 }
 
+md-outlined-text-field {
+	position: relative;
+}
+
+md-outlined-text-field label {
+	position: absolute;
+	font-size: 1rem;
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	background-color: var(--surface);
+	color: var(--muted);
+	padding: 0 0.3rem;
+	margin: 0 0.5rem;
+	transition: .1s ease-out;
+	transform-origin: left top;
+	pointer-events: none;
+	border-radius: 10px;
+}
+
+md-outlined-text-field input {
+	font-size: 1rem;
+	border: 0;
+	outline: 1px solid var(--muted);
+	border-radius: 10px;
+	padding: 1rem 0.7rem;
+	color: var(--on-surface);
+	transition: 0.1s ease-out;
+	background-color: var(--surface);
+}
+
+md-outlined-text-field input:focus {
+	outline-color: var(--on-primary);
+}
+
+md-outlined-text-field input:focus+label {
+	color: var(--on-primary);
+	top: 0;
+	transform: translateY(-50%) scale(.9);
+}
+
+md-outlined-text-field input:not(:placeholder-shown)+label {
+	top: 0;
+	transform: translateY(-50%) scale(.9);
+}
+
+md-outlined-text-field input::placeholder {
+	text-transform: initial;
+}
+
 .sidebar-menu {
 	display: none;
 }
