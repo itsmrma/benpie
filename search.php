@@ -13,7 +13,7 @@
             
 
         <?php
-        $conn = mysqli_connect('localhost', 'root', 'admin', 'sagre');
+        $conn = mysqli_connect('localhost', 'root', '', 'sagre');
         $select="";
         $query = "SELECT nome, cap FROM comune ORDER BY nome ASC";
         $result = mysqli_query($conn,$query);
