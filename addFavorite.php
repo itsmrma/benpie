@@ -15,4 +15,3 @@
     $sql = "insert into utenti (idUtente, idEvento) values (".$idUtente.",".$_SESSION["idEvento"].")";
     $result = $conn -> query($sql);
     
-?>
