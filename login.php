@@ -26,9 +26,9 @@
                                 ?>
                                 <div class="alert alert-danger text-center">
                                     <?php
-                                    foreach($errors as $showerror){
-                                        echo $showerror;
-                                    }
+                                        foreach($errors as $showerror){
+                                            echo $showerror;
+                                        }
                                     ?>
                                 </div>
                                 <?php
