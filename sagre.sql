@@ -32,7 +32,7 @@ CREATE TABLE `comune` (
   `nome` varchar(50) DEFAULT NULL,
   `cap` int(5) DEFAULT NULL,
   `id_prov` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -59,7 +59,7 @@ CREATE TABLE `evento` (
   `url` varchar(100) DEFAULT NULL,
   `geo_x` varchar(30) DEFAULT NULL,
   `geo_y` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -81,7 +81,7 @@ CREATE TABLE `preferiti` (
 CREATE TABLE `provincia` (
   `id` int(11) NOT NULL,
   `nome` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -92,7 +92,7 @@ CREATE TABLE `provincia` (
 CREATE TABLE `tipo` (
   `id` int(11) NOT NULL,
   `nome` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -103,7 +103,7 @@ CREATE TABLE `tipo` (
 CREATE TABLE `toponimo` (
   `id` int(11) NOT NULL,
   `nome` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -137,7 +137,7 @@ ALTER TABLE `evento`
   ADD KEY `id_comune` (`id_comune`),
   ADD KEY `id_tipo` (`id_tipo`),
   ADD KEY `id_toponimo` (`id_toponimo`);
-ALTER TABLE `evento` ADD FULLTEXT KEY `denom` (`denom`);
+
 
 --
 -- Indici per le tabelle `preferiti`
