@@ -24,13 +24,11 @@
                         <?php
                             if(count($errors) > 0){
                                 ?>
-                                <div class="alert alert-danger text-center">
                                     <?php
                                         foreach($errors as $showerror){
                                             echo $showerror;
                                         }
                                     ?>
-                                </div>
                                 <?php
                             }
                             ?>
