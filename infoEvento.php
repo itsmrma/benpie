@@ -18,11 +18,18 @@
           
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script>
+            function sendAjaxRequest(element,urlToSend) {
+                        var clickedButton = element;
+                        $.ajax({type: "POST",
+                            url: urlToSend,
+                            data: { id: clickedButton.val(), access_token: $("#access_token").val() }
+                        });
+            }
+
             $(document).ready(function(){
-                $("button").click(function(){
-                    $.ajax({url: "addFavorite.php", success: function(result){
-                    $("#div1").html(result);
-                    }});
+                $("#favourite").click(function(e){
+                    e.preventDefault();
+                    sendAjaxRequest($(this),'addFavourite.php');
                 });
             });
         </script>
@@ -78,10 +85,9 @@
 
                     echo "<div id='feedback-recruiting'><div class='grid-center-2col'><a class='card-1' href='". $array['url'] . "'><i class='fas fa-comment'></i><h4 style='margin: 0;'>PDF</h4></a></div></div>";
                     
-                    
                     if(isset($_SESSION["email"])){
                        $_SESSION["idEvento"] =  $array['id'];
-                       echo "<button>PREFERITI</button>";
+                       echo "<button id='favourite'>PREFERITI</button>";
                     }
                     
                     print_r($array);

@@ -25,9 +25,9 @@
                             if(count($errors) > 0){
                                 ?>
                                     <?php
-                                    foreach($errors as $showerror){
-                                        echo $showerror;
-                                    }
+                                        foreach($errors as $showerror){
+                                            echo $showerror;
+                                        }
                                     ?>
                                 <?php
                             }
