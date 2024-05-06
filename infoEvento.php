@@ -22,14 +22,7 @@
                         var clickedButton = element;
                         $.ajax({type: "POST",
                             url: urlToSend,
-                            data: { id: clickedButton.val(), access_token: $("#access_token").val() },
-                            success:function(result){
-                                alert('ok');
-                            },
-                            error:function(result)
-                            {
-                            alert('error');
-                            }
+                            data: { id: clickedButton.val(), access_token: $("#access_token").val() }
                         });
             }
 
@@ -91,7 +84,6 @@
                     echo "<span class='material-symbols-outlined'>schedule</span>" . $start . "<span class='material-symbols-outlined'>sports_score</span>" . $end . "<br><br><br>";
 
                     echo "<div id='feedback-recruiting'><div class='grid-center-2col'><a class='card-1' href='". $array['url'] . "'><i class='fas fa-comment'></i><h4 style='margin: 0;'>PDF</h4></a></div></div>";
-                    
                     
                     if(isset($_SESSION["email"])){
                        $_SESSION["idEvento"] =  $array['id'];
