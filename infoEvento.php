@@ -91,8 +91,6 @@
                        #echo "<div id='feedback-recruiting'><div class='grid-center-2col'><i class='fas fa-comment'></i><h4 style='margin: 0;'>AGGIUNGI AI PREFERITI</h4></div></div>";
                     }
                     
-                    print_r($array);
-                    
                     $geo_x = $array["geo_x"];
                     $geo_y = $array["geo_y"];
                     $nomeEvento = $array["denom"];
