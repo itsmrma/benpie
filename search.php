@@ -44,7 +44,7 @@
                 echo $data;
                 $query = "SELECT evento.denom, evento.id FROM evento INNER JOIN comune ON comune.id=evento.id_comune ";
                 if (isset($_POST['comune'])) {
-                    $query = "WHERE comune.cap='" . $_POST['comune'] . "'";
+                    $query .= "WHERE comune.cap='" . $_POST['comune'] . "'";
 
                 }
 
