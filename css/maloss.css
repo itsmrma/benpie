@@ -19,6 +19,17 @@
     --md-outlined-text-field-hover-label-text-color: var(--on-surface-variant);
     --md-outlined-text-field-focus-label-text-color: var(--on-surface-variant);
     --md-outlined-text-field-label-text-color: var(--on-surface);
+    
+    --md-list-container-color: var(--on-surface);
+    --md-list-outline-color: var(--on-surface);
+    --md-list-focus-outline-color: var(--on-surface);
+    --md-list-hover-outline-color: var(--on-surface-variant);
+    --md-list-hover-input-text-color: var(--on-surface-variant);
+    --md-list-focus-input-text-color: var(--on-surface-variant);
+    --md-list-input-text-color: var(--on-surface);
+    --md-list-hover-label-text-color: var(--on-surface-variant);
+    --md-list-focus-label-text-color: var(--on-surface-variant);
+    --md-list-label-text-color: var(--on-surface);
 }
 
 
