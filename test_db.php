@@ -199,7 +199,10 @@ for ($i = 0; $i < count($json); $i++) {
 
         $query .= ")";
 
-        $conn->query($query);
+        $abc = $conn->query($query);
+        if ($abc->num_rows == 0) {
+            echo "Errore query " . $query;
+        }
     } else {
         //print("Fiera " . $json[$i]['denom'] . " già presente <br>");
     }
@@ -208,7 +211,7 @@ for ($i = 0; $i < count($json); $i++) {
 }
 
 
-header("location: ./index.php");
+#header("location: ./index.php");
 
 $conn->close();
 
