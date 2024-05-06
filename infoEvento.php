@@ -88,6 +88,7 @@
                     if(isset($_SESSION["email"])){
                        $_SESSION["idEvento"] =  $array['id'];
                        echo "<button id='favourite'>PREFERITI</button>";
+                       #echo "<div id='feedback-recruiting'><div class='grid-center-2col'><i class='fas fa-comment'></i><h4 style='margin: 0;'>AGGIUNGI AI PREFERITI</h4></div></div>";
                     }
                     
                     $geo_x = $array["geo_x"];
