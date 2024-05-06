@@ -1,15 +1,27 @@
 :root {
-    --md-filled-select-text-field-container-shape: 0px;
-    --md-filled-select-text-field-container-color: #f7faf9;
-    --md-filled-select-text-field-input-text-color: #005353;
-    --md-filled-select-text-field-input-text-font: system-ui;
+    --md-outlined-select-text-field-container-color: var(--on-surface);
+    --md-outlined-select-text-field-outline-color: var(--on-surface);
+    --md-outlined-select-text-field-focus-outline-color: var(--on-surface);
+    --md-outlined-select-text-field-hover-outline-color: var(--on-surface-variant);
+    --md-outlined-select-text-field-hover-input-text-color: var(--on-surface-variant);
+    --md-outlined-select-text-field-focus-input-text-color: var(--on-surface-variant);
+    --md-outlined-select-text-field-input-text-color: var(--on-surface);
+    --md-outlined-select-text-field-hover-label-text-color: var(--on-surface-variant);
+    --md-outlined-select-text-field-focus-label-text-color: var(--on-surface-variant);
+    --md-outlined-select-text-field-label-text-color: var(--on-surface);
+    --md-outlined-text-field-container-color: var(--on-surface);
+    --md-outlined-text-field-outline-color: var(--on-surface);
+    --md-outlined-text-field-focus-outline-color: var(--on-surface);
+    --md-outlined-text-field-hover-outline-color: var(--on-surface-variant);
+    --md-outlined-text-field-hover-input-text-color: var(--on-surface-variant);
+    --md-outlined-text-field-focus-input-text-color: var(--on-surface-variant);
+    --md-outlined-text-field-input-text-color: var(--on-surface);
+    --md-outlined-text-field-hover-label-text-color: var(--on-surface-variant);
+    --md-outlined-text-field-focus-label-text-color: var(--on-surface-variant);
+    --md-outlined-text-field-label-text-color: var(--on-surface);
 }
 
-md-filled-select::part(menu) {
-    --md-menu-container-color: #f4fbfa;
-    --md-menu-container-shape: 0px;
-}
 
-md-filled-select {
+md-outlined-select {
     padding: 30px;
 }
