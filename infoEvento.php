@@ -90,8 +90,6 @@
                        echo "<button id='favourite'>PREFERITI</button>";
                     }
                     
-                    print_r($array);
-                    
                     $geo_x = $array["geo_x"];
                     $geo_y = $array["geo_y"];
                     $nomeEvento = $array["denom"];
