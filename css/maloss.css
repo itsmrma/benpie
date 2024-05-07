@@ -20,14 +20,8 @@
     --md-outlined-text-field-focus-label-text-color: var(--on-surface-variant);
     --md-outlined-text-field-label-text-color: var(--on-surface);
     
-    --md-list-container-color: var(--on-surface);	
-    --md-list-item-container-shape : var(--on-surface);
-    --md-list-item-label-text-color 	: var(--on-surface);
-    --md-list-item-supporting-text-color 	: var(--on-surface);
-    --md-list-item-trailing-supporting-text-color 	: var(--on-surface);
-    --md-list-item-label-text-font 	: var(--on-surface);
-    --md-list-item-supporting-text-font 	: var(--on-surface);
-    --md-list-item-trailing-supporting-text-font 	: var(--on-surface);
+
+    
 }
 
 
