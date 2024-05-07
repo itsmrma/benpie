@@ -20,7 +20,7 @@
       <?php include 'code.html';?>
 
       <div class="main-container">
-      
+
       <div class="mdc-data-table">
         <div class="mdc-data-table__table-container" >
           <table class="mdc-data-table__table" aria-label="Dessert calories">

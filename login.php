@@ -16,22 +16,28 @@
     <?php include 'code.html'; ?>
 
     <div class="main-container" style>
+
         <div class="main">
+
             <div class="section flex-center-y">
                 <div class="rounded-inner">
                     <form class="basic-form" method="POST" action="login.php">
                         <h1 class="firstTitle flex-center-x">Accedi</h1>
                         <?php
-                            if(count($errors) > 0){
-                                ?>
+                            if(count($errors) > 0){?>
+
+                                <div class="alert alert-danger">
                                     <?php
-                                        foreach($errors as $showerror){
-                                            echo $showerror;
-                                        }
+                                    foreach ($errors as $showerror) {
+                                        ?>
+                                        <li><?php echo $showerror; ?></li>
+                                    <?php
+                                    }
                                     ?>
-                                <?php
-                            }
-                            ?>
+                                </div>
+
+                                <?php   }
+                        ?>
                         <div class="input-container">
                             <div class="material-textfield">
                                 <input placeholder="" type="email" required name="email">

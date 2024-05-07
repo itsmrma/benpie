@@ -52,7 +52,6 @@ if (isset($_POST['login'])) {
     } else {
         $errors['email'] = "Non sei registrato";
     }
-    print_r($errors);
 }
 
 
