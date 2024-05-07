@@ -20,7 +20,7 @@
       <?php include 'code.html';?>
 
       <div class="main-container">
-
+      
       <div class="mdc-data-table">
         <div class="mdc-data-table__table-container" >
           <table class="mdc-data-table__table" aria-label="Dessert calories">
@@ -48,7 +48,7 @@
                 while($datiEventi = $prossimiEventi->fetch_assoc()){
                   echo "
                   <tr class='mdc-data-table__row'>
-                    <th class='mdc-data-table__cell' scope='row'><a href='infoEvento.php?idEvento=".$datiEventi['id']."' target='_blank' >".$datiEventi["denom"]."</a></th>
+                    <th class='mdc-data-table__cell' scope='row'><a href='infoEvento.php?idEvento=".$datiEventi['id']."' target='_blank' ><md-text-button>".$datiEventi["denom"]."</md-text-button></a></th>
                     <td class='mdc-data-table__cell mdc-data-table__cell--numeric'>".$datiEventi['data_inizio']."</td>
                     
                   </tr>";
