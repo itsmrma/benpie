@@ -3,7 +3,7 @@
 
     <head>
       <?php include 'head.html';?>
-        
+
     </head>
 
     <body>
@@ -12,22 +12,39 @@
 
       <div class="main-container">
         
-        <md-list style="max-width: 300px; max-height: 300px">
-          <md-list-item>
-            Cat
-            <img slot="start" style="width: 56px" src="https://placekitten.com/112/112">
-          </md-list-item>
-          <md-divider></md-divider>
-          <md-list-item>
-            Kitty Cat
-            <img slot="start" style="width: 56px" src="https://placekitten.com/114/114">
-          </md-list-item>
-          <md-divider></md-divider>
-          <md-list-item>
-            Cate
-            <img slot="start" style="width: 56px" src="https://placekitten.com/116/116">
-          </md-list-item>
+
+
+        <md-list style="max-width: 300px;">
+
+          <?php 
+
+            $currentDate = date('Y-m-d');
+            $conn = new mysqli("localhost","root","","sagre");
+
+            if ($conn -> connect_error) {
+              die("Errore di connessione ".$conn->connect_errno." ".$conn->connect_error);
+            }
+
+            $sql = "select id, denom from evento where evento.data_inizio>='".$currentDate."'order by evento.data_inizio asc limit 10";
+            
+            $prossimiEventi = $conn ->query($sql);
+
+            while($datiEventi = $prossimiEventi->fetch_assoc()){
+             
+                echo "
+                <md-list-item>
+                <a href=infoEvento.php target='_blank'>".$datiEventi["denom"]."</a>
+                <img slot='start' style='width: 56px' >
+                </md-list-item>
+                ";
+
+            }
+
+          ?>
+
         </md-list>
+
+
 
       </div>
 
@@ -35,6 +52,10 @@
         // set active
         var active = document.getElementById('sidebar_home');
         active.classList.add('active');
+      </script>
+
+      <script>
+        infoEventi = <?php echo json_encode($prossimiEventi); ?>; 
       </script>
 
     </body>

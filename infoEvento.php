@@ -18,12 +18,13 @@
           
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script>
+
             function sendAjaxRequest(element,urlToSend) {
-                        var clickedButton = element;
-                        $.ajax({type: "POST",
-                            url: urlToSend,
-                            data: { id: clickedButton.val(), access_token: $("#access_token").val() }
-                        });
+                var clickedButton = element;
+                $.ajax({type: "POST",
+                    url: urlToSend,
+                    data: { id: clickedButton.val(), access_token: $("#access_token").val() }
+                });
             }
 
             $(document).ready(function(){
@@ -32,6 +33,7 @@
                     sendAjaxRequest($(this),'addFavourite.php');
                 });
             });
+            
         </script>
         <?php include 'head.html';session_start();?>
     </head>
