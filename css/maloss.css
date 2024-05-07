@@ -30,3 +30,8 @@
 md-outlined-select {
     padding: 30px;
 }
+
+.toast {
+    float: right;
+    width: 30%;
+}
