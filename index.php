@@ -5,8 +5,9 @@
       <?php include 'head.html';?>
       <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
       <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+      <script src="js/snackbar.js" defer></script>
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
       <style>
         .mdc-data-table{
           height: 50%;
@@ -16,14 +17,16 @@
     </head>
 
     <body>
-
+      
       <?php include 'code.html';?>
 
-      <div class="main-container">
+      
 
+    <div class="main-container">
+      
       <div class="mdc-data-table">
         <div class="mdc-data-table__table-container" >
-          <table class="mdc-data-table__table" aria-label="Dessert calories">
+          <table class="mdc-data-table__table" aria-label="Prossimi eventi">
             <thead>
               <tr class="mdc-data-table__header-row">
                 <th class="mdc-data-table__header-cell" role="columnheader" scope="col">PROSSIMI EVENTI</th>
@@ -67,7 +70,9 @@
 
 
 
-      </div>
+
+    </div>
+    <div id="snackbar"></div>
 
       <script>
         // set active

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snackbar Example</title>
+  <!-- Importa le librerie necessarie -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+
+  <!-- Contenitore per lo snackbar -->
+  <div id="snackbar">Hello, world!</div>
+
+  <!-- Button per attivare lo snackbar -->
+  <button onclick="showSnackbar()">Mostra Snackbar</button>
+
+  <!-- Importa le librerie JavaScript necessarie -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    // Funzione per mostrare lo snackbar
+    function showSnackbar() {
+      // Inizializza lo snackbar
+      var snackbar = document.getElementById("snackbar");
+
+      // Opzioni dello snackbar
+      var options = {
+        duration: 3000, // Durata in millisecondi
+        inDuration: 300, // Durata dell'animazione di ingresso
+        outDuration: 200 // Durata dell'animazione di uscita
+      };
+
+      // Mostra lo snackbar
+      M.toast({html: snackbar.innerHTML, ...options});
+    }
+  </script>
+</body>
+</html>

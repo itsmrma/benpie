@@ -215,3 +215,12 @@ for ($i = 0; $i < count($json); $i++) {
 
 $conn->close();
 
+$dataOraCorrente = date("Y-m-d H:i:s");
+
+$percorsoFile = "date.txt";
+
+$file = fopen($percorsoFile, "w");
+
+fwrite($file, $dataOraCorrente);
+
+fclose($file);

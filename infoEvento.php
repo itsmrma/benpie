@@ -35,7 +35,7 @@
             });
 
         </script>
-        <?php include 'head.html';session_start();?>
+        <?php include 'head.html';error_reporting(0);session_start();?>
     </head>
 
     <body>
