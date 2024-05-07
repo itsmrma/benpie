@@ -5,13 +5,19 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v9.1.0/ol.css">
         <style>
-        .map {
-            height: 40%;
-            width: 40%;
-            
-            margin-left: auto;
-            margin-right: auto;
-        }
+      .map {
+        margin:auto;
+        position: relative;        
+        width: 40%;
+        height: 40%;
+        left: 20px;
+        top: 20px;
+        -moz-border-radius: 15px;
+        border-radius: 15px;
+        border: 1px solid black;
+        overflow: hidden;
+
+      }
         </style>
         <script src="https://cdn.jsdelivr.net/npm/ol@v9.1.0/dist/ol.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>

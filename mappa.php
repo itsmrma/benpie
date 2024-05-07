@@ -6,11 +6,17 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v9.1.0/ol.css">
     <style>
       .map {
-        height: 600px;
-        width: 60%;
-        
-        margin-left: auto;
-        margin-right: auto;
+        margin:auto;
+        position: relative;        
+        width: 80%;
+        height: 70%;
+        left: 20px;
+        top: 20px;
+        -moz-border-radius: 15px;
+        border-radius: 15px;
+        border: 1px solid black;
+        overflow: hidden;
+
       }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/ol@v9.1.0/dist/ol.js"></script>
