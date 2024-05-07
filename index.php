@@ -3,15 +3,13 @@
 
     <head>
       <?php include 'head.html';?>
-      <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
-      <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
       <style>
         .mdc-data-table{
-          height: 50%;
           width: 50%;
+          margin:auto;
         }
+
       </style>
     </head>
 
