@@ -154,8 +154,6 @@
           return feature;
         });
 
-        document.cookie = "idEvento = "+feature.get('id');
-
         disposePopover();
         if (!feature) {
           return;
@@ -164,7 +162,7 @@
         popover = new bootstrap.Popover(element, {
           placement: 'top',
           html: true,
-          content: "<a target='_blank' href='infoEvento.php'>"+feature.get('name')+"</a>"
+          content: "<a target='_blank' href='infoEvento.php?idEvento="+feature.get('id')+"'>"+feature.get('name')+"</a>"
         });
         popover.show();
       });

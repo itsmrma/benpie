@@ -33,7 +33,7 @@
                     sendAjaxRequest($(this),'addFavourite.php');
                 });
             });
-            
+
         </script>
         <?php include 'head.html';session_start();?>
     </head>
@@ -63,7 +63,7 @@
                         die("Errore di connessione ". $conn->connect_errno ." ".$conn->connect_error);
                     }
 
-                    $sql = "select * from evento where id=".$_COOKIE["idEvento"];
+                    $sql = "select * from evento where id=".$_GET["idEvento"];
                     
                     $coordResult = $conn -> query($sql);
                     $array=$coordResult->fetch_assoc();

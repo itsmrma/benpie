@@ -33,7 +33,7 @@
              
                 echo "
                 <md-list-item>
-                <a href=infoEvento.php target='_blank'>".$datiEventi["denom"]."</a>
+                <a href='infoEvento.php?idEvento=".$datiEventi["id"]."' target='_blank'  ciao='employeeLink'>".$datiEventi["denom"]."</a>
                 <img slot='start' style='width: 56px' >
                 </md-list-item>
                 ";
