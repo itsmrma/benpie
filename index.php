@@ -10,9 +10,10 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
       <style>
         .mdc-data-table{
-          height: 50%;
           width: 50%;
+          margin:auto;
         }
+
       </style>
     </head>
 
