@@ -36,9 +36,6 @@ fetch(filePath)
  
 
 function showSnackbar() {
-    // Inizializza lo snackbar
-    var snackbar = document.getElementById("snackbar");
-
     // Opzioni dello snackbar
     var options = {
         duration: 5000, // Durata in millisecondi
@@ -47,5 +44,5 @@ function showSnackbar() {
     };
 
     // Mostra lo snackbar
-    M.toast({html: "Abbiamo notato che il database non è aggiornato. Aggiornamento in background...", ...options});
+    M.toast({html: "Abbiamo notato che il database non è aggiornato. <br>Aggiornamento in background...", ...options});
 }
