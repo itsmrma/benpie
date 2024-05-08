@@ -5,19 +5,27 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v9.1.0/ol.css">
         <style>
-      .map {
-        margin:auto;
-        position: relative;        
-        width: 40%;
-        height: 40%;
-        left: 20px;
-        top: 20px;
-        -moz-border-radius: 15px;
-        border-radius: 15px;
-        border: 1px solid black;
-        overflow: hidden;
+            .map {
+                margin:auto;
+                position: relative;        
+                width: 40%;
+                height: 40%;
+                left: 20px;
+                top: 20px;
+                -moz-border-radius: 15px;
+                border-radius: 15px;
+                border: 1px solid black;
+                overflow: hidden;
 
-      }
+            }
+
+            .grid-container{
+                display:grid;
+                width: 100px;
+                grid-template-columns: auto auto auto;
+
+            }
+
         </style>
         <script src="https://cdn.jsdelivr.net/npm/ol@v9.1.0/dist/ol.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -39,7 +47,10 @@
                     sendAjaxRequest($(this),'addFavourite.php');
                 });
             });
-
+            
+            function downloadPdf(url){
+                window.open(url, "self");
+            }
         </script>
         <?php include 'head.html';error_reporting(0);session_start();?>
     </head>
@@ -88,21 +99,34 @@
                     $date1 = date_format($date, "Y/m/d");
                     $date = date_create($date1 . $array['ora_fine']);
                     $end = date_format($date,"Y/m/d H:i");
-
+                
                     echo "<span class='material-symbols-outlined'>schedule</span>" . $start . "<span class='material-symbols-outlined'>sports_score</span>" . $end . "<br><br><br>";
-
-                    echo "<div id='feedback-recruiting'><div class='grid-center-2col'><a class='card-1' href='". $array['url'] . "'><i class='fas fa-comment'></i><h4 style='margin: 0;'>PDF</h4></a></div></div>";
-                    
-                    if(isset($_SESSION["email"])){
-                       $_SESSION["idEvento"] =  $array['id'];
-                       echo "<button id='favourite'>PREFERITI</button>";
-                       #echo "<div id='feedback-recruiting'><div class='grid-center-2col'><i class='fas fa-comment'></i><h4 style='margin: 0;'>AGGIUNGI AI PREFERITI</h4></div></div>";
-                    }
+                ?>
+                <div class="grid-container">
+                    <div class="grid-item"> 
+                    <md-filled-tonal-icon-button id='download' onclick="downloadPdf('<?php echo $array['url']?>')">
+                    <span class='material-symbols-outlined'>
+                    download
+                    </span>
+                    </md-filled-tonal-icon-button>
+                    </div>
+                    <br>
+                    <?php if(isset($_SESSION["email"])){
+                       $_SESSION["idEvento"] =  $array['id'];?>
+                       <div class="grid-item"> 
+                       <md-filled-tonal-icon-button id='favourite'>
+                       <span class='material-symbols-outlined'>
+                       favorite
+                       </span>
+                     </md-filled-tonal-icon-button>
+                        </div> 
+                   <?php } 
                     
                     $geo_x = $array["geo_x"];
                     $geo_y = $array["geo_y"];
                     $nomeEvento = $array["denom"];
-                ?>
+                    ?>
+                </div>
             </div>
 
             
