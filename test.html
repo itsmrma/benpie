@@ -68,3 +68,24 @@
   </script>
 </body>
 </html>
+
+// Supponiamo che la variabile "query" sia già definita nel tuo file JavaScript
+var query = "valore_da_inviare";
+
+// Crea un oggetto FormData e aggiungi la variabile "query"
+var formData = new FormData();
+formData.append('query', query);
+
+// Effettua una richiesta POST a "search.php" con i dati del modulo
+fetch('search.php', {
+  method: 'POST',
+  body: formData
+})
+.then(response => {
+  // Gestisci la risposta come preferisci
+  console.log('Risposta dalla ricerca:', response);
+})
+.catch(error => {
+  // Gestisci gli errori
+  console.error('Errore durante la ricerca:', error);
+});
