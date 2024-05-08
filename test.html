@@ -37,3 +37,55 @@
   </script>
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/13.0.0/material-components-web.min.css">
+  <title>Date Picker</title>
+</head>
+<body>
+  <label for="datepicker" class="mdc-text-field mdc-text-field--outlined">
+    <span class="mdc-notched-outline">
+      <span class="mdc-notched-outline__leading"></span>
+      <span class="mdc-notched-outline__notch">
+        <span class="mdc-floating-label">Select Date</span>
+      </span>
+      <span class="mdc-notched-outline__trailing"></span>
+    </span>
+    <input type="text" id="datepicker" class="mdc-text-field__input" readonly>
+    <div class="mdc-line-ripple"></div>
+  </label>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/13.0.0/material-components-web.min.js"></script>
+  <script>
+    const datePicker = new mdc.textField.MDCTextField(document.querySelector('.mdc-text-field'));
+    const picker = new mdc.datepicker.MDCDatePicker(document.querySelector('#datepicker'));
+  </script>
+</body>
+</html>
+
+// Supponiamo che la variabile "query" sia già definita nel tuo file JavaScript
+var query = "valore_da_inviare";
+
+// Crea un oggetto FormData e aggiungi la variabile "query"
+var formData = new FormData();
+formData.append('query', query);
+
+// Effettua una richiesta POST a "search.php" con i dati del modulo
+fetch('search.php', {
+  method: 'POST',
+  body: formData
+})
+.then(response => {
+  // Gestisci la risposta come preferisci
+  console.log('Risposta dalla ricerca:', response);
+})
+.catch(error => {
+  // Gestisci gli errori
+  console.error('Errore durante la ricerca:', error);
+});

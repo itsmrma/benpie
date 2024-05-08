@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="css/maloss.css">
     <script src="js/cookie.js"></script>
     <script src="js/search.js" defer></script>
+    <!-- <script src="js/date.js"></script> -->
     <?php include 'head.html'; ?>
 </head>
 
@@ -34,6 +35,18 @@
 
                 ?>
 
+                <!-- <label for="datepicker" class="mdc-text-field mdc-text-field--outlined">
+                    <span class="mdc-notched-outline">
+                        <span class="mdc-notched-outline__leading"></span>
+                        <span class="mdc-notched-outline__notch">
+                            <span class="mdc-floating-label">Select Date</span>
+                        </span>
+                        <span class="mdc-notched-outline__trailing"></span>
+                    </span>
+                    <input type="text" id="datepicker" class="mdc-text-field__input" readonly>
+                    <div class="mdc-line-ripple"></div>
+                </label>
+ -->
                 <button class="btn filled submit-btn" type="submit" name="login" value="login">Ricerca</a></button>
 
             </form>
@@ -54,7 +67,7 @@
                 }
 
                 $query .= " ORDER BY denom DESC";
-                print($query);
+                print ($query);
                 $result = $conn->query($query);
 
                 foreach ($result->fetch_all(MYSQLI_ASSOC) as $row) {
