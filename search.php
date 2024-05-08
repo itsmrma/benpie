@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,46 +36,11 @@
 
                 ?>
 
-                <!-- <label for="datepicker" class="mdc-text-field mdc-text-field--outlined">
-                    <span class="mdc-notched-outline">
-                        <span class="mdc-notched-outline__leading"></span>
-                        <span class="mdc-notched-outline__notch">
-                            <span class="mdc-floating-label">Select Date</span>
-                        </span>
-                        <span class="mdc-notched-outline__trailing"></span>
-                    </span>
-                    <input type="text" id="datepicker" class="mdc-text-field__input" readonly>
-                    <div class="mdc-line-ripple"></div>
-                </label>
- -->
                 <button class="btn filled submit-btn" type="submit" name="login" value="login">Ricerca</a></button>
 
             </form>
 
-            <?php
-            if (isset($_POST["comune"])) {
-                $data = json_decode(file_get_contents('php://input'), true);
-                echo $data;
-                $query = "SELECT evento.denom, evento.id FROM evento INNER JOIN comune ON comune.id=evento.id_comune ";
-                if (isset($_POST['comune'])) {
-                    $query .= "WHERE comune.cap='" . $_POST['comune'] . "'";
-
-                }
-
-                if (isset($_POST['nomeFiera'])) {
-                    $query .= " AND evento.denom LIKE '%" . $_POST['nomeFiera'] . "%'";
-
-                }
-
-                $query .= " ORDER BY denom DESC";
-                print ($query);
-                $result = $conn->query($query);
-
-                foreach ($result->fetch_all(MYSQLI_ASSOC) as $row) {
-                    echo "<a target='_blank' href='infoEvento.php' onclick='setCookie(" . $row['id'] . ")'>" . $row['denom'] . "</a><br>";
-                }
-            }
-            ?>
+            <div id="list"></div>
 
 
         </div>
