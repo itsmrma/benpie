@@ -1,20 +1,17 @@
 <?php
-session_start();
-
 $query = "SELECT evento.denom, evento.id FROM evento INNER JOIN comune ON comune.id=evento.id_comune ";
 
-//print($_POST['query']);
+$dati_json = file_get_contents("php://input");
+$dati = json_decode($dati_json);
 
-print_r($_GET);
+$query .= $dati->query;
 
 $query .= " ORDER BY denom DESC";
 
-$_SESSION['query']=$query;
-
 $conn = mysqli_connect('localhost', 'root', '', 'sagre');
 
-$result = $conn->query($_SESSION['query']);
+$result = $conn->query($query);
 
 foreach ($result->fetch_all(MYSQLI_ASSOC) as $row) {
-    echo "<a target='_blank' href='infoEvento.php' onclick='setCookie(" . $row['id'] . ")'>" . $row['denom'] . "</a><br>";
+    echo "<a target='_blank' href='infoEvento.php?idEvento=" . $row['id'] . "'>" . $row['denom'] . "</a><br>";
 }

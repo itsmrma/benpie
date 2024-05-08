@@ -1,4 +1,3 @@
-<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +14,7 @@
 
     <div class="main-container" id="main-container">
         <div class="main">
-            <form action="search.php" method="post" class="basic-form">
+            <form action="search.php" method="post" class="basic-form" id="cerca">
 
 
                 <md-outlined-text-field label="Nome fiera" name="nomeFiera" id=nomeFiera>
@@ -35,8 +34,6 @@
 
 
                 ?>
-
-                <button class="btn filled submit-btn" type="submit" name="login" value="login">Ricerca</a></button>
 
             </form>
 
