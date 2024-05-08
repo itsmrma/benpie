@@ -18,6 +18,14 @@
                 overflow: hidden;
 
             }
+
+            .grid-container{
+                display:grid;
+                width: 100px;
+                grid-template-columns: auto auto auto;
+
+            }
+
         </style>
         <script src="https://cdn.jsdelivr.net/npm/ol@v9.1.0/dist/ol.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -94,25 +102,31 @@
                 
                     echo "<span class='material-symbols-outlined'>schedule</span>" . $start . "<span class='material-symbols-outlined'>sports_score</span>" . $end . "<br><br><br>";
                 ?>
+                <div class="grid-container">
+                    <div class="grid-item"> 
                     <md-filled-tonal-icon-button id='download' onclick="downloadPdf('<?php echo $array['url']?>')">
                     <span class='material-symbols-outlined'>
                     download
                     </span>
                     </md-filled-tonal-icon-button>
+                    </div>
                     <br>
                     <?php if(isset($_SESSION["email"])){
                        $_SESSION["idEvento"] =  $array['id'];?>
+                       <div class="grid-item"> 
                        <md-filled-tonal-icon-button id='favourite'>
                        <span class='material-symbols-outlined'>
                        favorite
                        </span>
                      </md-filled-tonal-icon-button>
+                        </div> 
                    <?php } 
                     
                     $geo_x = $array["geo_x"];
                     $geo_y = $array["geo_y"];
                     $nomeEvento = $array["denom"];
-                ?>
+                    ?>
+                </div>
             </div>
 
             
