@@ -32,6 +32,8 @@ md-outlined-select {
 }
 
 .toast {
-    float: right;
-    width: 30%;
+    bottom: 20px; /* regola l'altezza del toast dal basso */
+    right: 20px;
+    height: 10%;
+    position: fixed;
 }

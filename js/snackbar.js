@@ -20,7 +20,8 @@ fetch(filePath)
     const timeDifference = today.getTime() - dateFromFile.getTime();
 
     // Converti la differenza in giorni
-    const daysPassed = Math.floor(timeDifference / (1000 * 3600 * 24));
+    let daysPassed = Math.floor(timeDifference / (1000 * 3600 * 24));
+    daysPassed+=1;
 
     console.log('Giorni passati:', daysPassed);
     
