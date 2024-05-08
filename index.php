@@ -12,7 +12,9 @@
   <style>
     .mdc-data-table {
       width: 50%;
-      margin: auto;
+      position:absolute;
+      bottom:0;
+      height: 80%;
     }
   </style>
   <link rel="stylesheet" href="css/maloss.css">
