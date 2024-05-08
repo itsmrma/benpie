@@ -1,32 +1,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=0.75">
-        <!-- Material design 2 -->
-        <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
-        <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<!-- Material design 2 -->
+<link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-        <!-- Font Awesome -->
-        <script src="https://kit.fontawesome.com/95ae55bd9a.js" crossorigin="anonymous"></script>
-        <!-- Material Icon -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-        
-        
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-        <script type="importmap">
+<!-- Font Awesome -->
+<script src="https://kit.fontawesome.com/95ae55bd9a.js" crossorigin="anonymous"></script>
+<!-- Material Icon -->
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<script type="importmap">
           {
             "imports": {
               "@material/web/": "https://esm.run/@material/web/"
             }
           }
         </script>
-        <script type="module">
-          import '@material/web/all.js';
-          import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
-      
-          document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
-        </script>
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/dark.css" id="themeCSS">
-        <script src="js/changeTheme.js"></script>
+<script type="module">
+  import '@material/web/all.js';
+  import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.2.5/angular-material.css" integrity="sha512-yBGI2ktxO1PhtQD8ptCm34qpP47nV0gPcl8LvNpgsL++FaG5Bp6xMOue38anAqvUou1/8BtQPECnURm7fODd1g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.2.5/angular-material.js" integrity="sha512-r9vXkO+sJL9e3NwHQY4U2XPanMws794rAfzq4u43WMNyPQX5/07oALQ3qDUyXL2EnJ3xBeNA+QBsWkvH/T3lhw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+</script>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dark.css" id="themeCSS">
+<script src="js/changeTheme.js"></script>
+<!-- Required styles for Material Web -->
+<link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+
+<!-- Render textfield component -->
+<label class="mdc-text-field mdc-text-field--filled">
+  <span class="mdc-text-field__ripple"></span>
+  <span class="mdc-floating-label" id="my-label">Label</span>
+  <input type="text" class="mdc-text-field__input" aria-labelledby="my-label">
+  <span class="mdc-line-ripple"></span>
+</label>
+
+<!-- Required Material Web JavaScript library -->
+<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+<!-- Instantiate single textfield component rendered in the document -->
+<script>
+  mdc.textField.MDCTextField.attachTo(document.querySelector < HTMLElement > ('.mdc-text-field'));
+</script>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
