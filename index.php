@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,7 +40,6 @@
 
           <tbody class="mdc-data-table__content">
             <?php
-            session_start();
             $currentDate = date('Y-m-d');
             $conn = new mysqli("localhost", "root", "", "sagre");
 
@@ -48,7 +48,7 @@
             }
             
             if(isset($_SESSION["email"])){
-              "select DISTINCT denom from preferiti inner join evento on evento.id = preferiti.idUtente where preferiti.idUtente =".$_SESSION['id']
+              "select DISTINCT denom from preferiti inner join evento on evento.id = preferiti.idUtente where preferiti.idUtente =".$_SESSION['id'];
               $sql = "select denom from  as data_inizio from evento where evento.data_inizio>='" . $currentDate . "'order by evento.data_inizio asc limit 10";
             }
             $sql = "select id, denom, CAST(evento.data_inizio AS date) as data_inizio from evento where evento.data_inizio>='" . $currentDate . "'order by evento.data_inizio asc limit 10";
