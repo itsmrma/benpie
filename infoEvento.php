@@ -17,7 +17,6 @@
             top: 20px;
             -moz-border-radius: 15px;
             border-radius: 15px;
-            border: 1px solid black;
             overflow: hidden;
 
         }
@@ -27,6 +26,19 @@
             width: 100px;
             grid-template-columns: auto auto auto;
 
+        }
+
+        .commentContainer{
+            margin: auto;
+            width: 50%;
+            height: 20%;
+            left: 20px;
+            top: 20px;
+            -moz-border-radius: 20px;
+            border-radius: 20px;
+            
+            overflow: hidden;
+            background-color: #e6e0e9;
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/ol@v9.1.0/dist/ol.js"></script>
@@ -70,6 +82,15 @@
         function downloadPdf(url) {
             window.open(url, "self");
         }
+
+        function inviaCommento(){
+            $.ajax({
+                type: "POST",
+                url: urlToSend,
+                data: { }
+            });
+        }
+
     </script>
 
 
@@ -149,6 +170,20 @@
             </div>
         </div>
 
+        <div class="commentContainer">
+                <md-filled-text-field class="commenta" id="scriviCommento"
+                    --md-sys-color-primary: #006a6a;
+                    type="textarea"
+                    label=""
+                    rows="3"
+                    style="resize: none; width: 100%; height:  80%;
+                   "
+                >
+                </md-filled-text-field>
+                <md-filled-tonal-button height="20%" width="10px" onclick="inviaCommento()">
+                    Commenta
+                </md-filled-tonal-button>
+        </div>
 
 
     </div>
