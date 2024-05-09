@@ -32,20 +32,23 @@
     }
   </style>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
   <script>
-        function removeFavorite(idEvento){
-          var numIdEvento = parseInt(idEvento);
-          console.log(numIdEvento);
-          document.cookie =  escape("idevent") + "=" + escape(numIdEvento);
-          <?php
-            $conn = new mysqli("localhost", "root", "", "sagre");
-            if ($conn->connect_error) {
-              die("Errore di connessione " . $conn->connect_errno . " " . $conn->connect_error);
-            }
-            $sql = "delete from preferiti where preferiti.idEvento =".$_COOKIE['idevent']." and preferiti.idUtente = ".$_SESSION["id"];
-            $result = $conn->query($sql);
-          ?>
-        }
+    function removeFavorite(idEvento){
+      var numIdEvento = parseInt(idEvento);
+      console.log(numIdEvento);
+      document.cookie =  "idevent=" + numIdEvento;
+      sendAjaxRequest('removeFavourite.php');
+    }
+
+    function sendAjaxRequest(urlToSend) {
+      $.ajax({
+          type: "POST",
+          url: urlToSend
+      });
+    }
+
 
   </script>
 
@@ -85,16 +88,18 @@
               
               $prossimiEventi = $conn->query($sql) or die($conn->error);
               
-              while ($datiEventi = $prossimiEventi->fetch_assoc()) {
-                echo "
+              while ($datiEventi = $prossimiEventi->fetch_assoc()) {?>
+                
                     <tr class='mdc-data-table__row'>
                       <td class='mdc-data-table__cell mdc-data-table__cell--numeric'>
-                        <md-icon-button onclick='removeFavorite('".$datiEventi['idEvento']."')'>
+                        <md-icon-button id='favourite' onclick="removeFavorite('<?php echo $datiEventi['idEvento']?>')" >
                           <span class='material-symbols-outlined'>
                             favorite
                           </span>
                         </md-icon-button>
                       </td>
+              <?php  
+                    echo "
                       <th class='mdc-data-table__cell' scope='row'><a href='infoEvento.php?idEvento=" . $datiEventi['idEvento'] . "' target='_blank' ><md-text-button>" . $datiEventi["denom"] . "</md-text-button></a></th>
                       <td class='mdc-data-table__cell mdc-data-table__cell--numeric'>" . $datiEventi['data_inizio'] . "</td>
                     </tr>";
