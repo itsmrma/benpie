@@ -18,9 +18,9 @@
     <div class="main-container" style>
     
     
-    
+     <?php if(!isset($_SESSION["email"], $_SESSION["password"])){ ?>
         <div class="main">
-
+            
             <div class="section flex-center-y">
                 <div class="rounded-inner">
                     <form class="basic-form" method="POST" action="login.php">
@@ -61,7 +61,10 @@
                 </div>
             </div>
         </div>
-        
+        <?php }else{
+
+            
+        } ?>
     </div>
 
 

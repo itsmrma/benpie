@@ -47,7 +47,7 @@ if (isset($_POST['login'])) {
             $_SESSION['email'] = $email;
             $_SESSION['password'] = $password;
             $_SESSION['id'] = $fetch_id;
-            header('location: index.php');
+            header('location: login.php');
         } else {
             $errors['email'] = "credenziali errate";
         }
