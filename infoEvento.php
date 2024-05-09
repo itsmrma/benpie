@@ -33,8 +33,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
     <script>
         function showSnackbar(x) {
+            console.log(x);
             // Opzioni dello snackbar
             var options = {
                 duration: 8000, // Durata in millisecondi
@@ -46,6 +48,7 @@
             M.toast({ html: "Evento \"" + x + "\" aggiunto ai preferiti.", ...options });
         }
     </script>
+
     <script>
 
         function sendAjaxRequest(element, urlToSend) {

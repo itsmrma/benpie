@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="css/maloss.css">
     <script src="js/cookie.js"></script>
     <script src="js/search.js" defer></script>
     <!-- <script src="js/date.js"></script> -->
