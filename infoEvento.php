@@ -1,9 +1,11 @@
+<?php session_start(); ?>
 <html>
 
 <head>
-    <?php include 'head.html';
-    error_reporting(0);
-    session_start(); ?>
+    <?php
+    include 'head.html';
+    //error_reporting(0);
+    ?>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v9.1.0/ol.css">
@@ -28,7 +30,7 @@
 
         }
 
-        .commentContainer{
+        .commentContainer {
             margin: auto;
             width: 50%;
             height: 20%;
@@ -36,7 +38,7 @@
             top: 20px;
             -moz-border-radius: 20px;
             border-radius: 20px;
-            
+
             overflow: hidden;
             background-color: #e6e0e9;
         }
@@ -45,20 +47,21 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    
-    <script>
-        function showSnackbar(x) {
-            console.log(x);
-            // Opzioni dello snackbar
-            var options = {
-                duration: 8000, // Durata in millisecondi
-                inDuration: 300, // Durata dell'animazione di ingresso
-                outDuration: 200 // Durata dell'animazione di uscita
-            };
 
-            // Mostra lo snackbar
-            M.toast({ html: "Evento \"" + x + "\" aggiunto ai preferiti.", ...options });
-        }
+    <script>
+        $(document).ready(function () {
+            $("#favourite").click(function () {
+                var options = {
+                    duration: 8000, // Durata in millisecondi
+                    inDuration: 300, // Durata dell'animazione di ingresso
+                    outDuration: 200 // Durata dell'animazione di uscita
+                };
+
+                // Mostra lo snackbar
+                M.toast({ html: "Evento aggiunto ai preferiti.", ...options });
+            });
+        });
+
     </script>
 
     <script>
@@ -83,11 +86,11 @@
             window.open(url, "self");
         }
 
-        function inviaCommento(){
+        function inviaCommento() {
             $.ajax({
                 type: "POST",
                 url: urlToSend,
-                data: { }
+                data: {}
             });
         }
 
@@ -155,7 +158,7 @@
                 <?php if (isset($_SESSION["email"])) {
                     $_SESSION["idEvento"] = $array['id']; ?>
                     <div class="grid-item">
-                        <md-filled-tonal-icon-button id='favourite' onclick="showSnackbar('<?php echo $array['denom']; ?>')">
+                        <md-filled-tonal-icon-button id='favourite'>
                             <span class='material-symbols-outlined'>
                                 favorite
                             </span>
@@ -171,18 +174,13 @@
         </div>
 
         <div class="commentContainer">
-                <md-filled-text-field class="commenta" id="scriviCommento"
-                    --md-sys-color-primary: #006a6a;
-                    type="textarea"
-                    label=""
-                    rows="3"
-                    style="resize: none; width: 100%; height:  80%;
-                   "
-                >
-                </md-filled-text-field>
-                <md-filled-tonal-button height="20%" width="10px" onclick="inviaCommento()">
-                    Commenta
-                </md-filled-tonal-button>
+            <md-filled-text-field class="commenta" id="scriviCommento" --md-sys-color-primary: #006a6a; type="textarea"
+                label="" rows="3" style="resize: none; width: 100%; height:  80%;
+                   ">
+            </md-filled-text-field>
+            <md-filled-tonal-button height="20%" width="10px" onclick="inviaCommento()">
+                Commenta
+            </md-filled-tonal-button>
         </div>
 
 
