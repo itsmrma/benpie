@@ -52,6 +52,8 @@
 
   </script>
 
+  <script src="js/snackbar.js"></script>
+
 </head>
 
 <body>
