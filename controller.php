@@ -42,10 +42,11 @@ if (isset($_POST['login'])) {
     if (mysqli_num_rows($res) > 0) {
         $fetch = mysqli_fetch_assoc($res);
         $fetch_pass = $fetch['password'];
+        $fetch_id = $fetch['idUtente'];
         if (password_verify($password, $fetch_pass)) {
             $_SESSION['email'] = $email;
             $_SESSION['password'] = $password;
-            $_SESSION['id'] = $id;
+            $_SESSION['id'] = $fetch_id;
             header('location: index.php');
         } else {
             $errors['email'] = "credenziali errate";

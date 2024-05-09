@@ -31,6 +31,24 @@
         webkit-box-shadow: inset 0 0 6px rgba(255,255,255,255);
     }
   </style>
+
+  <script>
+        function removeFavorite(idEvento){
+          var numIdEvento = parseInt(idEvento);
+          console.log(numIdEvento);
+          document.cookie =  escape("idevent") + "=" + escape(numIdEvento);
+          <?php
+            $conn = new mysqli("localhost", "root", "", "sagre");
+            if ($conn->connect_error) {
+              die("Errore di connessione " . $conn->connect_errno . " " . $conn->connect_error);
+            }
+            $sql = "delete from preferiti where preferiti.idEvento =".$_COOKIE['idevent']." and preferiti.idUtente = ".$_SESSION["id"];
+            $result = $conn->query($sql);
+          ?>
+        }
+
+  </script>
+
 </head>
 
 <body>
@@ -44,6 +62,7 @@
         <table class="mdc-data-table__table" aria-label="Prossimi eventi">
           <thead>
             <tr class="mdc-data-table__header-row">
+              <th class="mdc-data-table__header-cell" role="columnheader" scope="col" width="60px"></th>
               <th class="mdc-data-table__header-cell" role="columnheader" scope="col">PROSSIMI EVENTI</th>
               <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader"
                 scope="col"><span class='material-symbols-outlined'>schedule</span>INIZIO</th>
@@ -52,6 +71,7 @@
 
           <tbody class="mdc-data-table__content">
             <?php
+            
             $currentDate = date('Y-m-d');
             $conn = new mysqli("localhost", "root", "", "sagre");
 
@@ -59,10 +79,28 @@
               die("Errore di connessione " . $conn->connect_errno . " " . $conn->connect_error);
             }
             
-            if(isset($_SESSION["email"])){
-              "select DISTINCT denom from preferiti inner join evento on evento.id = preferiti.idUtente where preferiti.idUtente =".$_SESSION['id'];
-              $sql = "select denom from  as data_inizio from evento where evento.data_inizio>='" . $currentDate . "'order by evento.data_inizio asc limit 10";
+            if(isset($_SESSION["email"],$_SESSION["id"])){
+              
+              $sql = "select DISTINCT evento.denom, idEvento, CAST(evento.data_inizio AS date)  as data_inizio from preferiti inner join evento on evento.id = preferiti.idEvento where preferiti.idUtente =".$_SESSION['id'];
+              
+              $prossimiEventi = $conn->query($sql) or die($conn->error);
+              
+              while ($datiEventi = $prossimiEventi->fetch_assoc()) {
+                echo "
+                    <tr class='mdc-data-table__row'>
+                      <td class='mdc-data-table__cell mdc-data-table__cell--numeric'>
+                        <md-icon-button onclick='removeFavorite('".$datiEventi['idEvento']."')'>
+                          <span class='material-symbols-outlined'>
+                            favorite
+                          </span>
+                        </md-icon-button>
+                      </td>
+                      <th class='mdc-data-table__cell' scope='row'><a href='infoEvento.php?idEvento=" . $datiEventi['idEvento'] . "' target='_blank' ><md-text-button>" . $datiEventi["denom"] . "</md-text-button></a></th>
+                      <td class='mdc-data-table__cell mdc-data-table__cell--numeric'>" . $datiEventi['data_inizio'] . "</td>
+                    </tr>";
+              }
             }
+            
             $sql = "select id, denom, CAST(evento.data_inizio AS date) as data_inizio from evento where evento.data_inizio>='" . $currentDate . "'order by evento.data_inizio asc limit 10";
 
             $prossimiEventi = $conn->query($sql);
@@ -71,6 +109,7 @@
 
               echo "
                   <tr class='mdc-data-table__row'>
+                    <td class='mdc-data-table__cell mdc-data-table__cell--numeric'></td>
                     <th class='mdc-data-table__cell' scope='row'><a href='infoEvento.php?idEvento=" . $datiEventi['id'] . "' target='_blank' ><md-text-button>" . $datiEventi["denom"] . "</md-text-button></a></th>
                     <td class='mdc-data-table__cell mdc-data-table__cell--numeric'>" . $datiEventi['data_inizio'] . "</td>
                   
