@@ -45,5 +45,5 @@ function showSnackbar() {
     };
 
     // Mostra lo snackbar
-    M.toast({html: "Abbiamo notato che il database non è aggiornato. <br><a href='update.php'>Aggiornalo</a>", ...options});
+    M.toast({html: "Ti consigliamo di aggiornare il database.", ...options});
 }

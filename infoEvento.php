@@ -7,7 +7,7 @@
     //error_reporting(0);
     ?>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v9.1.0/ol.css">
     <style>
 
@@ -66,18 +66,17 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <script>
-        $(document).ready(function () {
-            $("#favourite").click(function () {
-                var options = {
-                    duration: 8000, // Durata in millisecondi
-                    inDuration: 300, // Durata dell'animazione di ingresso
-                    outDuration: 200 // Durata dell'animazione di uscita
-                };
 
-                // Mostra lo snackbar
-                M.toast({ html: "Evento aggiunto ai preferiti.", ...options });
-            });
-        });
+        function showNotification() {
+            var options = {
+                duration: 8000, // Durata in millisecondi
+                inDuration: 300, // Durata dell'animazione di ingresso
+                outDuration: 200 // Durata dell'animazione di uscita
+            };
+
+            // Mostra lo snackbar
+            M.toast({ html: "Evento aggiunto ai preferiti.", ...options });
+        }
 
     </script>
 
@@ -103,10 +102,10 @@
             window.open(url, "self");
         }
 
-        function inviaCommento(){
+        function inviaCommento() {
             var input = document.getElementById("testo").value;
             document.cookie = "testo=; Max-Age=0"
-            document.cookie = "testo="+input;
+            document.cookie = "testo=" + input;
             $.ajax({
                 type: "POST",
                 url: "inviaCommento.php",
@@ -217,50 +216,52 @@
         <div id="commenti">
             <?php
 
-                $conn = new mysqli("localhost","root","","sagre");
+            $conn = new mysqli("localhost", "root", "", "sagre");
 
-                if ($conn -> connect_error) {
-                    die("Errore di connessione ". $conn->connect_errno ." ".$conn->connect_error);
-                }
-                
-                $sql = "select * from commento where idEvento=".$_SESSION["idEvento"];
-                $result = $conn -> query($sql);
-                $dati = $result ->fetch_all();
+            if ($conn->connect_error) {
+                die("Errore di connessione " . $conn->connect_errno . " " . $conn->connect_error);
+            }
 
-                $nomeUtente= "";
-                $contenutoCommento= "";
-                $dataOraPubblicazione= "";
-                $idCommento = "";
-                $_SESSION["idCommentoPadre"] = 0;
-                foreach($dati as $row){
-                    foreach($row as $key=>$value){
-                        switch ($key){
-                            case 1: 
-                                $contenutoCommento= $value;
-                                break;
-                            case 2:
-                                $dataOraPubblicazione= $value;
-                                break;
-                            case 3:
-                                $nomeUtente = $value;
-                                break;
-                            case 0:
-                                $idCommento = $value;
-                                break;
-                        }
+            $sql = "select * from commento where idEvento=" . $_SESSION["idEvento"];
+            $result = $conn->query($sql);
+            $dati = $result->fetch_all();
+
+            $nomeUtente = "";
+            $contenutoCommento = "";
+            $dataOraPubblicazione = "";
+            $idCommento = "";
+            $_SESSION["idCommentoPadre"] = 0;
+            foreach ($dati as $row) {
+                foreach ($row as $key => $value) {
+                    switch ($key) {
+                        case 1:
+                            $contenutoCommento = $value;
+                            break;
+                        case 2:
+                            $dataOraPubblicazione = $value;
+                            break;
+                        case 3:
+                            $nomeUtente = $value;
+                            break;
+                        case 0:
+                            $idCommento = $value;
+                            break;
                     }
-                   
-                    ?>
-                    
-                    <div class="commentContainer">
-                        <div height="40%" width="100%" style="color:black;"><?php echo $nomeUtente."  ".$dataOraPubblicazione?></div>
-                        <div height="40%" width="100%" style="color:black;"><?php echo $contenutoCommento?></div>
-                        <md-filled-tonal-button height="20px" width="10px" onclick="rispondi(<?php echo $nomeUtente.'  '.$idCommento?>)">
-                            Rispondi
-                        </md-filled-tonal-button>
-                    </div>
+                }
 
-                <?php }
+                ?>
+
+                <div class="commentContainer">
+                    <div height="40%" width="100%" style="color:black;"><?php echo $nomeUtente . "  " . $dataOraPubblicazione ?>
+                    </div>
+                    <div height="40%" width="100%" style="color:black;"><?php echo $contenutoCommento ?></div>
+                    <md-filled-tonal-button height="20px" width="10px"
+                        onclick="rispondi(<?php echo $nomeUtente . '  ' . $idCommento ?>)">
+                        Rispondi
+                    </md-filled-tonal-button>
+                </div>
+
+            <?php }
             ?>
         </div>
         </div>

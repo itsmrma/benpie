@@ -11,4 +11,3 @@
     $result = $conn->query($sql) or die($conn->error);
     
 
-?>
