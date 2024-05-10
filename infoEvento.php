@@ -10,38 +10,55 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v9.1.0/ol.css">
     <style>
+
         .map {
             margin: auto;
-            position: relative;
-            width: 40%;
-            height: 40%;
-            left: 20px;
-            top: 20px;
+            width: 60%;
+            height: 60%;
             -moz-border-radius: 15px;
             border-radius: 15px;
             overflow: hidden;
-
         }
 
         .grid-container {
             display: grid;
-            width: 100px;
-            grid-template-columns: auto auto auto;
+            grid-template-columns: auto 600px 600px auto;
+            grid-template-rows: auto 500px auto auto;
+        }
 
+        .item1{
+            grid-column: 2 / span 3;
+            grid-row: 1;
+        }
+        .item2{
+            grid-row:2;
+            grid-column: 2 / span 3;
+        }
+        .item3{
+            grid-column: 2 / span 3;
+            grid-row: 3 / span 4;
         }
 
         .commentContainer {
             margin: auto;
-            width: 50%;
-            height: 20%;
-            left: 20px;
-            top: 20px;
+            width: 100%;
+            height: 30%;
             -moz-border-radius: 20px;
             border-radius: 20px;
-
             overflow: hidden;
             background-color: #e6e0e9;
         }
+
+        .infoevento{
+            margin: auto;
+            width: 50%;
+            height: 20%;
+            -moz-border-radius: 20px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: #e6e0e9;
+        }
+
     </style>
     <script src="https://cdn.jsdelivr.net/npm/ol@v9.1.0/dist/ol.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -109,8 +126,9 @@
 
     <div class="main-container">
 
-        <div class="infoEvento">
-            <?php
+        <div class="grid-container">
+            <div class="item1">
+        <?php
 
             $opts = [
                 'http' => [
@@ -133,51 +151,56 @@
 
 
             echo "<h1> " . $array['denom'] . "</h1><br>";
-            echo "<div id='map' class='map'><div id='popup'></div></div>";
-            echo "<h3>" . $array['descrizione'] . "</h3><br>";
+        ?>
+            </div>
+        
+            <div class="item2">
+            <?php
+                echo "<div id='map' class='map'><div id='popup'></div></div>";
+                echo "<h3>" . $array['descrizione'] . "</h3><br>";
 
-            $date = date_create($array['data_inizio']);
-            $date1 = date_format($date, "Y/m/d");
-            $date = date_create($date1 . $array['ora_inizio']);
-            $start = date_format($date, "Y/m/d H:i");
+                $date = date_create($array['data_inizio']);
+                $date1 = date_format($date, "Y/m/d");
+                $date = date_create($date1 . $array['ora_inizio']);
+                $start = date_format($date, "Y/m/d H:i");
 
-            $date = date_create($array['data_fine']);
-            $date1 = date_format($date, "Y/m/d");
-            $date = date_create($date1 . $array['ora_fine']);
-            $end = date_format($date, "Y/m/d H:i");
+                $date = date_create($array['data_fine']);
+                $date1 = date_format($date, "Y/m/d");
+                $date = date_create($date1 . $array['ora_fine']);
+                $end = date_format($date, "Y/m/d H:i");
 
-            echo "<span class='material-symbols-outlined'>schedule</span>" . $start . "<span class='material-symbols-outlined'>sports_score</span>" . $end . "<br><br><br>";
+                echo "<span class='material-symbols-outlined'>schedule</span>" . $start . "<span class='material-symbols-outlined'>sports_score</span>" . $end . "<br><br><br>";
             ?>
-            <div class="grid-container">
-                <div class="grid-item">
-                    <md-filled-tonal-icon-button id='download' onclick="downloadPdf('<?php echo $array['url'] ?>')">
-                        <span class='material-symbols-outlined'>
-                            download
-                        </span>
-                    </md-filled-tonal-icon-button>
-                </div>
+
+                
+                
+                <md-filled-tonal-icon-button id='download' onclick="downloadPdf('<?php echo $array['url'] ?>')">
+                    <span class='material-symbols-outlined'>
+                        download
+                    </span>
+                </md-filled-tonal-icon-button>
+                
                 <br>
                 <?php if (isset($_SESSION["email"])) {
                     $_SESSION["idEvento"] = $array['id']; ?>
-                    <div class="grid-item">
-                        <md-filled-tonal-icon-button id='favourite'>
-                            <span class='material-symbols-outlined'>
-                                favorite
-                            </span>
-                        </md-filled-tonal-icon-button>
-                    </div>
+                    <md-filled-tonal-icon-button id='favourite'>
+                        <span class='material-symbols-outlined'>
+                            favorite
+                        </span>
+                    </md-filled-tonal-icon-button>
                 <?php }
 
-                $geo_x = $array["geo_x"];
-                $geo_y = $array["geo_y"];
-                $nomeEvento = $array["denom"];
+                    $geo_x = $array["geo_x"];
+                    $geo_y = $array["geo_y"];
+                    $nomeEvento = $array["denom"];
                 ?>
+                
+       
             </div>
-        </div>
-        
 
-        <div id="scriviCommento">
-            <div class="commentContainer">
+        <div class="item3">
+        
+            <div class="commentContainer" width=100% height=80% >
                 <md-filled-text-field class="commenta" id="testo"
                     --md-sys-color-primary: #006a6a;
                     type="textarea"
@@ -189,7 +212,7 @@
                     Commenta
                 </md-filled-tonal-button>
             </div>
-        </div>
+        
 
         <div id="commenti">
             <?php
@@ -239,8 +262,9 @@
 
                 <?php }
             ?>
-
-
+        </div>
+        </div>
+        </div>
         </div>
 
 
