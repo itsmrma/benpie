@@ -1,6 +1,5 @@
 <?php session_start(); ?>
 <html>
-
 <head>
     <?php
     include 'head.html';
@@ -35,24 +34,13 @@
             grid-column: 2 / span 3;
         }
         .item3{
-            grid-column: 2 / span 3;
+            grid-column: 1 / span 3;
             grid-row: 3 / span 4;
         }
 
         .commentContainer {
-            margin: auto;
             width: 100%;
-            height: 30%;
-            -moz-border-radius: 20px;
-            border-radius: 20px;
-            overflow: hidden;
-            background-color: #e6e0e9;
-        }
-
-        .infoevento{
-            margin: auto;
-            width: 50%;
-            height: 20%;
+            height: 40%;
             -moz-border-radius: 20px;
             border-radius: 20px;
             overflow: hidden;
@@ -126,53 +114,54 @@
     <div class="main-container">
 
         <div class="grid-container">
+
             <div class="item1">
-        <?php
+                <?php
 
-            $opts = [
-                'http' => [
-                    'method' => "GET",
-                    // Use newline \n to separate multiple headers
-                    'header' => "Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7\nAccept-Encoding:gzip, deflate, br, zstd\nAccept-Language:it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7",
-                ]
-            ];
+                    $opts = [
+                        'http' => [
+                            'method' => "GET",
+                            // Use newline \n to separate multiple headers
+                            'header' => "Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7\nAccept-Encoding:gzip, deflate, br, zstd\nAccept-Language:it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7",
+                        ]
+                    ];
 
-            $conn = new mysqli("localhost", "root", "", "sagre");
+                    $conn = new mysqli("localhost", "root", "", "sagre");
 
-            if ($conn->connect_error) {
-                die("Errore di connessione " . $conn->connect_errno . " " . $conn->connect_error);
-            }
-            $_SESSION["idEvento"] = $_GET["idEvento"];
-            $sql = "select * from evento where id=" . $_GET["idEvento"];
+                    if ($conn->connect_error) {
+                        die("Errore di connessione " . $conn->connect_errno . " " . $conn->connect_error);
+                    }
+                    $_SESSION["idEvento"] = $_GET["idEvento"];
+                    $sql = "select * from evento where id=" . $_GET["idEvento"];
 
-            $coordResult = $conn->query($sql);
-            $array = $coordResult->fetch_assoc();
+                    $coordResult = $conn->query($sql);
+                    $array = $coordResult->fetch_assoc();
 
 
-            echo "<h1> " . $array['denom'] . "</h1><br>";
-        ?>
+                    echo "<h1> " . $array['denom'] . "</h1><br>";
+                ?>
             </div>
         
             <div class="item2">
-            <?php
-                echo "<div id='map' class='map'><div id='popup'></div></div>";
-                echo "<h3>" . $array['descrizione'] . "</h3><br>";
+                <?php
+                    echo "<div id='map' class='map'><div id='popup'></div></div>";
+                    echo "<h3>" . $array['descrizione'] . "</h3><br>";
 
-                $date = date_create($array['data_inizio']);
-                $date1 = date_format($date, "Y/m/d");
-                $date = date_create($date1 . $array['ora_inizio']);
-                $start = date_format($date, "Y/m/d H:i");
+                    $date = date_create($array['data_inizio']);
+                    $date1 = date_format($date, "Y/m/d");
+                    $date = date_create($date1 . $array['ora_inizio']);
+                    $start = date_format($date, "Y/m/d H:i");
 
-                $date = date_create($array['data_fine']);
-                $date1 = date_format($date, "Y/m/d");
-                $date = date_create($date1 . $array['ora_fine']);
-                $end = date_format($date, "Y/m/d H:i");
+                    $date = date_create($array['data_fine']);
+                    $date1 = date_format($date, "Y/m/d");
+                    $date = date_create($date1 . $array['ora_fine']);
+                    $end = date_format($date, "Y/m/d H:i");
 
-                echo "<span class='material-symbols-outlined'>schedule</span>" . $start . "<span class='material-symbols-outlined'>sports_score</span>" . $end . "<br><br><br>";
-            ?>
+                    echo "<span class='material-symbols-outlined'>schedule</span>" . $start . "<span class='material-symbols-outlined'>sports_score</span>" . $end . "<br><br><br>";
+                ?>
 
-                
-                
+                    
+                    
                 <md-filled-tonal-icon-button id='download' onclick="downloadPdf('<?php echo $array['url'] ?>')">
                     <span class='material-symbols-outlined'>
                         download
@@ -197,81 +186,75 @@
        
             </div>
 
-        <div class="item3">
-        
-            <div class="commentContainer" width=100% height=80% >
-                <md-filled-text-field class="commenta" id="testo"
-                    --md-sys-color-primary: #006a6a;
-                    type="textarea"
-                    rows="3"
-                    style="resize: none; width: 100%; height:  80%;"
-                >
-                </md-filled-text-field>
-                <md-filled-tonal-button height="20%" width="10px" onclick="inviaCommento()">
-                    Commenta
-                </md-filled-tonal-button>
-            </div>
-        
-
-        <div id="commenti">
-            <?php
-
-            $conn = new mysqli("localhost", "root", "", "sagre");
-
-            if ($conn->connect_error) {
-                die("Errore di connessione " . $conn->connect_errno . " " . $conn->connect_error);
-            }
-
-            $sql = "select * from commento where idEvento=" . $_SESSION["idEvento"];
-            $result = $conn->query($sql);
-            $dati = $result->fetch_all();
-
-            $nomeUtente = "";
-            $contenutoCommento = "";
-            $dataOraPubblicazione = "";
-            $idCommento = "";
-            $_SESSION["idCommentoPadre"] = 0;
-            foreach ($dati as $row) {
-                foreach ($row as $key => $value) {
-                    switch ($key) {
-                        case 1:
-                            $contenutoCommento = $value;
-                            break;
-                        case 2:
-                            $dataOraPubblicazione = $value;
-                            break;
-                        case 3:
-                            $nomeUtente = $value;
-                            break;
-                        case 0:
-                            $idCommento = $value;
-                            break;
-                    }
-                }
-
-                ?>
-
+            <div class="item3">
+            
                 <div class="commentContainer">
-                    <div height="40%" width="100%" style="color:black;"><?php echo $nomeUtente . "  " . $dataOraPubblicazione ?>
-                    </div>
-                    <div height="40%" width="100%" style="color:black;"><?php echo $contenutoCommento ?></div>
-                    <md-filled-tonal-button height="20px" width="10px"
-                        onclick="rispondi(<?php echo $nomeUtente . '  ' . $idCommento ?>)">
-                        Rispondi
+                    <md-filled-text-field class="commenta" id="testo"
+                        --md-sys-color-primary: #006a6a;
+                        type="textarea"
+                        rows="3"
+                        style="resize: none; width: 100%; height:  80%;"
+                    >
+                    </md-filled-text-field>
+                    <md-filled-tonal-button height="20%" width="10px" onclick="inviaCommento()">
+                        Commenta
                     </md-filled-tonal-button>
                 </div>
+            
 
-            <?php }
-            ?>
-        </div>
-        </div>
-        </div>
-        </div>
+                <div id="commenti">
+                    <?php
 
+                        $conn = new mysqli("localhost", "root", "", "sagre");
 
+                        if ($conn->connect_error) {
+                            die("Errore di connessione " . $conn->connect_errno . " " . $conn->connect_error);
+                        }
+
+                        $sql = "select * from commento where idEvento=" . $_SESSION["idEvento"];
+                        $result = $conn->query($sql);
+                        $dati = $result->fetch_all();
+
+                        $nomeUtente = "";
+                        $contenutoCommento = "";
+                        $dataOraPubblicazione = "";
+                        $idCommento = "";
+                        $_SESSION["idCommentoPadre"] = 0;
+                        foreach ($dati as $row) {
+                            foreach ($row as $key => $value) {
+                                switch ($key) {
+                                    case 1:
+                                        $contenutoCommento = $value;
+                                        break;
+                                    case 2:
+                                        $dataOraPubblicazione = $value;
+                                        break;
+                                    case 3:
+                                        $nomeUtente = $value;
+                                        break;
+                                    case 0:
+                                        $idCommento = $value;
+                                        break;
+                                }
+                            }
+
+                    ?>
+
+                        <div class="commentContainer">
+                            <div height="40%" width="100%" style="color:black;"><?php echo $nomeUtente . "  " . $dataOraPubblicazione ?>
+                            </div>
+                            <div height="40%" width="100%" style="color:black;"><?php echo $contenutoCommento ?></div>
+                            <md-filled-tonal-button height="20px" width="10px"
+                                onclick="rispondi(<?php echo $nomeUtente . '  ' . $idCommento ?>)">
+                                Rispondi
+                            </md-filled-tonal-button>
+                        </div>
+
+                    <?php }?>
+                </div>
+            </div>
+        </div>
     </div>
-
-
 
     <script>
         // set active
@@ -368,7 +351,6 @@
         });
 
         map.on('movestart', disposePopover);
-
     </script>
 
 </body>
