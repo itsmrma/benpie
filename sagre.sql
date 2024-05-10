@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Apr 28, 2024 alle 14:41
+-- Creato il: Mag 10, 2024 alle 18:50
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.0.28
 
@@ -24,6 +24,21 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `commento`
+--
+
+CREATE TABLE `commento` (
+  `id` int(11) NOT NULL,
+  `testo` mediumtext NOT NULL,
+  `dataOraPubblicazione` datetime NOT NULL,
+  `idUtente` int(11) NOT NULL,
+  `idCommentoPadre` int(11) NOT NULL,
+  `idEvento` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Struttura della tabella `comune`
 --
 
@@ -32,7 +47,7 @@ CREATE TABLE `comune` (
   `nome` varchar(50) DEFAULT NULL,
   `cap` int(5) DEFAULT NULL,
   `id_prov` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 -- --------------------------------------------------------
 
@@ -59,7 +74,7 @@ CREATE TABLE `evento` (
   `url` varchar(100) DEFAULT NULL,
   `geo_x` varchar(30) DEFAULT NULL,
   `geo_y` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 -- --------------------------------------------------------
 
@@ -81,7 +96,7 @@ CREATE TABLE `preferiti` (
 CREATE TABLE `provincia` (
   `id` int(11) NOT NULL,
   `nome` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 -- --------------------------------------------------------
 
@@ -92,7 +107,7 @@ CREATE TABLE `provincia` (
 CREATE TABLE `tipo` (
   `id` int(11) NOT NULL,
   `nome` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 -- --------------------------------------------------------
 
@@ -103,7 +118,7 @@ CREATE TABLE `tipo` (
 CREATE TABLE `toponimo` (
   `id` int(11) NOT NULL,
   `nome` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 -- --------------------------------------------------------
 
@@ -123,6 +138,14 @@ CREATE TABLE `utenti` (
 --
 
 --
+-- Indici per le tabelle `commento`
+--
+ALTER TABLE `commento`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idUtente` (`idUtente`),
+  ADD KEY `idEvento` (`idEvento`);
+
+--
 -- Indici per le tabelle `comune`
 --
 ALTER TABLE `comune`
@@ -137,7 +160,7 @@ ALTER TABLE `evento`
   ADD KEY `id_comune` (`id_comune`),
   ADD KEY `id_tipo` (`id_tipo`),
   ADD KEY `id_toponimo` (`id_toponimo`);
-
+ALTER TABLE `evento` ADD FULLTEXT KEY `denom` (`denom`);
 
 --
 -- Indici per le tabelle `preferiti`
@@ -173,6 +196,12 @@ ALTER TABLE `utenti`
 --
 -- AUTO_INCREMENT per le tabelle scaricate
 --
+
+--
+-- AUTO_INCREMENT per la tabella `commento`
+--
+ALTER TABLE `commento`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `comune`
@@ -213,6 +242,13 @@ ALTER TABLE `utenti`
 --
 -- Limiti per le tabelle scaricate
 --
+
+--
+-- Limiti per la tabella `commento`
+--
+ALTER TABLE `commento`
+  ADD CONSTRAINT `commento_ibfk_1` FOREIGN KEY (`idUtente`) REFERENCES `utenti` (`idUtente`),
+  ADD CONSTRAINT `commento_ibfk_2` FOREIGN KEY (`idEvento`) REFERENCES `evento` (`id`);
 
 --
 -- Limiti per la tabella `comune`
