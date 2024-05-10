@@ -52,7 +52,7 @@
 
   </script>
 
-  <script src="js/snackbar.js"></script>
+  <script src="js/checkDate.js"></script>
 
 </head>
 
