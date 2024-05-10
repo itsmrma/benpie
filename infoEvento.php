@@ -84,10 +84,12 @@
         }
 
         function inviaCommento(){
+            var input = document.getElementById("testo").value;
+            document.cookie = "testo=; Max-Age=0"
+            document.cookie = "testo="+input;
             $.ajax({
                 type: "POST",
-                url: urlToSend,
-                data: { }
+                url: "inviaCommento.php",
             });
         }
 
@@ -120,7 +122,7 @@
             if ($conn->connect_error) {
                 die("Errore di connessione " . $conn->connect_errno . " " . $conn->connect_error);
             }
-
+            $_SESSION["idEvento"] = $_GET["idEvento"];
             $sql = "select * from evento where id=" . $_GET["idEvento"];
 
             $coordResult = $conn->query($sql);
@@ -169,20 +171,73 @@
                 ?>
             </div>
         </div>
+        
 
-        <div class="commentContainer">
-                <md-filled-text-field class="commenta" id="scriviCommento"
+        <div id="scriviCommento">
+            <div class="commentContainer">
+                <md-filled-text-field class="commenta" id="testo"
                     --md-sys-color-primary: #006a6a;
                     type="textarea"
-                    label=""
                     rows="3"
-                    style="resize: none; width: 100%; height:  80%;
-                   "
+                    style="resize: none; width: 100%; height:  80%;"
                 >
                 </md-filled-text-field>
                 <md-filled-tonal-button height="20%" width="10px" onclick="inviaCommento()">
                     Commenta
                 </md-filled-tonal-button>
+            </div>
+        </div>
+
+        <div id="commenti">
+            <?php
+
+                $conn = new mysqli("localhost","root","","sagre");
+
+                if ($conn -> connect_error) {
+                    die("Errore di connessione ". $conn->connect_errno ." ".$conn->connect_error);
+                }
+                
+                $sql = "select * from commento where idEvento=".$_SESSION["idEvento"];
+                $result = $conn -> query($sql);
+                $dati = $result ->fetch_all();
+
+                $nomeUtente= "";
+                $contenutoCommento= "";
+                $dataOraPubblicazione= "";
+                $idCommento = "";
+                $_SESSION["idCommentoPadre"] = 0;
+                foreach($dati as $row){
+                    foreach($row as $key=>$value){
+                        switch ($key){
+                            case 1: 
+                                $contenutoCommento= $value;
+                                break;
+                            case 2:
+                                $dataOraPubblicazione= $value;
+                                break;
+                            case 3:
+                                $nomeUtente = $value;
+                                break;
+                            case 0:
+                                $idCommento = $value;
+                                break;
+                        }
+                    }
+                   
+                    ?>
+                    
+                    <div class="commentContainer">
+                        <div height="40%" width="100%" style="color:black;"><?php echo $nomeUtente."  ".$dataOraPubblicazione?></div>
+                        <div height="40%" width="100%" style="color:black;"><?php echo $contenutoCommento?></div>
+                        <md-filled-tonal-button height="20px" width="10px" onclick="rispondi(<?php echo $nomeUtente.'  '.$idCommento?>)">
+                            Rispondi
+                        </md-filled-tonal-button>
+                    </div>
+
+                <?php }
+            ?>
+
+
         </div>
 
 
