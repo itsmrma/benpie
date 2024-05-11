@@ -33,16 +33,42 @@
 
 
                 ?>
-
+                <input type="text" class="date-range-input" id="date-range-picker" />
             </form>
-
-            <div id="list"></div>
-
-
+            <br><br>
+            <div id="list" class="listaEventi"></div>
         </div>
 
 
+
     </div>
+
+    <script>
+        // Inizializza il date range picker
+        $(document).ready(function () {
+            $('#date-range-picker').daterangepicker({
+                opens: 'left', // Opzioni di visualizzazione
+                autoApply: true, // Applica automaticamente la selezione al momento della chiusura
+                locale: {
+                    format: 'DD/MM/YY', // Formato della data
+                    separator: ' to ', // Separatore tra le due date
+                    applyLabel: 'Apply', // Etichetta del pulsante "Applica"
+                    cancelLabel: 'Cancel', // Etichetta del pulsante "Annulla"
+                    customRangeLabel: 'Custom Range', // Etichetta per il range personalizzato
+                    daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'], // Giorni della settimana
+                    monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], // Nomi dei mesi
+                    firstDay: 1 // Primo giorno della settimana (0 = Domenica, 1 = Lunedì, ecc.)
+                },
+                ranges: { // Range predefiniti
+                    'Today': [moment(), moment()],
+                    'Next 7 Days': [moment(), moment().add(6, 'days')],
+                    'Next Month': [moment().startOf('month').add(1, 'month'), moment().endOf('month').add(1, 'month')]
+                },
+                startDate: moment(), // Inizializza con il range di default "Today"
+                endDate: moment()
+            });
+        });
+    </script>
 
     <script>
         // set active

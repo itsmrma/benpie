@@ -22,6 +22,20 @@
 
 }
 
+.date-range-input {
+    background-color: var(--surface);
+    height: inherit;
+    width: 26%;
+    padding: 3%;
+    border: 1px solid var(--on-surface);
+    color: var(--on-surface);
+    border-radius: 2%;
+}
+
+.listaEventi {
+    font-size: large;
+}
+
 md-outlined-select {
     padding: 30px;
 }
@@ -82,13 +96,6 @@ nav,
     box-sizing: inherit;
 }
 
-*,
-*:before,
-*:after {
-    -webkit-box-sizing: inherit;
-    box-sizing: inherit;
-}
-
 * {
     font-family: 'Poppins', sans-serif;
 }
@@ -105,34 +112,6 @@ nav,
 search,
 section {
     display: block;
-}
-
-*,
-*:before,
-*:after {
-    -webkit-box-sizing: inherit;
-    box-sizing: inherit;
-}
-
-*,
-*:before,
-*:after {
-    -webkit-box-sizing: inherit;
-    box-sizing: inherit;
-}
-
-*,
-*:before,
-*:after {
-    -webkit-box-sizing: inherit;
-    box-sizing: inherit;
-}
-
-*,
-*:before,
-*:after {
-    -webkit-box-sizing: inherit;
-    box-sizing: inherit;
 }
 
 div::-webkit-scrollbar {

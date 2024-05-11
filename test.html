@@ -3,89 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Snackbar Example</title>
-  <!-- Importa le librerie necessarie -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-</head>
-<body>
+  <title>Date Range Picker Example</title>
+  <!-- CSS per il date range picker -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
-  <!-- Contenitore per lo snackbar -->
-  <div id="snackbar">Hello, world!</div>
-
-  <!-- Button per attivare lo snackbar -->
-  <button onclick="showSnackbar()">Mostra Snackbar</button>
-
-  <!-- Importa le librerie JavaScript necessarie -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <script>
-    // Funzione per mostrare lo snackbar
-    function showSnackbar() {
-      // Inizializza lo snackbar
-      var snackbar = document.getElementById("snackbar");
-
-      // Opzioni dello snackbar
-      var options = {
-        duration: 3000, // Durata in millisecondi
-        inDuration: 300, // Durata dell'animazione di ingresso
-        outDuration: 200 // Durata dell'animazione di uscita
-      };
-
-      // Mostra lo snackbar
-      M.toast({html: snackbar.innerHTML, ...options});
+  <style>
+    /* Stile per il campo di input */
+    .date-range-input {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
     }
-  </script>
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/13.0.0/material-components-web.min.css">
-  <title>Date Picker</title>
+  </style>
 </head>
 <body>
-  <label for="datepicker" class="mdc-text-field mdc-text-field--outlined">
-    <span class="mdc-notched-outline">
-      <span class="mdc-notched-outline__leading"></span>
-      <span class="mdc-notched-outline__notch">
-        <span class="mdc-floating-label">Select Date</span>
-      </span>
-      <span class="mdc-notched-outline__trailing"></span>
-    </span>
-    <input type="text" id="datepicker" class="mdc-text-field__input" readonly>
-    <div class="mdc-line-ripple"></div>
-  </label>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/13.0.0/material-components-web.min.js"></script>
-  <script>
-    const datePicker = new mdc.textField.MDCTextField(document.querySelector('.mdc-text-field'));
-    const picker = new mdc.datepicker.MDCDatePicker(document.querySelector('#datepicker'));
-  </script>
+<input type="text" class="date-range-input" id="date-range-picker" />
+
+<!-- JavaScript per il date range picker -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+<script>
+  // Inizializza il date range picker
+  $(document).ready(function() {
+    $('#date-range-picker').daterangepicker({
+      opens: 'left', // Opzioni di visualizzazione
+      autoApply: true, // Applica automaticamente la selezione al momento della chiusura
+      locale: {
+        format: 'YYYY-MM-DD', // Formato della data
+        separator: ' to ', // Separatore tra le due date
+        applyLabel: 'Apply', // Etichetta del pulsante "Applica"
+        cancelLabel: 'Cancel', // Etichetta del pulsante "Annulla"
+        customRangeLabel: 'Custom Range', // Etichetta per il range personalizzato
+        daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'], // Giorni della settimana
+        monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], // Nomi dei mesi
+        firstDay: 1 // Primo giorno della settimana (0 = Domenica, 1 = Lunedì, ecc.)
+      },
+      ranges: { // Range predefiniti
+        'Today': [moment(), moment()],
+        'Next 7 Days': [moment(), moment().add(6, 'days')],
+        'Next Month': [moment().startOf('month').add(1, 'month'), moment().endOf('month').add(1, 'month')]
+      },
+      startDate: moment(), // Inizializza con il range di default "Today"
+      endDate: moment()
+    });
+  });
+</script>
+
 </body>
 </html>
-
-// Supponiamo che la variabile "query" sia già definita nel tuo file JavaScript
-var query = "valore_da_inviare";
-
-// Crea un oggetto FormData e aggiungi la variabile "query"
-var formData = new FormData();
-formData.append('query', query);
-
-// Effettua una richiesta POST a "search.php" con i dati del modulo
-fetch('search.php', {
-  method: 'POST',
-  body: formData
-})
-.then(response => {
-  // Gestisci la risposta come preferisci
-  console.log('Risposta dalla ricerca:', response);
-})
-.catch(error => {
-  // Gestisci gli errori
-  console.error('Errore durante la ricerca:', error);
-});
