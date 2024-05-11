@@ -64,13 +64,10 @@
                             </div>
                         </div>
                         <div class="input-container">
-                            <!-- <div class="material-textfield">
+                            <div class="material-textfield">
                                 <input placeholder="" type="password" required name="cpassword" id="cpassword">
                                 <label>Conferma Password</label>
-                            </div> -->
-                            <md-outlined-text-field type="password" label="Conferma Password" name="cpassword" id="cpassword">
-
-                            </md-outlined-text-field>
+                            </div>
                         <br>
                             
                         </div>

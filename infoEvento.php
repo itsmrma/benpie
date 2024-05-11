@@ -171,7 +171,7 @@
                 <br>
                 <?php if (isset($_SESSION["email"])) {
                     $_SESSION["idEvento"] = $array['id']; ?>
-                    <md-filled-tonal-icon-button id='favourite'>
+                    <md-filled-tonal-icon-button id='favourite' onclick="showNotification()">
                         <span class='material-symbols-outlined'>
                             favorite
                         </span>

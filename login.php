@@ -16,57 +16,62 @@
     <?php include 'code.html'; ?>
 
     <div class="main-container" style>
-    
-    
-     <?php if(!isset($_SESSION["email"], $_SESSION["password"])){ ?>
-        <div class="main">
-            
-            <div class="section flex-center-y">
-                <div class="rounded-inner">
-                    <form class="basic-form" method="POST" action="login.php">
-                        <h1 class="firstTitle flex-center-x">Accedi</h1>
-                        <?php
-                            if(count($errors) > 0){?>
+
+
+        <?php if (!isset($_SESSION["email"], $_SESSION["password"])) { ?>
+            <div class="main">
+
+                <div class="section flex-center-y">
+                    <div class="rounded-inner">
+                        <form class="basic-form" method="POST" action="login.php">
+                            <h1 class="firstTitle flex-center-x">Accedi</h1>
+                            <?php
+                            if (count($errors) > 0) { ?>
 
                                 <div class="alert alert-danger">
                                     <?php
                                     foreach ($errors as $showerror) {
                                         ?>
                                         <li><?php echo $showerror; ?></li>
-                                    <?php
+                                        <?php
                                     }
                                     ?>
                                 </div>
 
-                                <?php   }
-                        ?>
-                        <div class="input-container">
-                            <div class="material-textfield">
-                                <input placeholder="" type="email" required name="email">
-                                <label>Email</label>
+                            <?php }
+                            ?>
+                            <div class="input-container">
+                                <div class="material-textfield">
+                                    <input placeholder="" type="email" required name="email">
+                                    <label>Email</label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="input-container">
-                            <div class="material-textfield">
-                                <input placeholder="" type="password" required name="password" id="password">
-                                <label>Password</label>
-                                <span id="PSWShowHideIcon" onclick="ShowPSW()"><i class="fa-solid fa-eye-slash"></i></span>
+                            <div class="input-container">
+                                <div class="material-textfield">
+                                    <input placeholder="" type="password" required name="password" id="password">
+                                    <label>Password</label>
+                                    <span id="PSWShowHideIcon" onclick="ShowPSW()"><i
+                                            class="fa-solid fa-eye-slash"></i></span>
+                                </div>
+                                <br>
+                                <p class="firstSubtitle">Non hai un account?<a href="signup.php" class="link">
+                                        Registrati</a>
+                                </p>
                             </div>
-                            <br>
-                            <p class="firstSubtitle">Non hai un account?<a href="signup.php" class="link"> Registrati</a>
-                            </p>
-                        </div>
-                        <button class="btn filled submit-btn" type="submit" name="login" value="login">Accedi</a>
-                    </form>
+                            <button class="btn filled submit-btn" type="submit" name="login" value="login">Accedi</a>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-        <?php }else{
+        <?php } else {
+            $conn = mysqli_connect('localhost', 'root', '', 'sagre');
+            $sql = "SELECT nomeUtente FROM utenti WHERE email='" . $_SESSION['email'] . "'";
+            $result = $conn->query($sql);
+            $row = $result->fetch_assoc();
+            echo "Ciao " . $row['nomeUtente'];
 
-            
         } ?>
     </div>
-
 
 
     <script>
