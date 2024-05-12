@@ -65,7 +65,7 @@
             // Mostra lo snackbar
             M.toast({ html: "Evento aggiunto ai preferiti.", ...options });
         }
-
+        
     </script>
 
     <script>
@@ -98,6 +98,8 @@
             if(idCommento!="scriviCommento"){
                 var tempId = parseInt(idCommento);
                 document.cookie = "idCommentoPadre=" + tempId;
+            }else{
+                document.cookie = "idCommentoPadre=0"
             }
             $.ajax({
                 type: "POST",
@@ -115,6 +117,9 @@
             
         }
 
+        function ordinaCommenti(){
+
+        }
     </script>
 
 
@@ -234,7 +239,7 @@
                         $contenutoCommento = "";
                         $dataOraPubblicazione = "";
                         $idCommento = "";
-                        $_SESSION["idCommentoPadre"] = 0;
+                        
                         foreach ($dati as $row) {
                             foreach ($row as $key => $value) {
                                 switch ($key) {
@@ -253,34 +258,65 @@
                                 }
                             }
 
+                            $sql = "select id from commento where idCommentoPadre=".$idCommento." order by dataOraPubblicazione desc" ;
+                            $result2 = $conn->query($sql);
+                            $commentiFiglio = $result2->fetch_all();
+
+                            $associazioni= array();
+                            $associazioni [0] = $idCommento;
+                            $i=1;
+                            foreach($commentiFiglio as $row2){
+                                foreach($row2 as $key=>$value){
+                                    $associazioni[$i] = $value;
+                                }
+                                $i++;
+                            }
                     ?>
 
-                        <div class="commentContainer">
-                            <div height="40%" width="100%" style="color:black;"><?php echo $nomeUtente . "  " . $dataOraPubblicazione ?>
-                            </div>
-                            <div height="40%" width="100%" style="color:black;"><?php echo $contenutoCommento ?></div>
-                            <md-filled-tonal-button height="20px" width="10px"
-                                onclick="rispondi(<?php echo $idCommento ?>)">
-                                Rispondi
-                            </md-filled-tonal-button>
-                        </div>
                         
-                        <div id="<?php echo "reply".$idCommento?>" style="display:none">
+                        <div id="bloccoCommenti<?php echo $idCommento?>" style="margin-left:100px;">
                             <div class="commentContainer">
-                                <md-filled-text-field class="commenta" id="<?php echo $idCommento?>"
-                                    --md-sys-color-primary: #006a6a;
-                                    type="textarea"
-                                    rows="3"
-                                    style="resize: none; width: 100%; height:  80%;"
-                                >
-                                </md-filled-text-field>
-                                <md-filled-tonal-button height="20%" width="10px" onclick="inviaCommento('<?php echo $idCommento?>')">
-                                    Commenta
+                                <div height="40%" width="100%" style="color:black;"><?php echo $nomeUtente . "  " . $dataOraPubblicazione ?>
+                                </div>
+                                <div height="40%" width="100%" style="color:black;"><?php echo $contenutoCommento ?></div>
+                                <md-filled-tonal-button height="20px" width="10px"
+                                    onclick="rispondi(<?php echo $idCommento ?>)">
+                                    Rispondi
+                                </md-filled-tonal-button>
+                                <md-filled-tonal-button height="20px" width="10px"
+                                    onclick="mostraRisposte(<?php echo $idCommento?>)">
+                                    Risposte
                                 </md-filled-tonal-button>
                             </div>
+                            
+                            <div id="<?php echo "reply".$idCommento?>" style="display:none">
+                                <div class="commentContainer">
+                                    <md-filled-text-field class="commenta" id="<?php echo $idCommento?>"
+                                        --md-sys-color-primary: #006a6a;
+                                        type="textarea"
+                                        rows="3"
+                                        style="resize: none; width: 100%; height:  80%;"
+                                    >
+                                    </md-filled-text-field>
+                                    <md-filled-tonal-button height="20%" width="10px" onclick="inviaCommento('<?php echo $idCommento?>')">
+                                        Commenta
+                                    </md-filled-tonal-button>
+                                </div>
+                            </div>
+                    
                         </div>
 
-                    <?php }?>
+                    
+                        <script>
+                            var associazioni =<?php echo json_encode($associazioni);?>;
+                            for(j=1; j<associazioni.length; j++){
+                                document.getElementById('bloccoCommenti'+associazioni[0]).append(document.getElementById('bloccoCommenti'+associazioni[j]));
+                            }
+                        </script>
+
+                    <?php }
+
+                    ?>
                 </div>
             </div>
         </div>
@@ -382,6 +418,8 @@
 
         map.on('movestart', disposePopover);
     </script>
+
+
 
 </body>
 
