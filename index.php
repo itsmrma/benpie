@@ -36,6 +36,7 @@
 
   <script>
     function removeFavorite(idEvento){
+      showNotificationRemove();
       var numIdEvento = parseInt(idEvento);
       console.log(numIdEvento);
       document.cookie =  "idevent=" + numIdEvento;
@@ -53,6 +54,21 @@
   </script>
 
   <script src="js/checkDate.js"></script>
+
+  <script>
+
+        function showNotificationRemove() {
+            var options = {
+                duration: 8000, // Durata in millisecondi
+                inDuration: 300, // Durata dell'animazione di ingresso
+                outDuration: 200 // Durata dell'animazione di uscita
+            };
+
+            // Mostra lo snackbar
+            M.toast({ html: "Evento rimosso dai preferiti.", ...options });
+        }
+        
+    </script>
 
 </head>
 

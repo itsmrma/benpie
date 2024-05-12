@@ -6,8 +6,6 @@ $dati = json_decode($dati_json);
 
 $query .= $dati->query;
 
-$query .= " ORDER BY denom DESC";
-
 $conn = mysqli_connect('localhost', 'root', '', 'sagre');
 
 $result = $conn->query($query);

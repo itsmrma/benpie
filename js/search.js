@@ -7,7 +7,7 @@ $('#date-range-picker').on('apply.daterangepicker', function () {
 });
 
 function search() {
-    let query="";
+    let query = "";
     if (document.getElementById('nomeFiera').value !== "") {
         if (query === "") {
             query += "WHERE evento.denom LIKE '%" + document.getElementById('nomeFiera').value + "%'";
@@ -48,6 +48,29 @@ function search() {
         } else {
             query += " AND DATE(evento.data_inizio)>='" + startDate + "' AND DATE(evento.data_fine)<='" + endDate + "'";
         }
+    }
+
+    console.log(document.getElementById('order').value);
+    console.log("CIAO")
+
+    if (document.getElementById('order').value !== "") {
+        let s;
+        switch (document.getElementById('order').value) {
+            case 1:
+                s = "evento.denom ASC"
+                break;
+            case 2:
+                s = "evento.denom DESC"
+                break;
+            case 3:
+                s = "evento.data_inzio ASC"
+                break;
+            case 4:
+                s = "evento.data_inizio DESC"
+                break;
+        }
+        console.log(s);
+        query += " ORDER BY " + s;
     }
 
     var xhr = new XMLHttpRequest();
