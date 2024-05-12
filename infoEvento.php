@@ -401,26 +401,6 @@
             }
         }
 
-        map.on('click', function (evt) {
-
-            const feature = map.forEachFeatureAtPixel(evt.pixel, function (feature) {
-                return feature;
-            });
-
-            disposePopover();
-            if (!feature) {
-                return;
-            }
-            popup.setPosition(evt.coordinate);
-            popover = new bootstrap.Popover(element, {
-                placement: 'top',
-                html: true,
-                content: "" + feature.get('nome')
-            });
-            popover.show();
-        });
-
-        map.on('movestart', disposePopover);
     </script>
 
 
