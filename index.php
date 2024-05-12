@@ -69,8 +69,8 @@
             <tr class="mdc-data-table__header-row">
               <th class="mdc-data-table__header-cell" role="columnheader" scope="col" width="60px"></th>
               <th class="mdc-data-table__header-cell" role="columnheader" scope="col">PROSSIMI EVENTI</th>
-              <th class="mdc-data-table__header-cell mdc-data-table__header-cell--numeric" role="columnheader"
-                scope="col"><span class='material-symbols-outlined'>schedule</span>INIZIO</th>
+              <th class="mdc-data-table__header-cell" role="columnheader" scope="col">DESCRIZIONE</th>
+              <th class="mdc-data-table__header-cell" role="columnheader" scope="col"><span class='material-symbols-outlined'>schedule</span>INIZIO</th>
             </tr>
           </thead>
 
@@ -102,13 +102,14 @@
                       </td>
               <?php  
                     echo "
-                      <th class='mdc-data-table__cell' scope='row'><a href='infoEvento.php?idEvento=" . $datiEventi['idEvento'] . "' target='_blank' ><md-text-button>" . $datiEventi["denom"] . "</md-text-button></a></th>
-                      <td class='mdc-data-table__cell mdc-data-table__cell--numeric'>" . $datiEventi['data_inizio'] . "</td>
+                      <td class='mdc-data-table__cell'><a href='infoEvento.php?idEvento=" . $datiEventi['idEvento'] . "' target='_blank' ><md-text-button>" . $datiEventi["denom"] . "</md-text-button></a></td>
+                      <td class='mdc-data-table__cell'> </td>
+                      <td class='mdc-data-table__cell'>" . $datiEventi['data_inizio'] . "</td>
                     </tr>";
               }
             }
             
-            $sql = "select id, denom, CAST(evento.data_inizio AS date) as data_inizio from evento where evento.data_inizio>='" . $currentDate . "'order by evento.data_inizio asc limit 10";
+            $sql = "select descrizione, id, denom, CAST(evento.data_inizio AS date) as data_inizio from evento where evento.data_inizio>='" . $currentDate . "'order by evento.data_inizio asc limit 10";
 
             $prossimiEventi = $conn->query($sql);
 
@@ -116,10 +117,10 @@
 
               echo "
                   <tr class='mdc-data-table__row'>
-                    <td class='mdc-data-table__cell mdc-data-table__cell--numeric'></td>
-                    <th class='mdc-data-table__cell' scope='row'><a href='infoEvento.php?idEvento=" . $datiEventi['id'] . "' target='_blank' ><md-text-button>" . $datiEventi["denom"] . "</md-text-button></a></th>
-                    <td class='mdc-data-table__cell mdc-data-table__cell--numeric'>" . $datiEventi['data_inizio'] . "</td>
-                  
+                    <td class='mdc-data-table__cell'></td>
+                    <td class='mdc-data-table__cell'><a href='infoEvento.php?idEvento=" . $datiEventi['id'] . "' target='_blank' ><md-text-button>" . $datiEventi["denom"] . "</md-text-button></a></td>
+                    <td class='mdc-data-table__cell' ><marquee behavior='scroll' direction='left'>".$datiEventi['descrizione']."</marquee></td>
+                    <td class='mdc-data-table__cell'>" . $datiEventi['data_inizio'] . "</td>
                   </tr>";
 
             }

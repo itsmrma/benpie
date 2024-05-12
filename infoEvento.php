@@ -208,7 +208,7 @@
 
             <div class="item3">
             
-                <div class="commentContainer">
+                <div class="commentContainer" style="width:60%;">
                     <md-filled-text-field class="commenta" id="scriviCommento"
                         --md-sys-color-primary: #006a6a;
                         type="textarea"
@@ -222,7 +222,7 @@
                 </div>
             
 
-                <div id="commenti">
+                <div id="commenti" style="width:50%;">
                     <?php
 
                         $conn = new mysqli("localhost", "root", "", "sagre");
@@ -257,6 +257,10 @@
                                         break;
                                 }
                             }
+                            $sql = "select nomeUtente from utenti where idUtente=".$nomeUtente;
+                            $result2 = $conn->query($sql);
+                            $nomeUser = $result2->fetch_assoc();
+                            $nomeUtente = $nomeUser["nomeUtente"];
 
                             $sql = "select id from commento where idCommentoPadre=".$idCommento." order by dataOraPubblicazione desc" ;
                             $result2 = $conn->query($sql);
@@ -274,8 +278,8 @@
                     ?>
 
                         
-                        <div id="bloccoCommenti<?php echo $idCommento?>" style="margin-left:100px;">
-                            <div class="commentContainer">
+                        <div id="bloccoCommenti<?php echo $idCommento?>" style="margin-left:20px;">
+                            <div class="commentContainer" style="margin-top:20px;">
                                 <div height="40%" width="100%" style="color:black;"><?php echo $nomeUtente . "  " . $dataOraPubblicazione ?>
                                 </div>
                                 <div height="40%" width="100%" style="color:black;"><?php echo $contenutoCommento ?></div>
@@ -289,7 +293,7 @@
                                 </md-filled-tonal-button>
                             </div>
                             
-                            <div id="<?php echo "reply".$idCommento?>" style="display:none">
+                            <div id="<?php echo "reply".$idCommento?>" style="display:none; margin-top:20px;">
                                 <div class="commentContainer">
                                     <md-filled-text-field class="commenta" id="<?php echo $idCommento?>"
                                         --md-sys-color-primary: #006a6a;
@@ -314,8 +318,8 @@
                             }
                         </script>
 
-                    <?php }
-
+                    <?php 
+                    }
                     ?>
                 </div>
             </div>
