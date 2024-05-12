@@ -13,7 +13,7 @@
     }
     
     $date = date('Y-m-d\TH:i:sP');
-    $sql = "insert into commento(testo, dataOraPubblicazione, idUtente, idEvento, idCommentoPadre) values ('".$_COOKIE["testo"]."','".$date."',".$_SESSION["id"].",".$_SESSION["idEvento"].",".$_SESSION["idCommentoPadre"].")";
+    $sql = "insert into commento(testo, dataOraPubblicazione, idUtente, idEvento, idCommentoPadre) values ('".$_COOKIE["testo"]."','".$date."',".$_SESSION["id"].",".$_SESSION["idEvento"].",".$_COOKIE["idCommentoPadre"].")";
 
     $result = $conn -> query($sql);
 

@@ -90,14 +90,29 @@
             window.open(url, "self");
         }
 
-        function inviaCommento() {
-            var input = document.getElementById("testo").value;
+        function inviaCommento(idCommento) {
+            var input = document.getElementById(idCommento).value;
             document.cookie = "testo=; Max-Age=0"
+            document.cookie = "idCommentoPadre=; Max-Age=0"
             document.cookie = "testo=" + input;
+            if(idCommento!="scriviCommento"){
+                var tempId = parseInt(idCommento);
+                document.cookie = "idCommentoPadre=" + tempId;
+            }
             $.ajax({
                 type: "POST",
                 url: "inviaCommento.php",
             });
+        }
+
+        function rispondi(idCommento){
+            var commento = document.getElementById("reply"+idCommento);
+            if(commento.style.display == "none"){
+                commento.style.display = "block";
+            }else{
+                commento.style.display = "none";
+            }
+            
         }
 
     </script>
@@ -189,14 +204,14 @@
             <div class="item3">
             
                 <div class="commentContainer">
-                    <md-filled-text-field class="commenta" id="testo"
+                    <md-filled-text-field class="commenta" id="scriviCommento"
                         --md-sys-color-primary: #006a6a;
                         type="textarea"
                         rows="3"
                         style="resize: none; width: 100%; height:  80%;"
                     >
                     </md-filled-text-field>
-                    <md-filled-tonal-button height="20%" width="10px" onclick="inviaCommento()">
+                    <md-filled-tonal-button height="20%" width="10px" onclick="inviaCommento('scriviCommento')">
                         Commenta
                     </md-filled-tonal-button>
                 </div>
@@ -211,7 +226,7 @@
                             die("Errore di connessione " . $conn->connect_errno . " " . $conn->connect_error);
                         }
 
-                        $sql = "select * from commento where idEvento=" . $_SESSION["idEvento"];
+                        $sql = "select * from commento where idEvento=" . $_SESSION["idEvento"]." order by dataOraPubblicazione desc";
                         $result = $conn->query($sql);
                         $dati = $result->fetch_all();
 
@@ -245,9 +260,24 @@
                             </div>
                             <div height="40%" width="100%" style="color:black;"><?php echo $contenutoCommento ?></div>
                             <md-filled-tonal-button height="20px" width="10px"
-                                onclick="rispondi(<?php echo $nomeUtente . '  ' . $idCommento ?>)">
+                                onclick="rispondi(<?php echo $idCommento ?>)">
                                 Rispondi
                             </md-filled-tonal-button>
+                        </div>
+                        
+                        <div id="<?php echo "reply".$idCommento?>" style="display:none">
+                            <div class="commentContainer">
+                                <md-filled-text-field class="commenta" id="<?php echo $idCommento?>"
+                                    --md-sys-color-primary: #006a6a;
+                                    type="textarea"
+                                    rows="3"
+                                    style="resize: none; width: 100%; height:  80%;"
+                                >
+                                </md-filled-text-field>
+                                <md-filled-tonal-button height="20%" width="10px" onclick="inviaCommento('<?php echo $idCommento?>')">
+                                    Commenta
+                                </md-filled-tonal-button>
+                            </div>
                         </div>
 
                     <?php }?>
