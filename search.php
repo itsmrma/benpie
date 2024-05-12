@@ -22,7 +22,7 @@
                 <?php
                 $conn = mysqli_connect('localhost', 'root', '', 'sagre');
 
-                $select = "<md-outlined-select label='Comune' name='comune' id='comune'>";
+                $select = "<md-outlined-select label='Comune' name='comune' id='comune'> <md-select-option aria-label='blank'></md-select-option>";
                 $query = "SELECT nome, cap FROM comune ORDER BY nome ASC";
                 $result = mysqli_query($conn, $query);
                 foreach ($result->fetch_all(MYSQLI_ASSOC) as $row) {
@@ -34,6 +34,29 @@
 
                 ?>
                 <input type="text" class="date-range-input" id="date-range-picker" />
+
+                <md-outlined-select label="Ordinamento" name="order" id="order">
+                    <md-select-option selected value="1">
+                        <div slot="headline">
+                            Nome (crescente)
+                        </div>
+                    </md-select-option>
+                    <md-select-option value="2">
+                        <div slot="headline">
+                            Nome (decrescente)
+                        </div>
+                    </md-select-option>
+                    <md-select-option value="3">
+                        <div slot="headline">
+                            Data (crescente)
+                        </div>
+                    </md-select-option>
+                    <md-select-option value="4">
+                        <div slot="headline">
+                            Data (decrescente)
+                        </div>
+                    </md-select-option>
+                </md-outlined-select>
             </form>
             <br><br>
             <div id="list" class="listaEventi"></div>

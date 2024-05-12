@@ -68,8 +68,13 @@
             $sql = "SELECT nomeUtente FROM utenti WHERE email='" . $_SESSION['email'] . "'";
             $result = $conn->query($sql);
             $row = $result->fetch_assoc();
-            echo "Ciao " . $row['nomeUtente'];
-
+            echo "Ciao " . $row['nomeUtente'] . "<br> Lista preferiti <br>";
+            $sql = "SELECT * from preferiti WHERE idUtente='" . $row['nomeUtente'] . "'";
+            // aggiungere lista preferiti
+            $result = $conn->query($sql);
+            foreach ($result->fetch_all(MYSQLI_ASSOC) as $row) {
+                //echo "";
+            }
         } ?>
     </div>
 
