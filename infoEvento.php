@@ -92,9 +92,12 @@
 
         function inviaCommento(idCommento) {
             var input = document.getElementById(idCommento).value;
+            input =  input.replaceAll("\n", "&");
+            console.log(input);
             document.cookie = "testo=; Max-Age=0"
             document.cookie = "idCommentoPadre=; Max-Age=0"
             document.cookie = "testo=" + input;
+            console.log(document.cookie);
             if(idCommento!="scriviCommento"){
                 var tempId = parseInt(idCommento);
                 document.cookie = "idCommentoPadre=" + tempId;
