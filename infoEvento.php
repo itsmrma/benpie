@@ -11,9 +11,8 @@
     <style>
 
         .map {
-            margin: auto;
-            width: 60%;
-            height: 60%;
+            width: 800px;
+            height: 400px;
             -moz-border-radius: 15px;
             border-radius: 15px;
             overflow: hidden;
@@ -21,21 +20,28 @@
 
         .grid-container {
             display: grid;
-            grid-template-columns: auto 600px 600px auto;
-            grid-template-rows: auto 500px auto auto;
+            grid-template-columns: auto 700px 700px auto;
+            grid-template-rows: auto auto auto auto;
         }
 
         .item1{
             grid-column: 2 / span 3;
             grid-row: 1;
         }
+        
         .item2{
             grid-row:2;
             grid-column: 2 / span 3;
+            padding: 20px;
+            -moz-border-radius: 20px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: darkkhaki;
         }
+
         .item3{
             grid-column: 1 / span 3;
-            grid-row: 3 / span 4;
+            grid-row: 4;
         }
 
         .commentContainer {
@@ -120,9 +126,6 @@
             
         }
 
-        function ordinaCommenti(){
-
-        }
     </script>
 
 
@@ -225,7 +228,7 @@
                 </div>
             
 
-                <div id="commenti" style="width:50%;">
+                <div id="commenti" width="50%">
                     <?php
 
                         $conn = new mysqli("localhost", "root", "", "sagre");
