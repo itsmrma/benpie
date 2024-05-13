@@ -19,7 +19,7 @@
         }
 
         .map {
-            width: 800px;
+            width: 600px;
             height: 400px;
             -moz-border-radius: 15px;
             border-radius: 15px;
@@ -44,6 +44,10 @@
             -moz-border-radius: 20px;
             border-radius: 20px;
             background-color: darkgrey;
+
+            display: grid;
+            grid-template-columns: auto auto auto;
+            grid-template-rows: auto auto auto auto;
         }
 
         .item3{
@@ -195,9 +199,10 @@
             </div>
         
             <div class="item2">
+                
                 <?php
-                    echo "<div id='map' class='map'><div id='popup'></div></div>";
-                    echo "<h3>" . $array['descrizione'] . "</h3><br>";
+                    echo "<div style='grid-column: 3; grid-row: 1/4;' id='map' class='map'><div id='popup'></div></div>";
+                    echo "<h3 style='grid-column: 1/2; grid-row: 1/2; margin:10px; margin-top:20px;'>" .$array['descrizione']."</h3><br>";
 
                     $date = date_create($array['data_inizio']);
                     $date1 = date_format($date, "Y/m/d");
@@ -209,13 +214,12 @@
                     $date = date_create($date1 . $array['ora_fine']);
                     $end = date_format($date, "Y/m/d H:i");
 
-                    echo "<span class='material-symbols-outlined'>schedule</span>" . $start . "<span class='material-symbols-outlined'>sports_score</span>" . $end . "<br><br><br>";
+                    echo "<span style='grid-column: 1; grid-row: 3;' class='material-symbols-outlined'>schedule</span>" . $start .
+                    "<span style='grid-column: 1; grid-row: 3; margin-left:30px;' class='material-symbols-outlined'>sports_score</span>" . $end . "<br><br><br>";
                 ?>
 
-                    
-                    
-                <md-filled-tonal-icon-button id='download' onclick="downloadPdf('<?php echo $array['url'] ?>')">
-                    <span class='material-symbols-outlined'>
+                <md-filled-tonal-icon-button style='grid-column: 1; grid-row: 4;' id='download' onclick="downloadPdf('<?php echo $array['url'] ?>')">
+                    <span  style='grid-column: 1; grid-row: 4; margin-right:30px;' class='material-symbols-outlined'>
                         download
                     </span>
                 </md-filled-tonal-icon-button>
@@ -223,7 +227,7 @@
                 <br>
                 <?php if (isset($_SESSION["email"])) {
                     $_SESSION["idEvento"] = $array['id']; ?>
-                    <md-filled-tonal-icon-button id='favourite' onclick="showNotification()">
+                    <md-filled-tonal-icon-button  style='grid-column: 1; grid-row: 4;' id='favourite' onclick="showNotification()">
                         <span class='material-symbols-outlined'>
                             favorite
                         </span>
@@ -245,7 +249,7 @@
                         --md-sys-color-primary: #006a6a;
                         type="textarea"
                         rows="4"
-                        style="resize:none; width: 100%; height:  80%;"
+                        style="resize:none; width: 100%; height:  75%;"
                     >
                     </md-filled-text-field>
                     <md-filled-tonal-button class="commentButton" onclick="inviaCommento('scriviCommento')">
@@ -313,7 +317,7 @@
                         <div class="bloccoCommenti" id="bloccoCommenti<?php echo $idCommento?>" style="margin-left:30px;">
                             <div class="commentContainer" style="margin-top:20px;">
                                 <div class="flex-container">
-                                <span class="material-symbols-outlined" style="margin:10px;">account_circle</span>
+                                <span class="material-symbols-outlined" style="margin:10px;color:black;">account_circle</span>
                                     <div style="color:black; margin: 10px;"><?php echo $nomeUtente ?></div>
                                     <div style="color:black; right:0; margin-left: 40%"><?php echo $dataOraPubblicazione ?></div>
                                 </div>
@@ -333,8 +337,7 @@
                                     <md-filled-text-field class="commenta" id="<?php echo $idCommento?>"
                                         --md-sys-color-primary: #006a6a;
                                         type="textarea"
-                                        rows="3"
-                                        style="resize: none; width: 100%; height:  80%;"
+                                        style="resize: none; width: 100%; height: 60%;"
                                     >
                                     </md-filled-text-field>
                                     <md-filled-tonal-button class="commentButton" onclick="inviaCommento('<?php echo $idCommento?>')">
