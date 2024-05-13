@@ -50,26 +50,26 @@ function search() {
         }
     }
 
-    console.log(document.getElementById('order').value);
-    console.log("CIAO")
+    /* console.log(document.getElementById('order').value);
+    console.log("CIAO") */
 
     if (document.getElementById('order').value !== "") {
-        let s;
+        let s="";
         switch (document.getElementById('order').value) {
-            case 1:
-                s = "evento.denom ASC"
+            case '1':
+                s = "evento.denom ASC";
                 break;
-            case 2:
-                s = "evento.denom DESC"
+            case '2':
+                s = "evento.denom DESC";
                 break;
-            case 3:
-                s = "evento.data_inzio ASC"
+            case '3':
+                s = "evento.data_inizio ASC";
                 break;
-            case 4:
-                s = "evento.data_inizio DESC"
+            case '4':
+                s = "evento.data_inizio DESC";
                 break;
         }
-        console.log(s);
+        //console.log(s);
         query += " ORDER BY " + s;
     }
 
@@ -89,6 +89,7 @@ function search() {
         }
     };
 
+    console.log(query);
     var dati = JSON.stringify({ query: query });
 
     // Invia i dati al server

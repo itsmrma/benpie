@@ -72,6 +72,17 @@
             M.toast({ html: "Evento aggiunto ai preferiti.", ...options });
         }
         
+        function showNotificationComment() {
+            var options = {
+                duration: 8000, // Durata in millisecondi
+                inDuration: 300, // Durata dell'animazione di ingresso
+                outDuration: 200 // Durata dell'animazione di uscita
+            };
+
+            // Mostra lo snackbar
+            M.toast({ html: "Commento aggiunto.", ...options });
+        }
+        
     </script>
 
     <script>
@@ -97,6 +108,7 @@
         }
 
         function inviaCommento(idCommento) {
+            showNotificationComment();
             var input = document.getElementById(idCommento).value;
             input =  input.replaceAll("\n", "&");
             console.log(input);
