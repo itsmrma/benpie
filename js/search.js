@@ -41,17 +41,13 @@ function search() {
         let startDate = y1 + "-" + m1 + "-" + d1;
         let endDate = y2 + "-" + m2 + "-" + d2;
 
-        //console.log(startDate + endDate);
-
         if (query === "") {
-            query += "WHERE '" + startDate + "' BETWEEN DATE(evento.data_inizio) AND DATE(evento.data_fine) AND DATE(evento.data_fine)<='" + endDate + "'";
+            query += "WHERE ('" + startDate + "' BETWEEN DATE(evento.data_inizio) AND DATE(evento.data_fine) OR '" + startDate + "' <= evento.data_inizio) AND ( '" + endDate + "' BETWEEN DATE(evento.data_inizio) AND DATE (evento.data_fine) OR DATE(evento.data_fine)<='" + endDate + "')";
         } else {
-            query += " AND '" + startDate + "' BETWEEN DATE(evento.data_inizio) AND DATE(evento.data_fine) AND DATE(evento.data_fine)<='" + endDate + "'";
+            query += " AND ('" + startDate + "' BETWEEN DATE(evento.data_inizio) AND DATE(evento.data_fine) OR '" + startDate + "' <= evento.data_inizio) AND ( '" + endDate + "' BETWEEN DATE(evento.data_inizio) AND DATE (evento.data_fine) OR DATE(evento.data_fine)<='" + endDate + "')";
         }
     }
 
-    /* console.log(document.getElementById('order').value);
-    console.log("CIAO") */
 
     if (document.getElementById('order').value !== "") {
         let s="";
@@ -69,22 +65,19 @@ function search() {
                 s = "evento.data_inizio DESC";
                 break;
         }
-        //console.log(s);
         query += " ORDER BY " + s;
     }
 
+    console.log (query);
+    
     var xhr = new XMLHttpRequest();
 
     xhr.open("POST", "query.php", true);
 
-    // Imposta l'intestazione della richiesta per indicare che stai inviando dati di tipo JSON
     xhr.setRequestHeader("Content-Type", "application/json");
 
-    // Definisci cosa fare quando ricevi una risposta dal server
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            // Gestisci la risposta dal server
-            console.log(xhr.responseText);
             document.getElementById('list').innerHTML = xhr.responseText;
         }
     };
@@ -92,6 +85,5 @@ function search() {
     console.log(query);
     var dati = JSON.stringify({ query: query });
 
-    // Invia i dati al server
     xhr.send(dati);
 }

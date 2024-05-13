@@ -256,20 +256,20 @@
                             favorite
                         </span>
                     </md-filled-tonal-icon-button>
-                <?php }
+                <?php 
+                    $sql="SELECT idEvento FROM preferiti WHERE preferiti.idUtente = ".$_SESSION['id'];
+                    $result = $conn->query($sql);
+                    foreach ($result->fetch_all(MYSQLI_ASSOC) as $row) {
+                        if ($row['idEvento']==$_SESSION['idEvento']) {
+                            echo "<script>cambiaColoreCuore('red');</script>";
+                        }
+                    }
+                }
 
                 $geo_x = $array["geo_x"];
                 $geo_y = $array["geo_y"];
                 $nomeEvento = $array["denom"];
 
-                $sql="SELECT idEvento FROM preferiti WHERE preferiti.idUtente = ".$_SESSION['id'];
-                $result = $conn->query($sql);
-                foreach ($result->fetch_all(MYSQLI_ASSOC) as $row) {
-                    if ($row['idEvento']==$_SESSION['idEvento']) {
-                        echo "<script>cambiaColoreCuore('red');</script>";
-                    }
-                }
-                
                 ?>
 
             </div>
