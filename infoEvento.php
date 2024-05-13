@@ -9,7 +9,9 @@
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v9.1.0/ol.css">
     <style>
-
+        .flex-container{
+            display: flex;
+        }
         .map {
             width: 800px;
             height: 400px;
@@ -35,22 +37,28 @@
             padding: 20px;
             -moz-border-radius: 20px;
             border-radius: 20px;
-            overflow: hidden;
-            background-color: darkkhaki;
+            
+            background-color: darkgrey;
         }
 
         .item3{
+            margin-top: 30px;
             grid-column: 1 / span 3;
             grid-row: 4;
         }
 
         .commentContainer {
-            width: 100%;
-            height: 40%;
+            width: 700px;
+            height: 200px;
             -moz-border-radius: 20px;
             border-radius: 20px;
             overflow: hidden;
             background-color: #e6e0e9;
+            position:relative;
+        }
+        
+        .commentButton{
+            height: 10px;
         }
 
     </style>
@@ -230,11 +238,11 @@
                     <md-filled-text-field class="commenta" id="scriviCommento"
                         --md-sys-color-primary: #006a6a;
                         type="textarea"
-                        rows="3"
-                        style="resize: none; width: 100%; height:  80%;"
+                        rows="4"
+                        style="resize:none; width: 100%; height:  80%;"
                     >
                     </md-filled-text-field>
-                    <md-filled-tonal-button class="bottoneCommenta" height="20%" width="10px" onclick="inviaCommento('scriviCommento')">
+                    <md-filled-tonal-button class="commentButton" onclick="inviaCommento('scriviCommento')">
                         Commenta
                     </md-filled-tonal-button>
                 </div>
@@ -296,16 +304,18 @@
                     ?>
 
                         
-                        <div class="bloccoCommenti" id="bloccoCommenti<?php echo $idCommento?>" style="margin-left:20px;">
+                        <div class="bloccoCommenti" id="bloccoCommenti<?php echo $idCommento?>" style="margin-left:30px;">
                             <div class="commentContainer" style="margin-top:20px;">
-                                <div height="40%" width="100%" style="color:black;"><?php echo $nomeUtente . "  " . $dataOraPubblicazione ?>
+                                <div class="flex-container">
+                                    <div style="color:black; margin-left: 10px;"><?php echo $nomeUtente ?></div>
+                                    <div style="color:black; right:0;"><?php echo $dataOraPubblicazione ?></div>
                                 </div>
-                                <div height="40%" width="100%" style="color:black;"><?php echo $contenutoCommento ?></div>
-                                <md-filled-tonal-button height="20px" width="10px"
+                                <div height="40%" width="100%" style="color:black; margin-left: 10px"><?php echo $contenutoCommento ?></div>
+                                <md-filled-tonal-button height="20px" width="10px" style="bottom: 0; position: absolute;"
                                     onclick="rispondi(<?php echo $idCommento ?>)">
                                     Rispondi
                                 </md-filled-tonal-button>
-                                <md-filled-tonal-button height="20px" width="10px"
+                                <md-filled-tonal-button height="20px" width="10px" style="left: 130; bottom: 0; position: absolute;"
                                     onclick="mostraRisposte(<?php echo $idCommento?>)">
                                     Risposte
                                 </md-filled-tonal-button>
@@ -320,7 +330,7 @@
                                         style="resize: none; width: 100%; height:  80%;"
                                     >
                                     </md-filled-text-field>
-                                    <md-filled-tonal-button height="20%" width="10px" onclick="inviaCommento('<?php echo $idCommento?>')">
+                                    <md-filled-tonal-button class="commentButton" onclick="inviaCommento('<?php echo $idCommento?>')">
                                         Commenta
                                     </md-filled-tonal-button>
                                 </div>
