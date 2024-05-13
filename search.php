@@ -6,6 +6,7 @@
     <script src="js/search.js" defer></script>
     <!-- <script src="js/date.js"></script> -->
     <?php include 'head.html'; ?>
+    <link rel="stylesheet" href="css/page.css"></link>
 </head>
 
 <body>
@@ -16,7 +17,7 @@
             <form action="search.php" method="post" class="basic-form" id="cerca">
 
 
-                <md-outlined-text-field label="Nome fiera" name="nomeFiera" id=nomeFiera>
+                <md-outlined-text-field label="Nome fiera" name="nomeFiera" id="nomeFiera">
                 </md-outlined-text-field>
 
                 <?php
