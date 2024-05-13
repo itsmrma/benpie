@@ -8,8 +8,8 @@
     .mdc-data-table {
       width: 50%;
       position:absolute;
-      bottom:0;
-      height: 80%;
+      bottom:5%;
+      height: 70%;
     }
     
     div::-webkit-scrollbar
@@ -17,6 +17,7 @@
     height:7px;
 
     }
+    
     div::-webkit-scrollbar-track
     {
         border-radius: 10px;

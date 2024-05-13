@@ -5,7 +5,6 @@ $email = "";
 $name = "";
 $errors = array();
 
-//if user signup button
 if (isset($_POST['signup'])) {
     $name = mysqli_real_escape_string($con, $_POST['nomeUtente']);
     $email = mysqli_real_escape_string($con, $_POST['email']);
@@ -32,8 +31,6 @@ if (isset($_POST['signup'])) {
 
 }
 
-
-//if user click login button
 if (isset($_POST['login'])) {
     $email = mysqli_real_escape_string($con, $_POST['email']);
     $password = mysqli_real_escape_string($con, $_POST['password']);
@@ -56,9 +53,7 @@ if (isset($_POST['login'])) {
     }
 }
 
-
-
-//if login now button click
 if (isset($_POST['login-now'])) {
     header('Location: login.php');
 }
+
