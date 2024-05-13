@@ -9,13 +9,30 @@
     <?php include 'head.html'; ?>
     <script src="js/ShowPSW.js"></script>
 
+    <script>
+            function removeFavorite(idEvento){
+                showNotificationRemove();
+                var numIdEvento = parseInt(idEvento);
+                console.log(numIdEvento);
+                document.cookie =  "idevent=" + numIdEvento;
+                sendAjaxRequest('removeFavourite.php');
+            }
+
+            function sendAjaxRequest(urlToSend) {
+                $.ajax({
+                    type: "POST",
+                    url: urlToSend
+                });
+            }
+    </script>
+
 </head>
 
 <body>
 
     <?php include 'code.html'; ?>
 
-    <div class="main-container" style>
+        <div class="main-container">
 
 
         <?php if (!isset($_SESSION["email"], $_SESSION["password"])) { ?>
@@ -68,14 +85,53 @@
             $sql = "SELECT nomeUtente FROM utenti WHERE email='" . $_SESSION['email'] . "'";
             $result = $conn->query($sql);
             $row = $result->fetch_assoc();
-            echo "Ciao " . $row['nomeUtente'] . "<br> Lista preferiti <br>";
-            $sql = "SELECT * from preferiti WHERE idUtente='" . $row['nomeUtente'] . "'";
-            // aggiungere lista preferiti
-            $result = $conn->query($sql);
-            foreach ($result->fetch_all(MYSQLI_ASSOC) as $row) {
-                //echo "";
-            }
-        } ?>
+            echo "Ciao " . $row['nomeUtente'] . "<br> Lista preferiti <br>";?>
+
+            <table class="mdc-data-table__table" aria-label="Prossimi eventi">
+                <thead>
+                    <tr class="mdc-data-table__header-row">
+                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col" width="60px"></th>
+                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">EVENTI PREFERITI</th>
+                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">DESCRIZIONE</th>
+                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col"><span class='material-symbols-outlined'>schedule</span>INIZIO</th>
+                    </tr>
+                </thead>
+
+                <tbody class="mdc-data-table__content">
+
+            <?php
+                $sql = "select DISTINCT evento.denom, idEvento, CAST(evento.data_inizio AS date)  as data_inizio from preferiti inner join evento on evento.id = preferiti.idEvento where preferiti.idUtente =".$_SESSION['id'];
+              
+                $prossimiEventi = $conn->query($sql) or die($conn->error);
+            
+                while ($datiEventi = $prossimiEventi->fetch_assoc()) {?>
+              
+                  <tr class='mdc-data-table__row' aria-label="Prossimi eventi">
+                    <td class='mdc-data-table__cell mdc-data-table__cell--numeric'>
+                      <md-icon-button id='favourite' onclick="removeFavorite('<?php echo $datiEventi['idEvento']?>')" >
+                        <span class='material-symbols-outlined'>
+                          favorite
+                        </span>
+                      </md-icon-button>
+                    </td>
+            <?php  
+                  echo "
+                    <td class='mdc-data-table__cell'><a href='infoEvento.php?idEvento=" . $datiEventi['idEvento'] . "' target='_blank' ><md-text-button>" . $datiEventi["denom"] . "</md-text-button></a></td>
+                    <td class='mdc-data-table__cell'> </td>
+                    <td class='mdc-data-table__cell'>" . $datiEventi['data_inizio'] . "</td>
+                  </tr>";
+                }
+            ?>
+                </tbody>;
+            </table>
+            
+
+
+             
+
+            
+
+        <?php } ?>
     </div>
 
 
