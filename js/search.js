@@ -84,7 +84,7 @@ function search() {
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
             // Gestisci la risposta dal server
-            //console.log(xhr.responseText);
+            console.log(xhr.responseText);
             document.getElementById('list').innerHTML = xhr.responseText;
         }
     };

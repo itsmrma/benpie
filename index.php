@@ -30,6 +30,9 @@
 
         webkit-box-shadow: inset 0 0 6px rgba(255,255,255,255);
     }
+    .main-container {
+    	height: max-content;
+    }
   </style>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
