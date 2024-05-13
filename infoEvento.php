@@ -29,7 +29,7 @@
         .grid-container {
             display: grid;
             grid-template-columns: auto auto auto auto;
-            grid-template-rows: auto auto auto auto;
+            grid-template-rows: auto auto auto auto auto auto;
         }
 
         .item1{
@@ -43,14 +43,19 @@
             padding: 20px;
             -moz-border-radius: 20px;
             border-radius: 20px;
-            background-color: darkgrey;
-
+            background-color: darkslateblue;
             display: grid;
-            grid-template-columns: auto auto auto;
+            grid-template-columns: 150px 150px auto;
             grid-template-rows: auto auto auto auto;
         }
 
         .item3{
+            margin-top: 30px;
+            grid-column: 2 / span 3;
+            grid-row: 5/6;
+        }
+
+        .item4{
             margin-top: 30px;
             grid-column: 2 / span 3;
             grid-row: 4;
@@ -58,7 +63,7 @@
 
         .commentContainer {
             margin:10px;
-            width: 60%;
+            width: 600px;
             height: 200px;
             -moz-border-radius: 20px;
             border-radius: 20px;
@@ -69,6 +74,15 @@
         
         .commentButton{
             height: 10px;
+        }
+
+        #commenti{
+            -moz-border-radius: 20px;
+            border-radius: 20px;
+            background-color: thistle;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            margin-top:20px
         }
 
     </style>
@@ -201,7 +215,7 @@
             <div class="item2">
                 
                 <?php
-                    echo "<div style='grid-column: 3; grid-row: 1/4;' id='map' class='map'><div id='popup'></div></div>";
+                    echo "<div style='grid-column: 3; grid-row: 1/5;' id='map' class='map'><div id='popup'></div></div>";
                     echo "<h3 style='grid-column: 1/2; grid-row: 1/2; margin:10px; margin-top:20px;'>" .$array['descrizione']."</h3><br>";
 
                     $date = date_create($array['data_inizio']);
@@ -214,12 +228,13 @@
                     $date = date_create($date1 . $array['ora_fine']);
                     $end = date_format($date, "Y/m/d H:i");
 
-                    echo "<span style='grid-column: 1; grid-row: 3;' class='material-symbols-outlined'>schedule</span>" . $start .
-                    "<span style='grid-column: 1; grid-row: 3; margin-left:30px;' class='material-symbols-outlined'>sports_score</span>" . $end . "<br><br><br>";
+                    echo "<span style='grid-column: 1/2; grid-row: 3;' class='material-symbols-outlined'>schedule</span><div style='grid-column: 1/2; grid-row: 3; margin-left:40px'>" . $start .
+                    "</div><span style='grid-column: 1/2; grid-row: 4;' class='material-symbols-outlined'>sports_score</span><div style='grid-column: 1/2; grid-row: 4;margin-left:40px'>" . $end .
+                    "</div><br><br><br>";
                 ?>
 
-                <md-filled-tonal-icon-button style='grid-column: 1; grid-row: 4;' id='download' onclick="downloadPdf('<?php echo $array['url'] ?>')">
-                    <span  style='grid-column: 1; grid-row: 4; margin-right:30px;' class='material-symbols-outlined'>
+                <md-filled-tonal-icon-button style='grid-column: 1; grid-row: 5;' id='download' onclick="downloadPdf('<?php echo $array['url'] ?>')">
+                    <span class='material-symbols-outlined'>
                         download
                     </span>
                 </md-filled-tonal-icon-button>
@@ -227,7 +242,7 @@
                 <br>
                 <?php if (isset($_SESSION["email"])) {
                     $_SESSION["idEvento"] = $array['id']; ?>
-                    <md-filled-tonal-icon-button  style='grid-column: 1; grid-row: 4;' id='favourite' onclick="showNotification()">
+                    <md-filled-tonal-icon-button  style='grid-column: 1; grid-row: 5; margin-left: 50px;' id='favourite' onclick="showNotification()">
                         <span class='material-symbols-outlined'>
                             favorite
                         </span>
@@ -238,9 +253,10 @@
                     $geo_y = $array["geo_y"];
                     $nomeEvento = $array["denom"];
                 ?>
-                
        
             </div>
+
+            <div class="item4"><h1>SEZIONE COMMENTI</h1></div>
 
             <div class="item3">
             
@@ -258,7 +274,7 @@
                 </div>
             
 
-                <div id="commenti" width="50%">
+                <div id="commenti">
                     <?php
 
                         $conn = new mysqli("localhost", "root", "", "sagre");
