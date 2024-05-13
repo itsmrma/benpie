@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="css/page.css">
+    <link rel="stylesheet" href="css/page_login.css">
     <?php include 'head.html'; ?>
     <script src="js/ShowPSW.js"></script>
 
