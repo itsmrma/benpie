@@ -28,7 +28,7 @@
 
         .grid-container {
             display: grid;
-            grid-template-columns: auto 700px 700px auto;
+            grid-template-columns: auto auto auto auto;
             grid-template-rows: auto auto auto auto;
         }
 
@@ -43,18 +43,18 @@
             padding: 20px;
             -moz-border-radius: 20px;
             border-radius: 20px;
-            
             background-color: darkgrey;
         }
 
         .item3{
             margin-top: 30px;
-            grid-column: 1 / span 3;
+            grid-column: 2 / span 3;
             grid-row: 4;
         }
 
         .commentContainer {
-            width: 700px;
+            margin:10px;
+            width: 60%;
             height: 200px;
             -moz-border-radius: 20px;
             border-radius: 20px;
@@ -313,8 +313,9 @@
                         <div class="bloccoCommenti" id="bloccoCommenti<?php echo $idCommento?>" style="margin-left:30px;">
                             <div class="commentContainer" style="margin-top:20px;">
                                 <div class="flex-container">
-                                    <div style="color:black; margin-left: 10px;"><?php echo $nomeUtente ?></div>
-                                    <div style="color:black; right:0;"><?php echo $dataOraPubblicazione ?></div>
+                                <span class="material-symbols-outlined" style="margin:10px;">account_circle</span>
+                                    <div style="color:black; margin: 10px;"><?php echo $nomeUtente ?></div>
+                                    <div style="color:black; right:0; margin-left: 40%"><?php echo $dataOraPubblicazione ?></div>
                                 </div>
                                 <div height="40%" width="100%" style="color:black; margin-left: 10px"><?php echo $contenutoCommento ?></div>
                                 <md-filled-tonal-button height="20px" width="10px" style="bottom: 0; position: absolute;"
