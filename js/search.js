@@ -44,9 +44,9 @@ function search() {
         //console.log(startDate + endDate);
 
         if (query === "") {
-            query += "WHERE '" + startDate + "' BETWEEN DATE(evento.data_inizio) AND DATE(evento.data_fine) OR '" + endDate + "' BETWEEN DATE(evento.data_inizio) AND DATE(evento.data_fine)";
+            query += "WHERE '" + startDate + "' BETWEEN DATE(evento.data_inizio) AND DATE(evento.data_fine) AND DATE(evento.data_fine)<='" + endDate + "'";
         } else {
-            query += " AND ('" + startDate + "' BETWEEN DATE(evento.data_inizio) AND DATE(evento.data_fine) OR '" + endDate + "' BETWEEN DATE(evento.data_inizio) AND DATE(evento.data_fine))";
+            query += " AND '" + startDate + "' BETWEEN DATE(evento.data_inizio) AND DATE(evento.data_fine) AND DATE(evento.data_fine)<='" + endDate + "'";
         }
     }
 
