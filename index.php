@@ -39,7 +39,15 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
   <script>
+    function cambiaColoreCuore(x) {
+        let bottone = document.getElementById('cuore');
+        bottone.style.color = x;
+    }
+  </script>
+
+  <script>
     function removeFavorite(idEvento){
+      cambiaColoreCuore('black');
       showNotificationRemove();
       var numIdEvento = parseInt(idEvento);
       console.log(numIdEvento);
@@ -62,6 +70,7 @@
   <script>
 
         function showNotificationRemove() {
+          //cambiaColoreCuore('black');
             var options = {
                 duration: 8000, // Durata in millisecondi
                 inDuration: 300, // Durata dell'animazione di ingresso
@@ -116,7 +125,7 @@
                     <tr class='mdc-data-table__row'>
                       <td class='mdc-data-table__cell mdc-data-table__cell--numeric'>
                         <md-icon-button id='favourite' onclick="removeFavorite('<?php echo $datiEventi['idEvento']?>')" >
-                          <span class='material-symbols-outlined'>
+                          <span class='material-symbols-outlined' style="color: red">
                             favorite
                           </span>
                         </md-icon-button>
