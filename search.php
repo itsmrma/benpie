@@ -85,6 +85,7 @@
                 },
                 ranges: { // Range predefiniti
                     'Today': [moment(), moment()],
+                    'Tomorrow': [moment().add(1, 'days'), moment().add(1, 'days')],
                     'Next 7 Days': [moment(), moment().add(6, 'days')],
                     'Next Month': [moment().startOf('month').add(1, 'month'), moment().endOf('month').add(1, 'month')]
                 },

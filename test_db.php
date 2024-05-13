@@ -188,14 +188,9 @@ for ($i = 0; $i < count($json); $i++) {
             if (isset($json[$i][$nomi[$j]])) {
                 if ($nomi[$j] == "url_programma") {
                     $query .= ", '" . $json[$i][$nomi[$j]]['url'] . "'";
-                } else if ($nomi[$j] == "denom") {
-                    $denom = str_replace("'", " ", $json[$i][$nomi[$j]]);
-                    $query .= ", '" . $denom . "'";
-                } else if ($nomi[$j] == "descrizione") {
-                    $descrizione = str_replace("'", " ", $json[$i][$nomi[$j]]);
-                    $query .= ", '" . $descrizione . "'";
                 } else {
-                    $query .= ", '" . $json[$i][$nomi[$j]] . "'";
+                    $str = str_replace("'", " ", $json[$i][$nomi[$j]]);
+                    $query .= ", '" . $str . "'";
                 }
 
             } else {
