@@ -214,7 +214,7 @@
 
             <div class="item3">
             
-                <div class="commentContainer" style="width:60%;">
+                <div class="commentContainer">
                     <md-filled-text-field class="commenta" id="scriviCommento"
                         --md-sys-color-primary: #006a6a;
                         type="textarea"
@@ -222,7 +222,7 @@
                         style="resize: none; width: 100%; height:  80%;"
                     >
                     </md-filled-text-field>
-                    <md-filled-tonal-button height="20%" width="10px" onclick="inviaCommento('scriviCommento')">
+                    <md-filled-tonal-button class="bottoneCommenta" height="20%" width="10px" onclick="inviaCommento('scriviCommento')">
                         Commenta
                     </md-filled-tonal-button>
                 </div>
@@ -284,7 +284,7 @@
                     ?>
 
                         
-                        <div id="bloccoCommenti<?php echo $idCommento?>" style="margin-left:20px;">
+                        <div class="bloccoCommenti" id="bloccoCommenti<?php echo $idCommento?>" style="margin-left:20px;">
                             <div class="commentContainer" style="margin-top:20px;">
                                 <div height="40%" width="100%" style="color:black;"><?php echo $nomeUtente . "  " . $dataOraPubblicazione ?>
                                 </div>
