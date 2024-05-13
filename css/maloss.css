@@ -22,9 +22,12 @@
 
 }
 
+
+
 .date-range-input {
     background-color: var(--surface);
-    height: 5%;
+    margin: auto;
+    height: 0%;
     width: 26%;
     padding: 3%;
     border: 1px solid var(--on-surface);
@@ -38,6 +41,13 @@
 
 md-outlined-select {
     padding: 30px;
+    width: 100%;
+}
+
+md-outlined-text-field {
+    padding: 30px;
+    width: 100%;
+    margin: auto;
 }
 
 

@@ -44,11 +44,11 @@
 	margin-bottom: 15px;
 }
 
-.basic-form{
+.basic-form {
     position: relative;
     display: flex;
-    flex-direction: column;
-    gap: 25px;
+    flex-wrap: nowrap;
+    gap: 15px;
 }
 
 .basic-form .material-textfield input:focus{
