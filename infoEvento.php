@@ -457,6 +457,15 @@
 
     </script>
 
+    <?php
+        if(isset($_GET["idComment"])){
+        ?>
+            <script>
+                console.log("ciao");
+                document.getElementById('bloccoCommenti'+<?php echo $_GET["idComment"] ?>).scrollIntoView();
+            </script>
+        <?php }
+    ?>
 
 
 </body>

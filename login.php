@@ -35,9 +35,27 @@
                 });
             }
 
+            function switchContenuto(bottonePremuto){
+                var commenti = document.getElementById("commentiScritti");
+                var preferiti = document.getElementById("tabellaPreferiti");
+                if(bottonePremuto=="messaggi"){
+                    commenti.style.display="block"
+                    preferiti.style.display="none"
+                }else if(bottonePremuto=="preferiti"){
+                    commenti.style.display="none"
+                    preferiti.style.display="block"
+                }
+            }
+
     </script>
 
     <style>
+        .grid-container{
+            display: grid;
+            grid-template-columns: auto 70% auto;
+            grid-template-rows: auto auto auto;
+        }
+
         .commentContainer {
             margin:10px;
             width: 600px;
@@ -62,9 +80,11 @@
             overflow: hidden;
             margin: auto;
         }
+
         .flex-container{
             display: flex;
         }
+
     </style>
 
 </head>
@@ -122,22 +142,33 @@
                 </div>
             </div>
 
-        <?php } else{
+        <?php } else{ ?>
+            <div class="grid-container">
+            <?php
             $conn = mysqli_connect('localhost', 'root', '', 'sagre');
             $sql = "SELECT nomeUtente FROM utenti WHERE email='" . $_SESSION['email'] . "'";
             $result = $conn->query($sql);
             $nomeUser = $result->fetch_assoc();
-            echo "<h1>Ciao " . $nomeUser['nomeUtente']."</h1>";
+            echo "<h1 style='grid-column: 2; grid-row: 1;'>Ciao " . $nomeUser['nomeUtente']."</h1>";
             ?>
 
             
-            <md-tabs class="tabs" id="tabs">
-                <md-primary-tab>Preferiti</md-primary-tab>
-                <md-primary-tab>Commenti</md-primary-tab>
+            <md-filled-tonal-icon-button href="logout.php" style="padding:50px; grid-column:3; grid-row: 1;">
+                <span class="material-symbols-outlined">
+                    logout
+                </span>
+                Logout
+            </md-filled-tonal-icon-button>
+            
+           
+            <md-tabs class="tabs" id="tabs" >
+               <md-primary-tab  onclick="switchContenuto('preferiti')">Preferiti</md-primary-tab>
+                <md-primary-tab onclick="switchContenuto('messaggi')">Commenti</md-primary-tab>
             </md-tabs>
+            
 
-            <md-list style="background-color:burlywood;-moz-border-radius: 20px;border-radius: 20px;
-            overflow: hidden;max-width: 800px;overflow-y: scroll; height:800px;">
+            <md-list id="commentiScritti" style="grid-column: 2; grid-row: 3; background-color:burlywood;-moz-border-radius: 20px;border-radius: 20px;
+            overflow: hidden;max-width: 800px;overflow-y: scroll; height:800px; display:none;">
 
                 <?php
                     $sql = "select * from commento where idUtente=".$_SESSION["id"]." order by dataOraPubblicazione desc";
@@ -164,12 +195,14 @@
                                 case 0:
                                     $idCommento = $value;
                                     break;
+                                case 5:
+                                    $idEvento = $value;
                             }
                         }
                 ?>
-                <md-list-item
+                <md-list-item style="grid-column: 2; grid-row: 3;"
                     type="link"
-                    href="infoEvento.php?idCommento=2"
+                    href="infoEvento.php?idEvento=<?php echo  $idEvento;?>&idComment=<?php echo  $idCommento;?>"
                     target="_blank">
                     <div slot="headline">
                         <div class="commentContainer" style="margin-top:20px;">
@@ -190,14 +223,8 @@
 
 
 
-            <<md-filled-tonal-icon-button href="logout.php">
-                <span class="material-symbols-outlined">
-                    logout
-                </span>
-                Logout
-            </<md-filled-tonal-icon-button>
 
-            <div class="mdc-data-table" id="tabellaPreferiti">
+            <div class="mdc-data-table" id="tabellaPreferiti"  style="grid-column: 2; grid-row: 3; display:block;">
             <div class="mdc-data-table__table-container">
             <table class="mdc-data-table__table" aria-label="Prossimi eventi">
                 <thead>
@@ -239,7 +266,7 @@
             </div>
             </div>
 
-             
+        </div>
 
             
 
