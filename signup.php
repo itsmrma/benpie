@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <title>Signup Form</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/page.css">
+    <link rel="stylesheet" href="css/page_login.css">
     <script src="js/checkPSW.js" defer></script>
     <?php include 'head.html'; ?>
 </head>

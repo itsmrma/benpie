@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php session_start(); 
+$ids = array();
+$count=0;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,15 +42,16 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
   <script>
-    function cambiaColoreCuore(x) {
-        let bottone = document.getElementById('cuore');
+    function cambiaColoreCuore(id, x) {
+        let bottone = document.getElementById(id);
         bottone.style.color = x;
     }
   </script>
 
   <script>
-    function removeFavorite(idEvento){
-      cambiaColoreCuore('black');
+    function removeFavorite(id, idEvento){
+      console.log(id);
+      cambiaColoreCuore(id, 'black');
       showNotificationRemove();
       var numIdEvento = parseInt(idEvento);
       console.log(numIdEvento);
@@ -70,7 +74,6 @@
   <script>
 
         function showNotificationRemove() {
-          //cambiaColoreCuore('black');
             var options = {
                 duration: 8000, // Durata in millisecondi
                 inDuration: 300, // Durata dell'animazione di ingresso
@@ -114,7 +117,7 @@
               die("Errore di connessione " . $conn->connect_errno . " " . $conn->connect_error);
             }
             
-            if(isset($_SESSION["email"],$_SESSION["id"])){
+            if(isset($_SESSION["email"], $_SESSION["id"])){
               
               $sql = "select DISTINCT evento.denom, idEvento, CAST(evento.data_inizio AS date)  as data_inizio from preferiti inner join evento on evento.id = preferiti.idEvento where preferiti.idUtente =".$_SESSION['id'];
               
@@ -124,8 +127,8 @@
                 
                     <tr class='mdc-data-table__row'>
                       <td class='mdc-data-table__cell mdc-data-table__cell--numeric'>
-                        <md-icon-button id='favourite' onclick="removeFavorite('<?php echo $datiEventi['idEvento']?>')" >
-                          <span class='material-symbols-outlined' style="color: red">
+                        <md-icon-button id="favourite" onclick="removeFavorite('<?php $ids[$count]="fav".$count; echo $ids[$count] . "', '" . $datiEventi['idEvento'];?>')" >
+                          <span class='material-symbols-outlined' id='<?php echo $ids[$count++]; ?>' style="color: red">
                             favorite
                           </span>
                         </md-icon-button>
