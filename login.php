@@ -10,7 +10,7 @@
     <script src="js/ShowPSW.js"></script>
 
     <script>
-            function showNotificationRemove() {
+            function showNotification(x) {
                 var options = {
                     duration: 8000, // Durata in millisecondi
                     inDuration: 300, // Durata dell'animazione di ingresso
@@ -18,10 +18,11 @@
                 };
 
                 // Mostra lo snackbar
-                M.toast({ html: "Evento rimosso dai preferiti.", ...options });
+                M.toast({ html: x, ...options });
             }
+
             function removeFavorite(idEvento){
-                showNotificationRemove();
+                showNotification("Evento rimosso dai preferiti.");
                 var numIdEvento = parseInt(idEvento);
                 console.log(numIdEvento);
                 document.cookie =  "idevent=" + numIdEvento;
@@ -94,6 +95,12 @@
     <?php include 'code.html'; ?>
 
         <div class="main-container">
+
+        <?php
+            if ($_GET['logout']==1) {
+                echo "<script>showNotification('Logout effettuato.');</script>";
+            }
+        ?>
 
 
         <?php if (!isset($_SESSION["email"], $_SESSION["password"])) { ?>

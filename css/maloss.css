@@ -22,7 +22,23 @@
 
 }
 
+md-text-button {
+    --_label-text-color: var(--on-surface);
+    --_focus-label-text-color: var(--on-surface);
+    --_hover-label-text-color: var(--on-surface);
+}
 
+.mdc-data-table__header-row {
+    background-color: var(--on-surface-primary);
+}
+
+.mdc-data-table__cell {
+    color: var(--on-surface);
+}
+
+.mdc-data-table {
+    background-color: var(--surface-variant);
+}
 
 .date-range-input {
     background-color: var(--surface);
