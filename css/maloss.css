@@ -22,6 +22,10 @@
 
 }
 
+.mdc-data-table__cell--numeric {
+    width: 5%;
+}
+
 md-text-button {
     --_label-text-color: var(--on-surface);
     --_focus-label-text-color: var(--on-surface);

@@ -224,7 +224,7 @@
 
                 <?php
                 echo "<div style='grid-column: 3; grid-row: 1/5;' id='map' class='map'><div id='popup'></div></div>";
-                echo "<h3 style='grid-column: 1/2; grid-row: 1/2; margin:10px; margin-top:20px;'>" . $array['descrizione'] . "</h3><br>";
+                echo "<h3 style='grid-column: 3; grid-row: 5; margin:10px; margin-top:20px; width: 30%;'>" . $array['descrizione'] . "</h3><br>";
 
                 $date = date_create($array['data_inizio']);
                 $date1 = date_format($date, "Y/m/d");
