@@ -7,7 +7,7 @@ Sito con cui è possibile effettuare ricerche delle sagre sul territorio lombard
 Previo login sarà possibile commentare e salvarsi nei preferiti alcune fiere.
 
 <h2>Pagine:</h2>
-<img src="readme/sidebar.png">
+<img src="readme/pages.png">
 <ul>
   <li>Homepage: pagina iniziale dove sarà presente una tabella con le prossime fiere (in ordine di data) e, se si hanno delle fiere nei preferiti, saranno presenti in cima alla tabella.</li>
   <li>Ricerca: pagina dove sarà possibile effettuare ricerche sulle fiere, sarà possibile filtrare per nome, data e posizione.</li>
