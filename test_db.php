@@ -8,7 +8,7 @@ $db = "sagre";
 $conn = new mysqli($host, $user, $pass, $db);
 
 
-$data = file_get_contents('https://www.dati.lombardia.it/resource/hs8z-dcey.json?$limit=2544');
+$data = file_get_contents('https://www.dati.lombardia.it/resource/hs8z-dcey.json?$limit=3000');
 $json = json_decode($data, true);
 
 $i = 0;
@@ -190,7 +190,8 @@ for ($i = 0; $i < count($json); $i++) {
                     $query .= ", '" . $json[$i][$nomi[$j]]['url'] . "'";
                 } else {
                     $str = str_replace("'", " ", $json[$i][$nomi[$j]]);
-                    $query .= ", '" . $str . "'";
+                    $lec = str_replace("\\", "\\\\", $str);
+                    $query .= ", '" . $lec . "'";
                 }
 
             } else {

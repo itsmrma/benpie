@@ -51,10 +51,12 @@
     </script>
 
     <style>
-        .grid-container{
+
+        .grid-container {
             display: grid;
             grid-template-columns: auto 70% auto;
             grid-template-rows: auto auto auto;
+            padding: 5%;
         }
 
         .commentContainer {
@@ -65,7 +67,7 @@
             border-radius: 20px;
             overflow: hidden;
             background-color: #e6e0e9;
-            position:relative;
+            position: relative;
         }
         .mdc-data-table {
             width: 50%;
@@ -97,9 +99,12 @@
         <div class="main-container">
 
         <?php
+        if (isset($_GET['logout'])) {
             if ($_GET['logout']==1) {
                 echo "<script>showNotification('Logout effettuato.');</script>";
             }
+        }
+            
         ?>
 
 
@@ -160,7 +165,7 @@
             ?>
 
             
-            <md-filled-tonal-icon-button href="logout.php" style="padding:50px; grid-column:3; grid-row: 1;">
+            <md-filled-tonal-icon-button href="logout.php" style="grid-column:3; grid-row: 1;">
                 <span class="material-symbols-outlined">
                     logout
                 </span>

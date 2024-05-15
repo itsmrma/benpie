@@ -94,7 +94,7 @@ $count=0;
 
   <div class="main-container">
 
-        <h1 style="font-size: 40px;">🎟️ PORTALE FIERE REGIONE LOMBARDIA 🎟️</h1>
+        <h1 style="font-size: 40px;">🎟️ PORTALE DELLE FIERE DELLA LOMBARDIA 🎟️</h1>
     <div class="mdc-data-table">
       <div class="mdc-data-table__table-container">
         <table class="mdc-data-table__table" aria-label="Prossimi eventi">
