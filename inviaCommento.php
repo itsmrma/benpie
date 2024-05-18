@@ -22,8 +22,7 @@
     $result = $conn -> query($sql);
     $dati = $result->fetch_assoc();
     
-    echo  $dati["id"];
-    echo $date;
+    echo  $dati["id"].";". $date;
 
     
 ?>

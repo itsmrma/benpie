@@ -105,7 +105,7 @@
     
         function addRemoveFavorite(id, idEvento){
             var aggiuntoRimosso = cambiaColoreCuore(id);
-            showNotificationRemove(aggiuntoRimosso);
+            showNotification(aggiuntoRimosso);
             var numIdEvento = parseInt(idEvento);
             document.cookie =  "idevent=" + numIdEvento;
             switch(aggiuntoRimosso){
@@ -174,32 +174,33 @@
             $.ajax({
                 type: "POST",
                 url: "inviaCommento.php",
-                success: function(idNuovoCommento, dataOra){
-                    
-                    var nuovoCommentoVuoto = document.getElementById("0").cloneNode(true);
+                success: function(info){
 
-                    document.getElementById("0").id = "bloccoCommenti"+idNuovoCommento;
-                    document.getElementById("dataOraPubblicazione0").innerHTML = dataOra;
-                    document.getElementById("rispondi0").setAttribute("onclick", "rispondi('"+idNuovoCommento+"')");
-                    document.getElementById("reply0").setAttribute(
-                    "onclick", "mostraRisposte('"+idNuovoCommento+"')");
-                    document.getElementById("risposte0").setAttribute(
-                    "onclick", "mostraRisposte('"+idNuovoCommento+"')");
-                    document.getElementById("replyCommento0").id =
-                    idNuovoCommento;
-                    document.getElementById("inviaCommento0").setAttribute(
-                    "onclick", "inviaCommento('"+idNuovoCommento+"')");
-                    
+                    var idNuovoCommento = info.split(";")[0];
+                    var dataNuovoCommento = info.split(";")[1].replaceAll("T", " ");
 
-                    
+                    var nuovoCommentoVuoto = document.getElementById("bloccoCommentiTest").cloneNode(true);
+                    document.getElementById("bloccoCommentiTest").id = "bloccoCommenti"+idNuovoCommento;
+                    document.getElementById("dataOraPubblicazioneTest").innerHTML = dataNuovoCommento;
+                    document.getElementById("contenutoCommentoTest").innerHTML = document.getElementById(idCommento).value;
+                    document.getElementById("rispondiTest").setAttribute("onclick", "rispondi("+idNuovoCommento+")");
+                    document.getElementById("replyTest").id = "reply"+idNuovoCommento;
+                    document.getElementById("replyCommentoTest").id = idNuovoCommento;
+                    document.getElementById("inviaCommentoTest").setAttribute("onclick", "inviaCommento('"+idNuovoCommento+"')");
+
+
                     if(idCommento=="scriviCommento"){
                         document.getElementById("commenti").prepend(document.getElementById("bloccoCommenti"+idNuovoCommento));
                         document.getElementById("bloccoCommenti"+idNuovoCommento).style.display = "block";
                     }else{
+                        document.getElementById("bloccoCommenti"+idCommento).appendChild(document.getElementById("bloccoCommenti"+idNuovoCommento));
+                        document.getElementById("bloccoCommenti"+idNuovoCommento).style.display = "block";
+
                     }
-                    
 
                     document.getElementById("commenti").prepend(nuovoCommentoVuoto);
+
+                    document.getElementById("reply"+idCommento).style.display = "none";
 
                 }
             });
@@ -329,7 +330,7 @@
                 <div id="commenti">
                     <?php if(isset($_SESSION["id"])){ ?>
 
-                    <div class="bloccoCommenti" id="0" style="margin-left:30px; display:none;">
+                    <div class="bloccoCommenti" id="bloccoCommentiTest" style="margin-left:30px; display:none;">
 
                         <div class="commentContainer" style="margin-top:20px;">
                             <div class="flex-container">
@@ -342,33 +343,35 @@
                                     $nomeUtente = $nomeUser["nomeUtente"];
                                     echo  $nomeUtente;
                                 ?></div>
-                                <div style="color:black; right:0; margin-left: 40%" id="dataOraPubblicazione0"><?php echo $dataOraPubblicazione ?>
+                                <div style="color:black; right:0; margin-left: 40%" id="dataOraPubblicazioneTest">
                                 </div>
                             </div>
-                            <div height="40%" width="100%" style="color:black; margin-left: 10px" id ="contenutoCommento0"></div>
-                            <md-filled-tonal-button height="20px" width="10px" style="bottom: 0; position: absolute;" id="rispondi0"
+                            <div height="40%" width="100%" style="color:black; margin-left: 10px" id ="contenutoCommentoTest"></div>
+                            <md-filled-tonal-button height="20px" width="10px" style="bottom: 0; position: absolute;" id="rispondiTest"
                                >
                                 Rispondi
                             </md-filled-tonal-button>
-                            <md-filled-tonal-button height="20px" width="10px" id="risposte0"
+                            <md-filled-tonal-button height="20px" width="10px" id="risposteTest"
                                 style="left: 130; bottom: 0; position: absolute;"
                                 >
                                 Risposte
                             </md-filled-tonal-button>
                         </div>
 
-                        <div id="reply0" style="display:none; margin-top:20px;">
+                        <div id="replyTest" style="display:none; margin-top:20px;">
                             <div class="commentContainer">
-                                <md-filled-text-field  id="replyCommento0" class="commenta"
+                                <md-filled-text-field  id="replyCommentoTest" class="commenta"
                                     --md-sys-color-primary: #006a6a; type="textarea"
                                     style="resize: none; width: 100%; height: 60%;">
                                 </md-filled-text-field>
-                                <md-filled-tonal-button class="commentButton" id="inviaCommento0"
+                                <md-filled-tonal-button class="commentButton" id="inviaCommentoTest"
                                     onclick="inviaCommento('<?php echo $idCommento ?>')">
                                     Pubblica
                                 </md-filled-tonal-button>
                             </div>
                         </div>
+
+                        
 
                     </div>
                     <?php } ?>
