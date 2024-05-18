@@ -57,7 +57,7 @@ $count=0;
         }
     }
   
-    function removeFavorite(id, idEvento){
+    function addRemoveFavorite(id, idEvento){
       var aggiuntoRimosso = cambiaColoreCuore(id);
       showNotificationRemove(aggiuntoRimosso);
       var numIdEvento = parseInt(idEvento);
@@ -135,7 +135,7 @@ $count=0;
                 
                     <tr class='mdc-data-table__row'>
                       <td class='mdc-data-table__cell mdc-data-table__cell--numeric'>
-                        <md-icon-button id="favourite" onclick="removeFavorite('<?php $ids[$count]="fav".$count; echo $ids[$count] . "', '" . $datiEventi['idEvento'];?>')" >
+                        <md-icon-button id="favourite" onclick="addRemoveFavorite('<?php $ids[$count]="fav".$count; echo $ids[$count] . "', '" . $datiEventi['idEvento'];?>')" >
                           <span class='material-symbols-outlined' id='<?php echo $ids[$count++]; ?>' style="color: red">
                             favorite
                           </span>

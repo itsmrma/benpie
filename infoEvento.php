@@ -91,64 +91,56 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <script>
-        function cambiaColoreCuore(x) {
-            let bottone = document.getElementById('cuore');
-            bottone.style.color = x;
+        function cambiaColoreCuore(id) {
+            let bottone = document.getElementById(id);
+            var coloreCuore = bottone.style.color;
+            if(coloreCuore == "black"){
+            bottone.style.color= "red";
+            return "aggiunto";
+            }else if(coloreCuore == "red"){
+            bottone.style.color = "black";
+            return "rimosso";
+            }
         }
-    </script>
-
-    <script defer>
-
-        function showNotification() {
-            cambiaColoreCuore('red');
-
-            var options = {
-                duration: 8000, // Durata in millisecondi
-                inDuration: 300, // Durata dell'animazione di ingresso
-                outDuration: 200 // Durata dell'animazione di uscita
-            };
-
-            // Mostra lo snackbar
-            M.toast({ html: "Evento aggiunto ai preferiti.", ...options });
-        }
-
-        function showNotificationComment() {
-            var options = {
-                duration: 8000, // Durata in millisecondi
-                inDuration: 300, // Durata dell'animazione di ingresso
-                outDuration: 200 // Durata dell'animazione di uscita
-            };
-
-            // Mostra lo snackbar
-            M.toast({ html: "Commento aggiunto.", ...options });
+    
+        function addRemoveFavorite(id, idEvento){
+            var aggiuntoRimosso = cambiaColoreCuore(id);
+            showNotificationRemove(aggiuntoRimosso);
+            var numIdEvento = parseInt(idEvento);
+            document.cookie =  "idevent=" + numIdEvento;
+            switch(aggiuntoRimosso){
+                case "aggiunto":
+                sendAjaxRequest('addFavourite.php');
+                break;
+                case "rimosso":
+                sendAjaxRequest('removeFavourite.php');
+                break;
+            }
         }
 
-    </script>
-
-    <script>
-
-        function sendAjaxRequest(element, urlToSend) {
-            var clickedButton = element;
+        function sendAjaxRequest(urlToSend) {
             $.ajax({
                 type: "POST",
-                url: urlToSend,
-                data: { id: clickedButton.val(), access_token: $("#access_token").val() }
+                url: urlToSend
             });
         }
 
-        $(document).ready(function () {
-            $("#favourite").click(function (e) {
-                e.preventDefault();
-                sendAjaxRequest($(this), 'addFavourite.php');
-            });
-        });
+        function showNotificationRemove(aggiuntoRimosso) {
+            var options = {
+                duration: 8000, // Durata in millisecondi
+                inDuration: 300, // Durata dell'animazione di ingresso
+                outDuration: 200 // Durata dell'animazione di uscita
+            };
 
+            // Mostra lo snackbar
+            M.toast({ html: "Evento "+aggiuntoRimosso +" dai preferiti.", ...options });
+        }
         function downloadPdf(url) {
             window.open(url, "self");
         }
 
         function inviaCommento(idCommento) {
-            showNotificationComment();
+            showNotification("Commento pubblicato");
             var input = document.getElementById(idCommento).value;
             input = input.replaceAll("\n", "&");
             console.log(input);
@@ -186,8 +178,6 @@
 <body>
 
     <?php include 'code.html'; ?>
-
-
 
     <div class="main-container">
 
@@ -249,10 +239,11 @@
                 </md-filled-tonal-icon-button>
 
                 <br>
+
                 <?php if (isset($_SESSION["email"])) {
                     $_SESSION["idEvento"] = $array['id']; ?>
-                    <md-filled-tonal-icon-button style='grid-column: 1; grid-row: 5; margin-left: 50px;' id='favourite' onclick="showNotification()">
-                        <span class='material-symbols-outlined' id="cuore">
+                    <md-filled-tonal-icon-button style='grid-column: 1; grid-row: 5; margin-left: 50px;' onclick="addRemoveFavorite('cuore', <?php echo  $_SESSION['idEvento'] ?>)">
+                        <span class='material-symbols-outlined'  style='color: black;' id='cuore'>
                             favorite
                         </span>
                     </md-filled-tonal-icon-button>
@@ -261,7 +252,7 @@
                     $result = $conn->query($sql);
                     foreach ($result->fetch_all(MYSQLI_ASSOC) as $row) {
                         if ($row['idEvento']==$_SESSION['idEvento']) {
-                            echo "<script>cambiaColoreCuore('red');</script>";
+                            echo "<script>cambiaColoreCuore('cuore');</script>";
                         }
                     }
                 }
