@@ -10,7 +10,41 @@
     <script src="js/ShowPSW.js"></script>
 
     <script>
-            function showNotification(x) {
+        function cambiaColoreCuore(id) {
+            let bottone = document.getElementById(id);
+            var coloreCuore = bottone.style.color;
+            if(coloreCuore == "black"){
+            bottone.style.color= "red";
+            return "aggiunto";
+            }else if(coloreCuore == "red"){
+            bottone.style.color = "black";
+            return "rimosso";
+            }
+        }
+    
+        function addRemoveFavorite(id, idEvento){
+        var aggiuntoRimosso = cambiaColoreCuore(id);
+        showNotificationRemove(aggiuntoRimosso);
+        var numIdEvento = parseInt(idEvento);
+        document.cookie =  "idevent=" + numIdEvento;
+        switch(aggiuntoRimosso){
+            case "aggiunto":
+            sendAjaxRequest('addFavourite.php');
+            break;
+            case "rimosso":
+            sendAjaxRequest('removeFavourite.php');
+            break;
+        }
+        }
+
+        function sendAjaxRequest(urlToSend) {
+        $.ajax({
+            type: "POST",
+            url: urlToSend
+        });
+        }
+
+        function showNotificationRemove(aggiuntoRimosso) {
                 var options = {
                     duration: 8000, // Durata in millisecondi
                     inDuration: 300, // Durata dell'animazione di ingresso
@@ -18,35 +52,20 @@
                 };
 
                 // Mostra lo snackbar
-                M.toast({ html: x, ...options });
-            }
+                M.toast({ html: "Evento "+aggiuntoRimosso +" dai preferiti.", ...options });
+        }
 
-            function removeFavorite(idEvento){
-                showNotification("Evento rimosso dai preferiti.");
-                var numIdEvento = parseInt(idEvento);
-                console.log(numIdEvento);
-                document.cookie =  "idevent=" + numIdEvento;
-                sendAjaxRequest('removeFavourite.php');
+        function switchContenuto(bottonePremuto){
+            var commenti = document.getElementById("commentiScritti");
+            var preferiti = document.getElementById("tabellaPreferiti");
+            if(bottonePremuto=="messaggi"){
+                commenti.style.display="block"
+                preferiti.style.display="none"
+            }else if(bottonePremuto=="preferiti"){
+                commenti.style.display="none"
+                preferiti.style.display="block"
             }
-
-            function sendAjaxRequest(urlToSend) {
-                $.ajax({
-                    type: "POST",
-                    url: urlToSend
-                });
-            }
-
-            function switchContenuto(bottonePremuto){
-                var commenti = document.getElementById("commentiScritti");
-                var preferiti = document.getElementById("tabellaPreferiti");
-                if(bottonePremuto=="messaggi"){
-                    commenti.style.display="block"
-                    preferiti.style.display="none"
-                }else if(bottonePremuto=="preferiti"){
-                    commenti.style.display="none"
-                    preferiti.style.display="block"
-                }
-            }
+        }
 
     </script>
 
@@ -87,7 +106,15 @@
         .flex-container{
             display: flex;
         }
-
+        .mdc-data-table {
+      width: 50%;
+      position:absolute;
+      bottom:5%;
+      height: 70%;
+      -moz-border-radius: 15px;
+      border-radius: 15px;
+      overflow: hidden;
+    }
     </style>
 
 </head>
@@ -259,8 +286,8 @@
               
                   <tr class='mdc-data-table__row' aria-label="Prossimi eventi">
                     <td class='mdc-data-table__cell mdc-data-table__cell--numeric'>
-                      <md-icon-button id='favourite' onclick="removeFavorite('<?php echo $datiEventi['idEvento']?>')" >
-                        <span class='material-symbols-outlined'>
+                      <md-icon-button  onclick="addRemoveFavorite('favourite', <?php echo $datiEventi['idEvento']?>)" >
+                        <span class='material-symbols-outlined' style="color: red;" id='favourite'>
                           favorite
                         </span>
                       </md-icon-button>
