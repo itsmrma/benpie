@@ -71,7 +71,9 @@
     </script>
 
     <style>
-
+        .main-container {
+            height: max-content;
+        }
         .grid-container {
             display: grid;
             grid-template-columns: auto 60% auto;
@@ -91,11 +93,11 @@
             background-color: #e6e0e9;
             position: relative;
         }
+
         .mdc-data-table {
             width: 100%;
-            bottom:0;
             height: auto;
-           
+            margin:auto
         }
 
         .tabs{
@@ -110,13 +112,15 @@
         }
         
         .mdc-data-table {
-            width: 50%;
+            width: 100%;
             bottom:5%;
-            height: 70%;
+            height: 100%;
             -moz-border-radius: 15px;
             border-radius: 15px;
             overflow: hidden;
+            margin:auto;
         }
+        
     </style>
 
 </head>
@@ -208,7 +212,7 @@
             
 
             <md-list id="commentiScritti" style="grid-column: 2; grid-row: 3; background-color:burlywood;-moz-border-radius: 20px;border-radius: 20px;
-            overflow: hidden;max-width: 800px;overflow-y: scroll; height:800px; display:none;">
+            overflow: hidden; width:fit-content; display:none; margin:auto">
 
                 <?php
                     $sql = "select * from commento where idUtente=".$_SESSION["id"]." order by dataOraPubblicazione desc";
@@ -240,7 +244,7 @@
                             }
                         }
                 ?>
-                <md-list-item style="width:100%; "
+                <md-list-item style="margin:auto;"
                     type="link"
                     href="infoEvento.php?idEvento=<?php echo  $idEvento;?>&idComment=<?php echo  $idCommento;?>"
                     target="_blank">
@@ -264,7 +268,7 @@
 
 
 
-            <div class="mdc-data-table" id="tabellaPreferiti"  style="grid-column: 2; grid-row: 3; display:none;">
+            <div class="mdc-data-table" id="tabellaPreferiti"  style="grid-column: 2; grid-row: 3; display:block;">
             <div class="mdc-data-table__table-container">
             <table class="mdc-data-table__table" aria-label="Prossimi eventi">
                 <thead>
