@@ -13,6 +13,9 @@ $count=0;
       position:absolute;
       bottom:5%;
       height: 70%;
+      -moz-border-radius: 15px;
+      border-radius: 15px;
+      overflow: hidden;
     }
     
     div::-webkit-scrollbar
@@ -42,21 +45,31 @@ $count=0;
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
   <script>
-    function cambiaColoreCuore(id, x) {
+    function cambiaColoreCuore(id) {
         let bottone = document.getElementById(id);
-        bottone.style.color = x;
+        var coloreCuore = bottone.style.color;
+        if(coloreCuore == "black"){
+          bottone.style.color= "red";
+          return "aggiunto";
+        }else if(coloreCuore == "red"){
+          bottone.style.color = "black";
+          return "rimosso";
+        }
     }
-  </script>
-
-  <script>
+  
     function removeFavorite(id, idEvento){
-      console.log(id);
-      cambiaColoreCuore(id, 'black');
-      showNotificationRemove();
+      var aggiuntoRimosso = cambiaColoreCuore(id);
+      showNotificationRemove(aggiuntoRimosso);
       var numIdEvento = parseInt(idEvento);
-      console.log(numIdEvento);
       document.cookie =  "idevent=" + numIdEvento;
-      sendAjaxRequest('removeFavourite.php');
+      switch(aggiuntoRimosso){
+        case "aggiunto":
+          sendAjaxRequest('addFavourite.php');
+          break;
+        case "rimosso":
+          sendAjaxRequest('removeFavourite.php');
+          break;
+      }
     }
 
     function sendAjaxRequest(urlToSend) {
@@ -66,14 +79,7 @@ $count=0;
       });
     }
 
-
-  </script>
-
-  <script src="js/checkDate.js"></script>
-
-  <script>
-
-        function showNotificationRemove() {
+    function showNotificationRemove(aggiuntoRimosso) {
             var options = {
                 duration: 8000, // Durata in millisecondi
                 inDuration: 300, // Durata dell'animazione di ingresso
@@ -81,10 +87,12 @@ $count=0;
             };
 
             // Mostra lo snackbar
-            M.toast({ html: "Evento rimosso dai preferiti.", ...options });
-        }
-        
-    </script>
+            M.toast({ html: "Evento "+aggiuntoRimosso +" dai preferiti.", ...options });
+    }
+
+  </script>
+
+  <script src="js/checkDate.js"></script>
 
 </head>
 
