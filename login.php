@@ -277,13 +277,14 @@
                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">EVENTI PREFERITI</th>
                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col">DESCRIZIONE</th>
                         <th class="mdc-data-table__header-cell" role="columnheader" scope="col"><span class='material-symbols-outlined'>schedule</span>INIZIO</th>
+                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col"><span class='material-symbols-outlined'>schedule</span>FINE</th>
                     </tr>
                 </thead>
 
                 <tbody class="mdc-data-table__content">
 
                 <?php
-                $sql = "select DISTINCT evento.denom, idEvento, CAST(evento.data_inizio AS date)  as data_inizio from preferiti inner join evento on evento.id = preferiti.idEvento where preferiti.idUtente =".$_SESSION['id'];
+                $sql = "select DISTINCT evento.denom, idEvento, CAST(evento.data_inizio AS date)  as data_inizio, CAST(evento.data_fine AS date)  as data_fine, descrizione from preferiti inner join evento on evento.id = preferiti.idEvento where preferiti.idUtente =".$_SESSION['id'];
               
                 $prossimiEventi = $conn->query($sql) or die($conn->error);
             
@@ -300,8 +301,9 @@
                 <?php  
                   echo "
                     <td class='mdc-data-table__cell'><a href='infoEvento.php?idEvento=" . $datiEventi['idEvento'] ."'target='_blank' ><md-text-button>" . $datiEventi["denom"] . "</md-text-button></a></td>
-                    <td class='mdc-data-table__cell'> </td>
+                    <td class='mdc-data-table__cell'><marquee behavior='scroll' direction='left'>".$datiEventi['descrizione']."</marquee></td>
                     <td class='mdc-data-table__cell'>" . $datiEventi['data_inizio'] . "</td>
+                    <td class='mdc-data-table__cell'>" . $datiEventi['data_fine'] . "</td>
                   </tr>";
                 }
             ?>
