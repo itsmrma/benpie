@@ -125,7 +125,7 @@
             });
         }
 
-        function showNotificationRemove(aggiuntoRimosso) {
+        function showNotification(aggiuntoRimosso) {
             var options = {
                 duration: 8000, // Durata in millisecondi
                 inDuration: 300, // Durata dell'animazione di ingresso
@@ -133,10 +133,27 @@
             };
 
             // Mostra lo snackbar
-            M.toast({ html: "Evento "+aggiuntoRimosso +" dai preferiti.", ...options });
+            M.toast({ html: aggiuntoRimosso, ...options });
         }
+
         function downloadPdf(url) {
             window.open(url, "self");
+        }
+
+        function getCookie(cname) {
+            let name = cname + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for(let i = 0; i <ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+                }
+            }
+            return "";
         }
 
         function inviaCommento(idCommento) {
@@ -157,7 +174,36 @@
             $.ajax({
                 type: "POST",
                 url: "inviaCommento.php",
+                success: function(idNuovoCommento, dataOra){
+                    
+                    var nuovoCommentoVuoto = document.getElementById("0").cloneNode(true);
+
+                    document.getElementById("0").id = "bloccoCommenti"+idNuovoCommento;
+                    document.getElementById("dataOraPubblicazione0").innerHTML = dataOra;
+                    document.getElementById("rispondi0").setAttribute("onclick", "rispondi('"+idNuovoCommento+"')");
+                    document.getElementById("reply0").setAttribute(
+                    "onclick", "mostraRisposte('"+idNuovoCommento+"')");
+                    document.getElementById("risposte0").setAttribute(
+                    "onclick", "mostraRisposte('"+idNuovoCommento+"')");
+                    document.getElementById("replyCommento0").id =
+                    idNuovoCommento;
+                    document.getElementById("inviaCommento0").setAttribute(
+                    "onclick", "inviaCommento('"+idNuovoCommento+"')");
+                    
+
+                    
+                    if(idCommento=="scriviCommento"){
+                        document.getElementById("commenti").prepend(document.getElementById("bloccoCommenti"+idNuovoCommento));
+                        document.getElementById("bloccoCommenti"+idNuovoCommento).style.display = "block";
+                    }else{
+                    }
+                    
+
+                    document.getElementById("commenti").prepend(nuovoCommentoVuoto);
+
+                }
             });
+            
         }
 
         function rispondi(idCommento) {
@@ -279,8 +325,54 @@
                     </md-filled-tonal-button>
                 </div>
 
-
+                
                 <div id="commenti">
+                    <?php if(isset($_SESSION["id"])){ ?>
+
+                    <div class="bloccoCommenti" id="0" style="margin-left:30px; display:none;">
+
+                        <div class="commentContainer" style="margin-top:20px;">
+                            <div class="flex-container">
+                                <span class="material-symbols-outlined"
+                                    style="margin:10px;color:black;">account_circle</span>
+                                <div style="color:black; margin: 10px;"><?php 
+                                    $sql = "select nomeUtente from utenti where idUtente=" .$_SESSION["id"];
+                                    $result2 = $conn->query($sql);
+                                    $nomeUser = $result2->fetch_assoc();
+                                    $nomeUtente = $nomeUser["nomeUtente"];
+                                    echo  $nomeUtente;
+                                ?></div>
+                                <div style="color:black; right:0; margin-left: 40%" id="dataOraPubblicazione0"><?php echo $dataOraPubblicazione ?>
+                                </div>
+                            </div>
+                            <div height="40%" width="100%" style="color:black; margin-left: 10px" id ="contenutoCommento0"></div>
+                            <md-filled-tonal-button height="20px" width="10px" style="bottom: 0; position: absolute;" id="rispondi0"
+                               >
+                                Rispondi
+                            </md-filled-tonal-button>
+                            <md-filled-tonal-button height="20px" width="10px" id="risposte0"
+                                style="left: 130; bottom: 0; position: absolute;"
+                                >
+                                Risposte
+                            </md-filled-tonal-button>
+                        </div>
+
+                        <div id="reply0" style="display:none; margin-top:20px;">
+                            <div class="commentContainer">
+                                <md-filled-text-field  id="replyCommento0" class="commenta"
+                                    --md-sys-color-primary: #006a6a; type="textarea"
+                                    style="resize: none; width: 100%; height: 60%;">
+                                </md-filled-text-field>
+                                <md-filled-tonal-button class="commentButton" id="inviaCommento0"
+                                    onclick="inviaCommento('<?php echo $idCommento ?>')">
+                                    Pubblica
+                                </md-filled-tonal-button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <?php } ?>
+
                     <?php
 
                     $conn = new mysqli("localhost", "root", "", "sagre");
@@ -337,6 +429,7 @@
 
 
                         <div class="bloccoCommenti" id="bloccoCommenti<?php echo $idCommento ?>" style="margin-left:30px;">
+
                             <div class="commentContainer" style="margin-top:20px;">
                                 <div class="flex-container">
                                     <span class="material-symbols-outlined"
@@ -366,7 +459,7 @@
                                     </md-filled-text-field>
                                     <md-filled-tonal-button class="commentButton"
                                         onclick="inviaCommento('<?php echo $idCommento ?>')">
-                                        Commenta
+                                        Pubblica
                                     </md-filled-tonal-button>
                                 </div>
                             </div>
@@ -470,7 +563,6 @@
         if(isset($_GET["idComment"])){
         ?>
             <script>
-                console.log("ciao");
                 document.getElementById('bloccoCommenti'+<?php echo $_GET["idComment"] ?>).scrollIntoView();
             </script>
         <?php }

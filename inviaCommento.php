@@ -17,6 +17,13 @@
 
     $result = $conn -> query($sql);
 
-    
+    $sql = "select id from commento where dataOraPubblicazione ='".$date."' and idUtente = ".$_SESSION["id"];
 
+    $result = $conn -> query($sql);
+    $dati = $result->fetch_assoc();
+    
+    echo  $dati["id"];
+    echo $date;
+
+    
 ?>
