@@ -28,7 +28,7 @@
 
         .grid-container {
             display: grid;
-            grid-template-columns: auto auto auto auto;
+            grid-template-columns: 10% auto 10%;
             grid-template-rows: auto auto auto auto auto auto;
         }
 

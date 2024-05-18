@@ -102,7 +102,7 @@ $count=0;
 
   <div class="main-container">
 
-        <h1 style="font-size: 40px;">🎟️ PORTALE DELLE FIERE DELLA LOMBARDIA 🎟️</h1>
+    <h1 style="font-size: 40px;">🎟️ PORTALE DELLE FIERE DELLA LOMBARDIA 🎟️</h1>
     <div class="mdc-data-table">
       <div class="mdc-data-table__table-container">
         <table class="mdc-data-table__table" aria-label="Prossimi eventi">
@@ -112,6 +112,7 @@ $count=0;
               <th class="mdc-data-table__header-cell" role="columnheader" scope="col">PROSSIMI EVENTI</th>
               <th class="mdc-data-table__header-cell" role="columnheader" scope="col">DESCRIZIONE</th>
               <th class="mdc-data-table__header-cell" role="columnheader" scope="col"><span class='material-symbols-outlined'>schedule</span>INIZIO</th>
+              <th class="mdc-data-table__header-cell" role="columnheader" scope="col"><span class='material-symbols-outlined'>schedule</span>FINE</th>
             </tr>
           </thead>
 
@@ -127,12 +128,14 @@ $count=0;
             
             if(isset($_SESSION["email"], $_SESSION["id"])){
               
-              $sql = "select DISTINCT evento.denom, idEvento, CAST(evento.data_inizio AS date)  as data_inizio from preferiti inner join evento on evento.id = preferiti.idEvento where preferiti.idUtente =".$_SESSION['id'];
+              $sql = "select DISTINCT evento.denom, idEvento, CAST(evento.data_inizio AS date)  as data_inizio, CAST(evento.data_fine AS date)  as data_fine,descrizione from preferiti inner join evento on evento.id = preferiti.idEvento where preferiti.idUtente =".$_SESSION['id'];
               
               $prossimiEventi = $conn->query($sql) or die($conn->error);
-              
-              while ($datiEventi = $prossimiEventi->fetch_assoc()) {?>
-                
+              $idEventiPreferiti ="(";
+              while ($datiEventi = $prossimiEventi->fetch_assoc()) {
+                $idEventiPreferiti.= $datiEventi['idEvento'].",";
+                ?>
+
                     <tr class='mdc-data-table__row'>
                       <td class='mdc-data-table__cell mdc-data-table__cell--numeric'>
                         <md-icon-button id="favourite" onclick="addRemoveFavorite('<?php $ids[$count]="fav".$count; echo $ids[$count] . "', '" . $datiEventi['idEvento'];?>')" >
@@ -144,14 +147,23 @@ $count=0;
               <?php  
                     echo "
                       <td class='mdc-data-table__cell'><a href='infoEvento.php?idEvento=" . $datiEventi['idEvento'] . "' target='_blank' ><md-text-button>" . $datiEventi["denom"] . "</md-text-button></a></td>
-                      <td class='mdc-data-table__cell'> </td>
+                      <td class='mdc-data-table__cell'><marquee behavior='scroll' direction='left'>".$datiEventi['descrizione']."</marquee></td>
                       <td class='mdc-data-table__cell'>" . $datiEventi['data_inizio'] . "</td>
+                      <td class='mdc-data-table__cell'>" . $datiEventi['data_fine'] . "</td>
                     </tr>";
               }
+            }else{
+              $idEventiPreferiti = "(-1)";
             }
             
-            $sql = "select descrizione, id, denom, CAST(evento.data_inizio AS date) as data_inizio from evento where evento.data_inizio>='" . $currentDate . "'order by evento.data_inizio asc limit 10";
-
+            if($idEventiPreferiti=="("){
+              $idEventiPreferiti = "(-1)";
+            }else{
+              $idEventiPreferiti[strlen($idEventiPreferiti)-1] = ")";
+            }
+           
+            $sql = "select descrizione, id, denom, CAST(evento.data_inizio AS date) as data_inizio, CAST(evento.data_fine AS date) as data_fine from evento where evento.id not in ".$idEventiPreferiti." and '". $currentDate. "' between evento.data_inizio and evento.data_fine order by evento.data_fine asc";
+        
             $prossimiEventi = $conn->query($sql);
 
             while ($datiEventi = $prossimiEventi->fetch_assoc()) {
@@ -162,6 +174,7 @@ $count=0;
                     <td class='mdc-data-table__cell'><a href='infoEvento.php?idEvento=" . $datiEventi['id'] . "' target='_blank' ><md-text-button>" . $datiEventi["denom"] . "</md-text-button></a></td>
                     <td class='mdc-data-table__cell' ><marquee behavior='scroll' direction='left'>".$datiEventi['descrizione']."</marquee></td>
                     <td class='mdc-data-table__cell'>" . $datiEventi['data_inizio'] . "</td>
+                    <td class='mdc-data-table__cell'>" . $datiEventi['data_fine'] . "</td>
                   </tr>";
 
             }
