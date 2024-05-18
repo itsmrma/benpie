@@ -52,6 +52,7 @@
                 };
 
                 // Mostra lo snackbar
+                M.Toast.dismissAll();
                 M.toast({ html: "Evento "+aggiuntoRimosso +" dai preferiti.", ...options });
         }
 
@@ -73,9 +74,11 @@
 
         .grid-container {
             display: grid;
-            grid-template-columns: auto 70% auto;
-            grid-template-rows: auto auto auto;
+            grid-template-columns: auto 60% auto;
+            grid-template-rows: 100px 200px auto;
             padding: 5%;
+            width: 100%;
+            height: 100%;
         }
 
         .commentContainer {
@@ -89,11 +92,10 @@
             position: relative;
         }
         .mdc-data-table {
-            width: 50%;
-            position: absolute;
+            width: 100%;
             bottom:0;
             height: auto;
-            margin-top: 10%;
+           
         }
 
         .tabs{
@@ -106,15 +108,15 @@
         .flex-container{
             display: flex;
         }
+        
         .mdc-data-table {
-      width: 50%;
-      position:absolute;
-      bottom:5%;
-      height: 70%;
-      -moz-border-radius: 15px;
-      border-radius: 15px;
-      overflow: hidden;
-    }
+            width: 50%;
+            bottom:5%;
+            height: 70%;
+            -moz-border-radius: 15px;
+            border-radius: 15px;
+            overflow: hidden;
+        }
     </style>
 
 </head>
@@ -126,12 +128,11 @@
         <div class="main-container">
 
         <?php
-        if (isset($_GET['logout'])) {
-            if ($_GET['logout']==1) {
-                echo "<script>showNotification('Logout effettuato.');</script>";
+            if (isset($_GET['logout'])) {
+                if ($_GET['logout']==1) {
+                    echo "<script>showNotification('Logout effettuato.');</script>";
+                }
             }
-        }
-            
         ?>
 
 
@@ -191,16 +192,16 @@
             echo "<h1 style='grid-column: 2; grid-row: 1;'>Ciao " . $nomeUser['nomeUtente']."</h1>";
             ?>
 
-            
-            <md-filled-tonal-icon-button href="logout.php" style="grid-column:3; grid-row: 1;">
+            <div  style="grid-column:3; grid-row: 1; right:0;">
+            <md-filled-tonal-icon-button href="logout.php">
                 <span class="material-symbols-outlined">
                     logout
                 </span>
                 Logout
             </md-filled-tonal-icon-button>
-            
+            </div>
            
-            <md-tabs class="tabs" id="tabs" >
+            <md-tabs class="tabs" id="tabs" style="grid-column: 2; grid-row: 2; width:100%;" >
                <md-primary-tab  onclick="switchContenuto('preferiti')">Preferiti</md-primary-tab>
                 <md-primary-tab onclick="switchContenuto('messaggi')">Commenti</md-primary-tab>
             </md-tabs>
@@ -239,12 +240,12 @@
                             }
                         }
                 ?>
-                <md-list-item style="grid-column: 2; grid-row: 3;"
+                <md-list-item style="width:100%; "
                     type="link"
                     href="infoEvento.php?idEvento=<?php echo  $idEvento;?>&idComment=<?php echo  $idCommento;?>"
                     target="_blank">
                     <div slot="headline">
-                        <div class="commentContainer" style="margin-top:20px;">
+                        <div class="commentContainer" >
                             <div class="flex-container">
                                 <span class="material-symbols-outlined" style="margin:10px;color:black;">account_circle</span>
                                     <div style="color:black; margin: 10px;"><?php echo $nomeUser['nomeUtente'] ?></div>
@@ -263,7 +264,7 @@
 
 
 
-            <div class="mdc-data-table" id="tabellaPreferiti"  style="grid-column: 2; grid-row: 3; display:block;">
+            <div class="mdc-data-table" id="tabellaPreferiti"  style="grid-column: 2; grid-row: 3; display:none;">
             <div class="mdc-data-table__table-container">
             <table class="mdc-data-table__table" aria-label="Prossimi eventi">
                 <thead>
@@ -300,7 +301,7 @@
                   </tr>";
                 }
             ?>
-                </tbody>;
+                </tbody>
             </table>
             </div>
             </div>
