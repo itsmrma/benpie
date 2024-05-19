@@ -87,7 +87,8 @@
                     'Today': [moment(), moment()],
                     'Tomorrow': [moment().add(1, 'days'), moment().add(1, 'days')],
                     'Next 7 Days': [moment(), moment().add(6, 'days')],
-                    'Next Month': [moment().startOf('month').add(1, 'month'), moment().endOf('month').add(1, 'month')]
+                    'Next Month': [moment().startOf('month').add(1, 'month'), moment().endOf('month').add(1, 'month')],
+                    'This Year': [moment().startOf('year'), moment().endOf('year')]
                 },
                 startDate: moment(), // Inizializza con il range di default "Today"
                 endDate: moment()

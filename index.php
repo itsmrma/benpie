@@ -86,8 +86,14 @@ $count=0;
                 outDuration: 200 // Durata dell'animazione di uscita
             };
 
-            // Mostra lo snackbar
-            M.toast({ html: "Evento "+aggiuntoRimosso +" dai preferiti.", ...options });
+            switch(aggiuntoRimosso){
+                case "aggiunto":
+                    M.toast({ html: "Evento aggiunto ai preferiti.", ...options });
+                break;
+                case "rimosso":
+                    M.toast({ html: "Evento rimosso dai preferiti.", ...options });
+                break;
+            }
     }
 
   </script>
