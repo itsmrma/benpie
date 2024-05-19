@@ -9,7 +9,7 @@
         margin:auto;
         position: relative;        
         width: 80%;
-        height: 70%;
+        height: 90%;
         left: 20px;
         top: 20px;
         -moz-border-radius: 15px;
@@ -94,7 +94,6 @@
       });
 
       for(var i=0, j=0; i<coordinate.length; i++){
-        console.log(coordinate[i][0],coordinate[i][1]);
         if(coordinate[i][0]!=null && coordinate[i][1]!=null){
           iconFeature[j] = new ol.Feature({
             geometry: new ol.geom.Point(ol.proj.transform([coordinate[i][0], coordinate[i][1]], "EPSG:4326", "EPSG:3857")),
@@ -103,6 +102,7 @@
           });
           iconFeature[j].setStyle(iconStyle);
           j++;
+          console.log(i);
         }
       }
 
