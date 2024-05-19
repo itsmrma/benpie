@@ -60,8 +60,8 @@
                 </md-outlined-select>
             </form>
             <br><br>
-
-            <div id="list" class="listaEventi">
+                
+            <div id="list">
             </div>
         </div>
 
