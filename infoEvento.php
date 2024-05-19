@@ -192,7 +192,7 @@
                 success: function(info){
 
                     var idNuovoCommento = info.split(";")[0];
-                    var dataNuovoCommento = info.split(";")[1].replaceAll("T", " ");
+                    var dataNuovoCommento = info.split(";")[1].replaceAll("T", " ").substring(0,16);
 
                     var nuovoCommentoVuoto = document.getElementById("bloccoCommentiTest").cloneNode(true);
                     document.getElementById("bloccoCommentiTest").id = "bloccoCommenti"+idNuovoCommento;
@@ -201,6 +201,7 @@
                     document.getElementById("rispondiTest").setAttribute("onclick", "rispondi("+idNuovoCommento+")");
                     document.getElementById("replyTest").id = "reply"+idNuovoCommento;
                     document.getElementById("replyCommentoTest").id = idNuovoCommento;
+                    document.getElementById(idNuovoCommento).value = "";
                     document.getElementById("inviaCommentoTest").setAttribute("onclick", "inviaCommento('"+idNuovoCommento+"')");
 
 
@@ -212,7 +213,7 @@
                         document.getElementById("bloccoCommenti"+idNuovoCommento).style.display = "block";
 
                     }
-
+                    document.getElementById("scriviCommento").value = "";
                     document.getElementById("commenti").prepend(nuovoCommentoVuoto);
 
                     document.getElementById("reply"+idCommento).style.display = "none";
@@ -366,11 +367,6 @@
                                >
                                 Rispondi
                             </md-filled-tonal-button>
-                            <md-filled-tonal-button height="20px" width="10px" id="risposteTest"
-                                style="left: 130; bottom: 0; position: absolute;"
-                                >
-                                Risposte
-                            </md-filled-tonal-button>
                         </div>
 
                         <div id="replyTest" style="display:none; margin-top:20px;">
@@ -462,11 +458,6 @@
                                     onclick="rispondi(<?php echo $idCommento ?>)">
                                     Rispondi
                                 </md-filled-tonal-button>
-                                <md-filled-tonal-button height="20px" width="10px"
-                                    style="left: 130; bottom: 0; position: absolute;"
-                                    onclick="mostraRisposte(<?php echo $idCommento ?>)">
-                                    Risposte
-                                </md-filled-tonal-button>
                             </div>
 
                             <div id="<?php echo "reply" . $idCommento ?>" style="display:none; margin-top:20px;">
@@ -489,6 +480,7 @@
                             var associazioni = <?php echo json_encode($associazioni); ?>;
                             for (j = 1; j < associazioni.length; j++) {
                                 document.getElementById('bloccoCommenti' + associazioni[0]).append(document.getElementById('bloccoCommenti' + associazioni[j]));
+                                document.getElementById('bloccoCommenti' + associazioni[j]).style.display = "none";
                             }
                         </script>
 
