@@ -1,9 +1,9 @@
 <?php
 //error_reporting(0);
 $host = "localhost";
-$user = "root";
-$pass = "";
-$db = "sagre";
+$user = "5biin-02";
+$pass = "5biin-02";
+$db = "5biin-02";
 
 $conn = new mysqli($host, $user, $pass, $db);
 

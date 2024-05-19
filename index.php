@@ -108,7 +108,7 @@ $count=0;
             <?php
             
             $currentDate = date('Y-m-d');
-            $conn = new mysqli("localhost", "root", "", "sagre");
+            $conn = new mysqli("localhost", "5biin-02", "5biin-02", "5biin-02");
 
             if ($conn->connect_error) {
               die("Errore di connessione " . $conn->connect_errno . " " . $conn->connect_error);
