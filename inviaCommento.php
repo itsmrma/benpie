@@ -13,7 +13,7 @@
     }
     $testo =  $_POST["testo"];
 
-    $date = date('Y-m-d\TH:i:sP');
+    $date = date('Y-m-d\Th:i:s');
     $sql = "insert into commento (testo, dataOraPubblicazione, idUtente, idEvento, idCommentoPadre) values ('".$testo."','".$date."',".$_SESSION["id"].",".$_SESSION["idEvento"].",".$_POST["idPadre"].")";
 
     $result = $conn -> query($sql);
