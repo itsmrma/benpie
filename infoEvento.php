@@ -176,15 +176,15 @@
             var input = document.getElementById(idCommento).value;
             input = input.replaceAll("\n", "&");
             console.log(input);
-            document.cookie = "testo=; Max-Age=0"
-            document.cookie = "idCommentoPadre=; Max-Age=0"
-            document.cookie = "testo=" + input;
+            document.cookie = "testo=; Max-Age=0; SameSite=None; Secure;";
+            document.cookie = "idCommentoPadre=; Max-Age=0; SameSite=None; Secure;";
+            document.cookie = "testo=" + input+"; SameSite=None; Secure;";
             console.log(document.cookie);
             if (idCommento != "scriviCommento") {
                 var tempId = parseInt(idCommento);
-                document.cookie = "idCommentoPadre=" + tempId;
+                document.cookie = "idCommentoPadre=" + tempId+";  SameSite=None; Secure;";
             } else {
-                document.cookie = "idCommentoPadre=0"
+                document.cookie = "idCommentoPadre=0; SameSite=None; Secure;"
             }
             $.ajax({
                 type: "POST",
@@ -216,8 +216,9 @@
                     document.getElementById("scriviCommento").value = "";
                     document.getElementById("commenti").prepend(nuovoCommentoVuoto);
 
+                    if(idCommento!="scriviCommento"){
                     document.getElementById("reply"+idCommento).style.display = "none";
-
+                    }
                 }
             });
             
