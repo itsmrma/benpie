@@ -47,12 +47,13 @@ md-text-button {
 .date-range-input {
     background-color: var(--surface);
     margin: auto;
-    height: 0%;
+    height: 11%;
     width: 26%;
-    padding: 3%;
+    padding: 2%;
     border: 1px solid var(--on-surface);
     color: var(--on-surface);
     border-radius: 2%;
+    min-width: max-content;
 }
 
 .listaEventi {
@@ -69,9 +70,9 @@ md-outlined-select {
 }
 
 md-outlined-text-field {
-    padding: 30px;
     width: 100%;
     margin: auto;
+    min-width: max-content;
 }
 
 
