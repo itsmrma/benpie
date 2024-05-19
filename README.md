@@ -16,6 +16,6 @@ Previo login sarà possibile commentare e salvarsi nei preferiti alcune fiere.
   <li>Aggiorna: pagina per aggiornare il database. Se il DB non viene aggiornato da una settimana verrete notificati sulla homepage.</li>
 </ul>
 
-Nella pagina contenente tutte le informazioni riguardati ad un evento sarà possibile, previo login, commentare o paggiungere ai preferiti quell'evento. 
+Nella pagina contenente tutte le informazioni riguardati ad un evento sarà possibile, previo login, commentare o paggiungere ai preferiti quell'evento. È anche possibile effettuare il download di un PDF con tutte le informazioni riguardanti quella fiera.
 </body>
 </html>
