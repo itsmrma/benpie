@@ -6,14 +6,14 @@
 
     session_start();
         
-    $conn = new mysqli("localhost","root","","sagre");
+    $conn = new mysqli("localhost","5biin-13","5biin-13","5biin-13");
 
     if ($conn -> connect_error) {
         die("Errore di connessione ". $conn->connect_errno ." ".$conn->connect_error);
     }
     $testo =  $_POST["testo"];
 
-    $date = date('Y-m-d\TH:i:sP');
+    $date = date('Y-m-d\Th:i:s');
     $sql = "insert into commento (testo, dataOraPubblicazione, idUtente, idEvento, idCommentoPadre) values ('".$testo."','".$date."',".$_SESSION["id"].",".$_SESSION["idEvento"].",".$_POST["idPadre"].")";
 
     $result = $conn -> query($sql);
