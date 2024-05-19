@@ -27,37 +27,45 @@
         }
 
         .grid-container {
+            height: 100%;
+            width: 100%;
             display: grid;
-            grid-template-columns: 10% auto 10%;
+            grid-template-columns: 10% 80% 10%;
             grid-template-rows: auto auto auto auto auto auto;
         }
 
         .item1 {
-            grid-column: 2 / span 3;
+            margin:auto;
+            grid-column: 2;
             grid-row: 1;
         }
 
         .item2 {
+            margin:auto;
+            width: fit-content;
             grid-row: 2;
-            grid-column: 2 / span 3;
+            grid-column: 2;
             padding: 20px;
             -moz-border-radius: 20px;
             border-radius: 20px;
             background-color: darkslateblue;
             display: grid;
-            grid-template-columns: 150px 150px auto;
+            grid-template-columns: 200px 600px;
             grid-template-rows: auto auto auto auto;
         }
 
         .item3 {
+            margin:auto;
+            width: fit-content;
             margin-top: 30px;
-            grid-column: 2 / span 3;
+            grid-column: 2 ;
             grid-row: 5/6;
         }
 
         .item4 {
+            margin:auto;
             margin-top: 30px;
-            grid-column: 2 / span 3;
+            grid-column: 2;
             grid-row: 4;
         }
 
@@ -260,8 +268,8 @@
             <div class="item2">
 
                 <?php
-                echo "<div style='grid-column: 3; grid-row: 1/5;' id='map' class='map'><div id='popup'></div></div>";
-                echo "<h3 style='grid-column: 3; grid-row: 5; margin:10px; margin-top:20px; width: 30%;'>" . $array['descrizione'] . "</h3><br>";
+                echo "<div style='grid-column: 2; grid-row: 1/5;' id='map' class='map'><div id='popup'></div></div>";
+                echo "<h3 style='grid-column: 2; grid-row: 5; margin:10px; margin-top:20px; width: 100%;'>" . $array['descrizione'] . "</h3><br>";
 
                 $date = date_create($array['data_inizio']);
                 $date1 = date_format($date, "Y/m/d");
@@ -273,8 +281,8 @@
                 $date = date_create($date1 . $array['ora_fine']);
                 $end = date_format($date, "Y/m/d H:i");
 
-                echo "<span style='grid-column: 1/2; grid-row: 3;' class='material-symbols-outlined'>schedule</span><div style='grid-column: 1/2; grid-row: 3; margin-left:40px'>" . $start .
-                    "</div><span style='grid-column: 1/2; grid-row: 4;' class='material-symbols-outlined'>sports_score</span><div style='grid-column: 1/2; grid-row: 4;margin-left:40px'>" . $end .
+                echo "<span style='grid-column: 1; grid-row: 3;' class='material-symbols-outlined'>schedule</span><div style='grid-column: 1; grid-row: 3; margin-left:40px'>" . $start .
+                    "</div><span style='grid-column: 1; grid-row: 4;' class='material-symbols-outlined'>sports_score</span><div style='grid-column: 1; grid-row: 4;margin-left:40px'>" . $end .
                     "</div><br><br><br>";
                 ?>
 
