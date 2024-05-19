@@ -57,6 +57,10 @@ md-text-button {
 
 .listaEventi {
     font-size: large;
+    background-image: url('../background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 md-outlined-select {
