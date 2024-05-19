@@ -1,8 +1,5 @@
 <?php
     
-    if(!strlen($_COOKIE["testo"])){
-        return;
-    }
 
     session_start();
         
@@ -11,9 +8,10 @@
     if ($conn -> connect_error) {
         die("Errore di connessione ". $conn->connect_errno ." ".$conn->connect_error);
     }
-    $testo = str_replace("&", "\n", $_COOKIE["testo"]);
+    $testo =  $_POST["testo"];
+
     $date = date('Y-m-d\TH:i:sP');
-    $sql = "insert into commento(testo, dataOraPubblicazione, idUtente, idEvento, idCommentoPadre) values ('".$testo."','".$date."',".$_SESSION["id"].",".$_SESSION["idEvento"].",".$_COOKIE["idCommentoPadre"].")";
+    $sql = "insert into commento (testo, dataOraPubblicazione, idUtente, idEvento, idCommentoPadre) values ('".$testo."','".$date."',".$_SESSION["id"].",".$_SESSION["idEvento"].",".$_POST["idPadre"].")";
 
     $result = $conn -> query($sql);
 
