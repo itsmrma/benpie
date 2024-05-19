@@ -139,7 +139,7 @@
                 inDuration: 300, // Durata dell'animazione di ingresso
                 outDuration: 200 // Durata dell'animazione di uscita
             };
-
+            M.Toast.dismissAll();
             switch(aggiuntoRimosso){
                 case "aggiunto":
                     M.toast({ html: "Evento aggiunto ai preferiti.", ...options });
@@ -480,7 +480,6 @@
                             var associazioni = <?php echo json_encode($associazioni); ?>;
                             for (j = 1; j < associazioni.length; j++) {
                                 document.getElementById('bloccoCommenti' + associazioni[0]).append(document.getElementById('bloccoCommenti' + associazioni[j]));
-                                document.getElementById('bloccoCommenti' + associazioni[j]).style.display = "none";
                             }
                         </script>
 

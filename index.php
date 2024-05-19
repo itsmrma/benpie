@@ -85,7 +85,7 @@ $count=0;
                 inDuration: 300, // Durata dell'animazione di ingresso
                 outDuration: 200 // Durata dell'animazione di uscita
             };
-
+            M.Toast.dismissAll();
             switch(aggiuntoRimosso){
                 case "aggiunto":
                     M.toast({ html: "Evento aggiunto ai preferiti.", ...options });
