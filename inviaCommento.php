@@ -1,5 +1,8 @@
 <?php
     
+    if(strlen( $_POST["testo"])<1){
+        return;
+    }
 
     session_start();
         
