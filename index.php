@@ -8,8 +8,9 @@ $count=0;
 <head>
   <?php include 'head.html'; ?>
   <style>
-    .mdc-data-table {
-      width: 50%;
+    .mdc-data-table { 
+      width: 70%;
+      min-width: 850px;
       position:absolute;
       bottom:5%;
       height: 70%;
@@ -18,28 +19,10 @@ $count=0;
       overflow: hidden;
     }
     
-    div::-webkit-scrollbar
-    {
-    height:7px;
-
-    }
-    
-    div::-webkit-scrollbar-track
-    {
-        border-radius: 10px;
-
-        webkit-box-shadow: inset 0 0 6px rgba(255,255,255,255);
-    }
-    div::-webkit-scrollbar-thumb
-    {
-        background-color: a6c53b;
-
-
-        webkit-box-shadow: inset 0 0 6px rgba(255,255,255,255);
-    }
     .main-container {
     	height: max-content;
     }
+
   </style>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
