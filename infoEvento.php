@@ -155,41 +155,22 @@
             window.open(url, "self");
         }
 
-        function getCookie(cname) {
-            let name = cname + "=";
-            let decodedCookie = decodeURIComponent(document.cookie);
-            let ca = decodedCookie.split(';');
-            for(let i = 0; i <ca.length; i++) {
-                let c = ca[i];
-                while (c.charAt(0) == ' ') {
-                c = c.substring(1);
-                }
-                if (c.indexOf(name) == 0) {
-                return c.substring(name.length, c.length);
-                }
-            }
-            return "";
-        }
 
         function inviaCommento(idCommento) {
-            showNotification("Commento pubblicato");
+            var idCommentoPadre;
             var input = document.getElementById(idCommento).value;
-            input = input.replaceAll("\n", "&");
-            console.log(input);
-            document.cookie = "testo=; Max-Age=0; SameSite=None; Secure;";
-            document.cookie = "idCommentoPadre=; Max-Age=0; SameSite=None; Secure;";
-            document.cookie = "testo=" + input+"; SameSite=None; Secure;";
-            console.log(document.cookie);
-            if (idCommento != "scriviCommento") {
-                var tempId = parseInt(idCommento);
-                document.cookie = "idCommentoPadre=" + tempId+";  SameSite=None; Secure;";
-            } else {
-                document.cookie = "idCommentoPadre=0; SameSite=None; Secure;"
+            if (idCommento == "scriviCommento") {
+                idCommentoPadre = "0";
+            }else{
+                idCommentoPadre = idCommento+"";
             }
+
             $.ajax({
                 type: "POST",
                 url: "inviaCommento.php",
+                data: {testo: document.getElementById(idCommento).value, idPadre: idCommentoPadre},
                 success: function(info){
+                    console.log(info);
 
                     var idNuovoCommento = info.split(";")[0];
                     var dataNuovoCommento = info.split(";")[1].replaceAll("T", " ").substring(0,16);
@@ -215,9 +196,8 @@
                     }
                     document.getElementById("scriviCommento").value = "";
                     document.getElementById("commenti").prepend(nuovoCommentoVuoto);
-
                     if(idCommento!="scriviCommento"){
-                    document.getElementById("reply"+idCommento).style.display = "none";
+                        document.getElementById("reply"+idCommento).style.display = "none";
                     }
                 }
             });
