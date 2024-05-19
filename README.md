@@ -15,5 +15,7 @@ Previo login sarà possibile commentare e salvarsi nei preferiti alcune fiere.
   <li>Area personale: pagina dove sarà possibile effettuare il login e registrarsi. A login effettuato questa pagina presenterà le proprie fiere preferite e i propri commenti.</li>
   <li>Aggiorna: pagina per aggiornare il database. Se il DB non viene aggiornato da una settimana verrete notificati sulla homepage.</li>
 </ul>
+
+Nella pagina contenente tutte le informazioni riguardati ad un evento sarà possibile, previo login, commentare o paggiungere ai preferiti quell'evento. 
 </body>
 </html>
