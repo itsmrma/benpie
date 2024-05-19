@@ -12,7 +12,16 @@ $count=0;
     .main-container {
     	height: max-content;
     }
-
+    .mdc-data-table {
+      width: 70%;
+      min-width: 850px;
+      position: absolute;
+      bottom: 5%;
+      height: 70%;
+      -moz-border-radius: 15px;
+      border-radius: 15px;
+      overflow: hidden;
+    }
   </style>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

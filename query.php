@@ -32,6 +32,6 @@ foreach ($result->fetch_all(MYSQLI_ASSOC) as $row) {
 }
 
 $s.="</tbody>
-</table></div></div>";
+</table>";
 
 echo $s;
