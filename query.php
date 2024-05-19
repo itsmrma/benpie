@@ -27,7 +27,7 @@ foreach ($result->fetch_all(MYSQLI_ASSOC) as $row) {
         <td class='mdc-data-table__cell'><a href='infoEvento.php?idEvento=" . $row['id'] . "' target='_blank' ><md-text-button>" . $row["denom"] . "</md-text-button></a></td>
         <td class='mdc-data-table__cell'>" . $row['data_inizio'] . "</td>
         <td class='mdc-data-table__cell'>" . $row['data_fine'] . "</td>
-        <td class='mdc-data-table__cell'>" . $row['nCom'] . " - (" . $row['nProv'] . ") </td>
+        <td class='mdc-data-table__cell'>" . $row['nCom'] . " (" . $row['nProv'] . ") </td>
     </tr>";
 }
 
