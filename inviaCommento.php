@@ -1,19 +1,20 @@
 <?php
     
-    if(!strlen($_COOKIE["testo"])){
+    if(strlen( $_POST["testo"])<1){
         return;
     }
 
     session_start();
         
-    $conn = new mysqli("localhost","5biin-02","5biin-02","5biin-02");
+    $conn = new mysqli("localhost","root","","sagre");
 
     if ($conn -> connect_error) {
         die("Errore di connessione ". $conn->connect_errno ." ".$conn->connect_error);
     }
-    $testo = str_replace("&", "\n", $_COOKIE["testo"]);
+    $testo =  $_POST["testo"];
+
     $date = date('Y-m-d\TH:i:sP');
-    $sql = "insert into commento(testo, dataOraPubblicazione, idUtente, idEvento, idCommentoPadre) values ('".$testo."','".$date."',".$_SESSION["id"].",".$_SESSION["idEvento"].",".$_COOKIE["idCommentoPadre"].")";
+    $sql = "insert into commento (testo, dataOraPubblicazione, idUtente, idEvento, idCommentoPadre) values ('".$testo."','".$date."',".$_SESSION["id"].",".$_SESSION["idEvento"].",".$_POST["idPadre"].")";
 
     $result = $conn -> query($sql);
 
