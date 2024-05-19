@@ -1,6 +1,6 @@
 <?php
 session_start();
-$con = mysqli_connect('localhost', 'root', '', 'sagre');
+$con = mysqli_connect("localhost","5biin-13","5biin-13","5biin-13");
 $email = "";
 $name = "";
 $errors = array();
