@@ -6,7 +6,7 @@ $dati = json_decode($dati_json);
 
 $query .= $dati->query;
 
-$conn = mysqli_connect('localhost', 'root', '', 'sagre');
+include 'conn.php';
 
 $result = $conn->query($query);
 

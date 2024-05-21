@@ -6,7 +6,7 @@
 
     session_start();
         
-    $conn = new mysqli("localhost","root","","sagre");
+    include 'conn.php';
 
     if ($conn -> connect_error) {
         die("Errore di connessione ". $conn->connect_errno ." ".$conn->connect_error);

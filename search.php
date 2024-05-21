@@ -21,7 +21,7 @@
                 </md-outlined-text-field>
 
                 <?php
-                $conn = mysqli_connect('localhost', 'root', '', 'sagre');
+                include 'conn.php';
 
                 $select = "<md-outlined-select label='Comune' name='comune' id='comune'> <md-select-option aria-label='blank'></md-select-option>";
                 $query = "SELECT nome, cap FROM comune ORDER BY nome ASC";

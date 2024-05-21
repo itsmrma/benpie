@@ -189,7 +189,7 @@
         <?php } else{ ?>
             <div class="grid-container">
             <?php
-            $conn = mysqli_connect('localhost', 'root', '', 'sagre');
+            include 'conn.php';
             $sql = "SELECT nomeUtente FROM utenti WHERE email='" . $_SESSION['email'] . "'";
             $result = $conn->query($sql);
             $nomeUser = $result->fetch_assoc();

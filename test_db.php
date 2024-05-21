@@ -1,11 +1,7 @@
 <?php
-//error_reporting(0);
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db = "sagre";
+error_reporting(0);
 
-$conn = new mysqli($host, $user, $pass, $db);
+include 'conn.php';
 
 
 $data = file_get_contents('https://www.dati.lombardia.it/resource/hs8z-dcey.json?$limit=3000');
@@ -76,7 +72,9 @@ for ($i = 0; $i < count($json); $i++) {
         $query_com = "SELECT id FROM comune WHERE cap = '" . $json[$i]['cap'] . "'";
         $result = $conn->query($query_com);
         if ($result->num_rows == 0) {
-            $query_com = "INSERT INTO `comune` (`id`, `nome`, `cap`, `id_prov`) VALUES (NULL, '" . $json[$i]['comune'] . "', '" . $json[$i]['cap'] . "', '" . $id_prov . "')";
+            $str = str_replace("'", " ", $json[$i]['comune']);
+            $query_com = "INSERT INTO `comune` (`id`, `nome`, `cap`, `id_prov`) VALUES (NULL, '" . $str . "', '" . $json[$i]['cap'] . "', '" . $id_prov . "')";
+            print($query_com);
             $conn->query($query_com);
             $query_com = "SELECT id FROM comune WHERE cap='" . $json[$i]['cap'] . "'";
             $result = $conn->query($query_com);
