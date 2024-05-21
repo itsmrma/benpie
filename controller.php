@@ -1,6 +1,6 @@
 <?php
 session_start();
-$con = mysqli_connect('localhost', 'root', '', 'sagre');
+include 'conn.php';
 $email = "";
 $name = "";
 $errors = array();
