@@ -19,7 +19,7 @@ $id_toponimo = 0;
 foreach ($json as $row) {
     if ($count == 0) {
         foreach ($row as $key => $value) {
-            if ($key != "location" && $key != ":@computed_region_ttgh_9sm5" && $key != ":@computed_region_af5v_nc64" && $key != "comune" && $key != "prov" && $key != "toponimo" && $key != "tipo" && $key != "cap" && $key != "indirizzo" && $key != "somminis" && $key != "gen_automatica_programma") {
+            if ($key != "location" && $key != ":@computed_region_ttgh_9sm5" && $key != ":@computed_region_af5v_nc64" && $key != "comune" && $key != "prov" && $key != "toponimo" && $key != "tipo" && $key != "cap" && $key != "somminis" && $key != "gen_automatica_programma") {
                 $nomi[$i++] = $key;
             }
 
@@ -27,6 +27,8 @@ foreach ($json as $row) {
         $count++;
     }
 }
+
+print_r($nomi);
 
 
 for ($i = 0; $i < count($json); $i++) {
@@ -167,15 +169,15 @@ for ($i = 0; $i < count($json); $i++) {
     $query = "SELECT url FROM evento WHERE url='" . $json[$i]['url_programma']['url'] . "'";
     $sel_res = $conn->query($query);
     if ($sel_res->num_rows == 0) {
-        $query = "INSERT INTO `evento` (`id`, `denom`, `id_tipo`, `n_ediz`, `descrizione`, `data_inizio`, `ora_inizio`, `data_fine`, `ora_fine`, `anno`, `istat`, `id_comune`, `id_toponimo`, `civico`, `nome_org`, `url`, `geo_x`, `geo_y`) VALUES (NULL";
+        $query = "INSERT INTO `evento` (`id`, `denom`, `id_tipo`, `n_ediz`, `descrizione`, `data_inizio`, `ora_inizio`, `data_fine`, `ora_fine`, `anno`, `istat`, `id_comune`, `id_toponimo`, `indirizzo`, `civico`, `nome_org`, `url`, `geo_x`, `geo_y`) VALUES (NULL";
 
         for ($j = 1; $j < count($nomi); $j++) {
 
-            if ($nomi[$j] == "civico") {
+            if ($nomi[$j] == "indirizzo") {
                 $query .= ", '" . $id_com . "'";
             }
 
-            if ($nomi[$j] == "civico") {
+            if ($nomi[$j] == "indirizzo") {
                 $query .= ", '" . $id_toponimo . "'";
             }
 

@@ -116,7 +116,7 @@ $count=0;
             
             if(isset($_SESSION["email"], $_SESSION["id"])){
               
-              $sql = "select DISTINCT evento.denom, idEvento, CAST(evento.data_inizio AS date)  as data_inizio, CAST(evento.data_fine AS date)  as data_fine,descrizione from preferiti inner join evento on evento.id = preferiti.idEvento where preferiti.idUtente =".$_SESSION['id'];
+              $sql = "select DISTINCT evento.denom, idEvento, CAST(evento.data_inizio AS date) as data_inizio, CAST(evento.data_fine AS date) as data_fine,descrizione from preferiti inner join evento on evento.id = preferiti.idEvento where preferiti.idUtente =".$_SESSION['id'];
               
               $prossimiEventi = $conn->query($sql) or die($conn->error);
               $idEventiPreferiti ="(";
