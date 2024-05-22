@@ -97,8 +97,8 @@ $count=0;
           <thead>
             <tr class="mdc-data-table__header-row">
               <th class="mdc-data-table__header-cell" role="columnheader" scope="col" width="60px"></th>
-              <th class="mdc-data-table__header-cell" role="columnheader" scope="col">PROSSIMI EVENTI</th>
-              <th class="mdc-data-table__header-cell" role="columnheader" scope="col">DESCRIZIONE</th>
+              <th class="mdc-data-table__header-cell" role="columnheader" scope="col"><span class="material-symbols-outlined">event_upcoming</span>PROSSIMI EVENTI</th>
+              <th class="mdc-data-table__header-cell" role="columnheader" scope="col"><span class="material-symbols-outlined">description</span>DESCRIZIONE</th>
               <th class="mdc-data-table__header-cell" role="columnheader" scope="col"><span class='material-symbols-outlined'>schedule</span>INIZIO</th>
               <th class="mdc-data-table__header-cell" role="columnheader" scope="col"><span class='material-symbols-outlined'>schedule</span>FINE</th>
             </tr>
