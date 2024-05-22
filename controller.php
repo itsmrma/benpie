@@ -6,15 +6,15 @@ $name = "";
 $errors = array();
 
 if (isset($_POST['signup'])) {
-    $name = mysqli_real_escape_string($con, $_POST['nomeUtente']);
-    $email = mysqli_real_escape_string($con, $_POST['email']);
-    $password = mysqli_real_escape_string($con, $_POST['password']);
-    $cpassword = mysqli_real_escape_string($con, $_POST['cpassword']);
+    $name = mysqli_real_escape_string($conn, $_POST['nomeUtente']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    $cpassword = mysqli_real_escape_string($conn, $_POST['cpassword']);
     if ($password !== $cpassword) {
         $errors['password'] = "Le password non corrispondono!";
     }
     $email_check = "SELECT * FROM utenti WHERE email = '$email'";
-    $res = mysqli_query($con, $email_check);
+    $res = mysqli_query($conn, $email_check);
     if (mysqli_num_rows($res) > 0) {
         $errors['email'] = "L'email inserita è già associata ad un utente";
     }
@@ -22,7 +22,7 @@ if (isset($_POST['signup'])) {
         $encpass = password_hash($password, PASSWORD_BCRYPT);
         $insert_data = "INSERT INTO utenti (nomeUtente, email, password)
             values('$name', '$email', '$encpass')";
-        $data_check = mysqli_query($con, $insert_data);
+        $data_check = mysqli_query($conn, $insert_data);
         if (!$data_check) {
             $errors['db-error'] = "Inserimento delle credenziali su db fallito";
         }
@@ -32,10 +32,10 @@ if (isset($_POST['signup'])) {
 }
 
 if (isset($_POST['login'])) {
-    $email = mysqli_real_escape_string($con, $_POST['email']);
-    $password = mysqli_real_escape_string($con, $_POST['password']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
     $check_email = "SELECT * FROM utenti WHERE email = '$email'";
-    $res = mysqli_query($con, $check_email);
+    $res = mysqli_query($conn, $check_email);
     if (mysqli_num_rows($res) > 0) {
         $fetch = mysqli_fetch_assoc($res);
         $fetch_pass = $fetch['password'];
