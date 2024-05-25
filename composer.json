@@ -1,0 +1,16 @@
+{
+    "name": "admin/benpie",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Admin\\Benpie\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "itsmrma",
+            "email": "m.benassi30@gmail.com"
+        }
+    ],
+    "require": {}
+}

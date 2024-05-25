@@ -243,7 +243,7 @@
                     die("Errore di connessione " . $conn->connect_errno . " " . $conn->connect_error);
                 }
                 $_SESSION["idEvento"] = $_GET["idEvento"];
-                $sql = "select evento.geo_x, evento.geo_y, evento.id, evento.denom, evento.descrizione, evento.data_inizio, evento.data_fine, evento.ora_inizio, evento.ora_fine, evento.url, comune.nome AS nCom, provincia.nome AS nProv FROM evento INNER JOIN comune INNER JOIN provincia ON comune.id=evento.id_comune AND provincia.id = comune.id_prov where evento.id=" . $_GET["idEvento"];
+                $sql = "select *, comune.nome AS nCom, provincia.nome AS nProv FROM evento INNER JOIN comune INNER JOIN provincia ON comune.id=evento.id_comune AND provincia.id = comune.id_prov where evento.id=" . $_GET["idEvento"];
 
                 $coordResult = $conn->query($sql);
                 $array = $coordResult->fetch_assoc();
@@ -269,8 +269,8 @@
                 $date = date_create($date1 . $array['ora_fine']);
                 $end = date_format($date, "Y/m/d H:i");
 
-                echo "<span style='grid-column: 1; grid-row: 2;' class='material-symbols-outlined'>location_on</span><div style='grid-column: 1; grid-row: 2; margin-left:40px'>" . $array['nCom'] .  " (" . $array['nProv'] .") </div>";
-
+                echo "<span style='grid-column: 1; grid-row: 1;' class='material-symbols-outlined'>location_on</span><div style='grid-column: 1; grid-row: 1; margin-left:40px'>" . $array['nCom'] .  " (" . $array['nProv'] .") </div>";
+                echo "<span style='grid-column: 1; grid-row: 2;' class='material-symbols-outlined'>signpost</span><div style='grid-column: 1; grid-row: 2; margin-left:40px'>" . $array['indirizzo'] . "</div>";
                 echo "<span style='grid-column: 1; grid-row: 3;' class='material-symbols-outlined'>schedule</span><div style='grid-column: 1; grid-row: 3; margin-left:40px'>" . $start .
                     "</div><span style='grid-column: 1; grid-row: 4;' class='material-symbols-outlined'>sports_score</span><div style='grid-column: 1; grid-row: 4;margin-left:40px'>" . $end .
                     "</div><br><br><br>";

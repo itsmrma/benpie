@@ -1,4 +1,4 @@
-<?php require_once "controller.php"; ?>
+<?php require_once "controller.php"; require_once 'config.php';?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -137,6 +137,10 @@
                     echo "<script>showNotification('Logout effettuato.');</script>";
                 }
             }
+
+            if (isset($_SESSION['user'])) {
+                echo htmlspecialchars($_SESSION['user']->email);
+            }
         ?>
 
 
@@ -183,6 +187,9 @@
                             <button class="btn filled submit-btn" type="submit" name="login" value="login">Accedi</a>
                         </form>
                     </div>
+
+                    Altrimenti accedi con Google: <?php $login_url = $client->createAuthUrl();?>
+                        <a href="<?php echo $login_url; ?>">Link</a>
                 </div>
             </div>
 

@@ -1,1 +1,4 @@
 .DS_Store
+/vendor/
+config.php
+oauth2callback.php
