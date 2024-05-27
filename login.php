@@ -137,10 +137,6 @@
                     echo "<script>showNotification('Logout effettuato.');</script>";
                 }
             }
-
-            if (isset($_SESSION['user'])) {
-                echo htmlspecialchars($_SESSION['user']->email);
-            }
         ?>
 
 
@@ -184,12 +180,17 @@
                                         Registrati</a>
                                 </p>
                             </div>
-                            <button class="btn filled submit-btn" type="submit" name="login" value="login">Accedi</a>
-                        </form>
-                    </div>
+                            <button class="btn filled submit-btn" type="submit" name="login" value="login">Accedi</a></button>
 
-                    Altrimenti accedi con Google: <?php $login_url = $client->createAuthUrl();?>
-                        <a href="<?php echo $login_url; ?>">Link</a>
+                        </form>
+
+                        <div class="basic-form">
+                            <br>
+                            <p class="firstSubtitle">Altrimenti</p>
+                            <a href="<?php $login_url = $client->createAuthUrl(); echo $login_url; ?>"><button style="width: 91%;display: flex;justify-content: center;"  class="btn filled submit-btn" onclick="<?php $login_url = $client->createAuthUrl(); echo $login_url; ?>">Accedi con Google</button></a>
+                        </div>
+                        
+                    </div>
                 </div>
             </div>
 

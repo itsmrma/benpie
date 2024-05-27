@@ -12,5 +12,8 @@
             "email": "m.benassi30@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "league/oauth2-google": "^4.0",
+        "google/apiclient": "^2.16"
+    }
 }

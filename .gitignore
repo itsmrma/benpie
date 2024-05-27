@@ -2,3 +2,7 @@
 /vendor/
 config.php
 oauth2callback.php
+composer.json
+composer.lock
+test.html
+test.php
