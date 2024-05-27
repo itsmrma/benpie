@@ -44,6 +44,17 @@
         });
         }
 
+        function showNotification(x) {
+                var options = {
+                    duration: 8000, // Durata in millisecondi
+                    inDuration: 300, // Durata dell'animazione di ingresso
+                    outDuration: 200 // Durata dell'animazione di uscita
+                };
+
+                // Mostra lo snackbar
+                M.toast({ html: x, ...options });
+        }
+
         function showNotificationRemove(aggiuntoRimosso) {
                 var options = {
                     duration: 8000, // Durata in millisecondi
@@ -52,7 +63,6 @@
                 };
 
                 // Mostra lo snackbar
-                M.Toast.dismissAll();
                 M.toast({ html: "Evento "+aggiuntoRimosso +" dai preferiti.", ...options });
         }
 
