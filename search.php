@@ -5,12 +5,12 @@
     <script src="js/cookie.js"></script>
     <script src="js/search.js" defer></script>
     <!-- <script src="js/date.js"></script> -->
-    <?php include 'head.html'; ?>
+    <?php include 'includes/head.html'; ?>
     <link rel="stylesheet" href="css/page.css"></link>
 </head>
 
 <body>
-    <?php include 'code.html'; ?>
+    <?php include 'includes/code.html'; ?>
 
     <div class="main-container" id="main-container">
         <div class="main">

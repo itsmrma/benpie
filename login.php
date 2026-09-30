@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="css/page_login.css">
-    <?php include 'head.html'; ?>
+    <?php include 'includes/head.html'; ?>
     <script src="js/ShowPSW.js"></script>
 
     <script>
@@ -29,10 +29,10 @@
         document.cookie =  "idevent=" + numIdEvento;
         switch(aggiuntoRimosso){
             case "aggiunto":
-            sendAjaxRequest('addFavourite.php');
+            sendAjaxRequest('api/addFavourite.php');
             break;
             case "rimosso":
-            sendAjaxRequest('removeFavourite.php');
+            sendAjaxRequest('api/removeFavourite.php');
             break;
         }
         }
@@ -127,7 +127,7 @@
 
 <body>
 
-    <?php include 'code.html'; ?>
+    <?php include 'includes/code.html'; ?>
 
         <div class="main-container">
 

@@ -8,11 +8,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/page_login.css">
     <script src="js/checkPSW.js" defer></script>
-    <?php include 'head.html'; ?>
+    <?php include 'includes/head.html'; ?>
 </head>
 
 <body>
-    <?php include 'code.html'; ?>
+    <?php include 'includes/code.html'; ?>
     <div class="main-container">
         <div class="main">
             <div class="section flex-center-y">

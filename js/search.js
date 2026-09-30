@@ -72,7 +72,7 @@ function search() {
     
     var xhr = new XMLHttpRequest();
 
-    xhr.open("POST", "query.php", true);
+    xhr.open("POST", "api/query.php", true);
 
     xhr.setRequestHeader("Content-Type", "application/json");
 

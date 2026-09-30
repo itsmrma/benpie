@@ -22,12 +22,12 @@
     <script src="https://cdn.jsdelivr.net/npm/ol@v9.1.0/dist/ol.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <?php include 'head.html';?>
+    <?php include 'includes/head.html';?>
   </head>
 
 
   <body>
-    <?php include 'code.html';?>
+    <?php include 'includes/code.html';?>
 
     
     <div class="main-container">
@@ -88,7 +88,7 @@
           anchor: [0.5, 640],
           anchorXUnits: 'fraction',
           anchorYUnits: 'pixels',
-          src: 'icona.png',
+          src: 'assets/icona.png',
           scale: 0.06
         }),
       });

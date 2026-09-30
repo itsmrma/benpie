@@ -6,7 +6,7 @@ $count=0;
 <html lang="en">
 
 <head>
-  <?php include 'head.html'; ?>
+  <?php include 'includes/head.html'; ?>
   <style>
        
     .main-container {
@@ -46,10 +46,10 @@ $count=0;
       document.cookie =  "idevent=" + numIdEvento;
       switch(aggiuntoRimosso){
         case "aggiunto":
-          sendAjaxRequest('addFavourite.php');
+          sendAjaxRequest('api/addFavourite.php');
           break;
         case "rimosso":
-          sendAjaxRequest('removeFavourite.php');
+          sendAjaxRequest('api/removeFavourite.php');
           break;
       }
     }
@@ -86,7 +86,7 @@ $count=0;
 
 <body>
 
-  <?php include 'code.html'; ?>
+  <?php include 'includes/code.html'; ?>
 
   <div class="main-container">
 

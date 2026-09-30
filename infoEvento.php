@@ -3,7 +3,7 @@
 
 <head>
     <?php
-    include 'head.html';
+    include 'includes/head.html';
     //error_reporting(0);
     ?>
 
@@ -118,10 +118,10 @@
             document.cookie =  "idevent=" + numIdEvento;
             switch(aggiuntoRimosso){
                 case "aggiunto":
-                sendAjaxRequest('addFavourite.php');
+                sendAjaxRequest('api/addFavourite.php');
                 break;
                 case "rimosso":
-                sendAjaxRequest('removeFavourite.php');
+                sendAjaxRequest('api/removeFavourite.php');
                 break;
             }
         }
@@ -166,7 +166,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "inviaCommento.php",
+                url: "api/inviaCommento.php",
                 data: {testo: document.getElementById(idCommento).value, idPadre: idCommentoPadre},
                 success: function(info){
                     console.log(info);
@@ -220,7 +220,7 @@
 
 <body>
 
-    <?php include 'code.html'; ?>
+    <?php include 'includes/code.html'; ?>
 
     <div class="main-container">
 
@@ -496,7 +496,7 @@
                 anchor: [0.5, 640],
                 anchorXUnits: 'fraction',
                 anchorYUnits: 'pixels',
-                src: 'icona.png',
+                src: 'assets/icona.png',
                 scale: 0.06
             }),
         });
